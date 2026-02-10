@@ -1,0 +1,44 @@
+{
+    "Header": {
+        "home": "Home",
+        "program": "Programs",
+        "profile": "Profile",
+        "dashboard": "Dashboard",
+        "sign_in_or_log_in": "Sign In / Log In",
+        "edit": "Edit",
+        "logout": "Logout"
+    },
+    "Footer": {
+        "know_more": "Know more"
+    },
+    "HomePage": {
+        "progress": "Progress",
+        "one_day": "one day",
+        "at_a_time": "at a time.",
+        "hp_text": "NextStep helps you structure your training, track your progress, and stay consistent — without unnecessary complexity.",
+        "hp_cta": "Get Started",
+        "cards": {
+            "clarity_title": "Clarity",
+            "clarity_text": "Simple, measurable goals.",
+            "consistency_title": "Consistency",
+            "consistency_text": "Sustainable habits.",
+            "progression_title": "Progression",
+            "progression_text": "Visualize your progress."
+        },
+        "illustration_alt": "Product illustration / video"
+    },
+    "AuthPage": {
+        "sign_in_or_log_in": "SIgn In / Log In",
+        "connexion": "Login",
+        "logIn": "Log in",
+        "email": "Email",
+        "password": "Password",
+        "connect": "Connect",
+        "forgotten_password": "Forgotten password?",
+        "register": "Register",
+        "first_name": "First name",
+        "last_name": "Last name",
+        "confirm_password": "Confirm password",
+        "create_account": "Create account"
+    }
+}

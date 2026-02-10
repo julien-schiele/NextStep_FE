@@ -1,0 +1,43 @@
+{
+    "Header": {
+        "home": "Inicio",
+        "program": "Programas",
+        "profile": "Perfil",
+        "dashboard": "Panel",
+        "sign_in_or_log_in": "Iniciar sesión / Acceder",
+        "edit": "Editar",
+        "logout": "Deconnexion"
+    },"Footer": {
+        "know_more": "Saber más"
+    },
+    "HomePage": {
+        "progress": "Progreso",
+        "one_day": "un día",
+        "at_a_time": "a la vez.",
+        "hp_text": "NextStep te ayuda a estructurar tu entrenamiento, seguir tu progreso y mantener la constancia — sin complejidad innecesaria.",
+        "hp_cta": "Comenzar",
+        "cards": {
+            "clarity_title": "Claridad",
+            "clarity_text": "Objetivos simples y medibles.",
+            "consistency_title": "Constancia",
+            "consistency_text": "Hábitos sostenibles.",
+            "progression_title": "Progresión",
+            "progression_text": "Visualiza tu progreso."
+        },
+        "illustration_alt": "Ilustración / video del producto"
+    },
+    "AuthPage": {
+        "sign_in_or_log_in": "Iniciar sesión / Acceder",
+        "connexion": "Iniciar sesión",
+        "logIn": "Acceder",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "connect": "Conectar",
+        "forgotten_password": "¿Olvidaste tu contraseña?",
+        "register": "Registrarse",
+        "first_name": "Nombre",
+        "last_name": "Apellido",
+        "confirm_password": "Confirmar contraseña",
+        "create_account": "Crear cuenta"
+    }
+}
