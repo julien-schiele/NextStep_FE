@@ -1,0 +1,70 @@
+import { getLocale } from "next-intl/server";
+import { cookies } from "next/headers";
+
+export async function fetchFromServer<T>(path: string, method: string = "GET", body?: any): Promise<T> {
+    const locale = await getLocale()
+    const cookieStore = cookies();
+    const cookieHeader = (await cookieStore)
+        .getAll()
+        .map(c => `${c.name}=${c.value}`)
+        .join("; ");
+
+    const baseUrl = process.env.NEXT_SERVER_API_URL!;
+
+    let res = await fetch(`${baseUrl}${path}`, {
+        method,
+        headers: {
+            "Content-Type": "application/json",
+            "Accept-Language": locale,
+            ...(cookieHeader ? { Cookie: cookieHeader } : {})
+        },
+        body: body ? JSON.stringify(body) : undefined,
+        credentials: "include",
+    });
+
+    if (res.status === 401) {
+        // try to refresh token
+        const refreshRes = await fetch(`${baseUrl}/token/refresh/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept-Language": locale,
+                ...(cookieHeader ? { Cookie: cookieHeader } : {})
+            },
+            credentials: "include",
+        });
+
+        if (!refreshRes.ok) {
+            throw new Error("Session expired, please login again");
+        }
+
+        const data = await refreshRes.json();
+        const accessToken = data.access;
+        if (!accessToken) throw new Error("Refresh succeeded but no access token returned");
+
+        // replay request with new access token
+        res = await fetch(`${baseUrl}${path}`, {
+            method,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept-Language": locale,
+                Authorization: `Bearer ${accessToken}`,
+                ...(cookieHeader ? { Cookie: cookieHeader } : {}),
+            },
+            body: body ? JSON.stringify(body) : undefined,
+            credentials: "include",
+        });
+    }
+
+    if (!res.ok) {
+        const text = await res.text();
+        let message = `API Error ${res.status}`;
+        try {
+            const err = JSON.parse(text);
+            if (err.detail) message = err.detail;
+        } catch { }
+        throw new Error(message);
+    }
+
+    return res.json();
+}

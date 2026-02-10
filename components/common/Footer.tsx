@@ -1,17 +1,14 @@
-import { apiGet } from "@/lib/apiClient";
+import { fetchFromServer } from "@/lib/fetchForServerComponent";
 import { PrivacyPolicyType } from "@/types/api/utils";
 import { Link } from "@/i18n/navigation";
 import parse from "html-react-parser";
 import { getTranslations } from "next-intl/server";
 
-type FooterProps = {
-    locale: string;
-};
 
-export default async function Footer({ locale }: FooterProps) {
+export default async function Footer() {
     const t = await getTranslations("Footer");
 
-    const policy: PrivacyPolicyType = await apiGet(`/privacy/`, {locale});
+    const policy: PrivacyPolicyType = await fetchFromServer(`/privacy/`, "GET");
 
     if (!policy) {
         return (

@@ -32,7 +32,7 @@ export default function Header() {
                     <Link href="/" className="hover:text-primary transition-colors">
                         {t("home")}
                     </Link>
-                    <Link href="/progress" className="hover:text-primary transition-colors">
+                    <Link href="/programs" className="hover:text-primary transition-colors">
                         {t("program")}
                     </Link>
                     <Link href="/dashboard" className="hover:text-primary transition-colors">

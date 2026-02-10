@@ -1,13 +1,11 @@
-import { apiGet } from "@/lib/apiClient";
+import { fetchFromServer } from "@/lib/fetchForServerComponent";
 import { PrivacyPolicyType } from "@/types/api/utils";
 import parse, { domToReact, Element } from "html-react-parser";
 import { P, H1, H2, H3, UL, LI, OL } from "@/components/ui/text"
-import { getLocale } from "next-intl/server";
 
 
 export default async function PrivacyPage() {
-    const locale = await getLocale()
-    const policy: PrivacyPolicyType = await apiGet(`/privacy/`, {locale});
+    const policy: PrivacyPolicyType = await fetchFromServer(`/privacy/`, "GET");
 
     if (!policy) {
         return (

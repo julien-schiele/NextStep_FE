@@ -13,7 +13,7 @@ import {
 import { H2 } from "../ui/text";
 import { Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { apiPost } from "@/lib/apiClient";
+import { fetchFromClient } from "@/lib/fetchForClientComponent";
 import { useAuth } from "@/lib/authProvider";
 
 
@@ -63,12 +63,11 @@ export default function AuthDialog() {
             return;
         }
         try {
-            const newUser = await apiPost("/users/create/", {
+            const newUser = await fetchFromClient("/users/create/", locale, "POST", {
                 first_name: data.first_name,
                 email: data.email,
                 password: data.password,
-            }, { locale });
-            console.log("User created:", newUser);
+            });
             setActiveTab("connexion");
         } catch (err: any) {
             alert(err.message);

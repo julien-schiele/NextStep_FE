@@ -6,11 +6,9 @@ import { H1, H2, H3, P } from "@/components/ui/text";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
-import {
-    useAuth
+import { useAuth } from "@/lib/authProvider";
 
 
-} from "@/lib/authProvider";
 export default function HomePage() {
     const t = useTranslations("HomePage");
     const { user } = useAuth()
@@ -24,7 +22,6 @@ export default function HomePage() {
                         <br />
                         {t("at_a_time")}
                     </H1>
-                    <H2>Let's go {user?.first_name} </H2>
                     <P className="text-lg">{t("hp_text")}</P>
 
                     <Button asChild variant="default" size="lg">

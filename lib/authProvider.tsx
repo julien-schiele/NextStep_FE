@@ -1,8 +1,9 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { apiGet, apiPost, setAccessToken } from "./apiClient";
+import { fetchFromClient, setAccessToken } from "./fetchForClientComponent";
 import { UserType } from "@/types/api/user";
+import { useLocale } from "next-intl";
 
 type AuthContextType = {
     user: UserType | null;
@@ -14,12 +15,13 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
+    const locale = useLocale()
     const [user, setUser] = useState<UserType | null>(null);
     const [loading, setLoading] = useState(true);
 
     const fetchUser = async () => {
         try {
-            const u = await apiGet<UserType>("/users/me/", {});
+            const u = await fetchFromClient<UserType>("/users/me/", locale);
             setUser(u);
         } catch {
             setUser(null);
@@ -34,7 +36,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const login = async (email: string, password: string) => {
         try {
-            const data = await apiPost("/token/", { email, password }, {});
+            const data = await fetchFromClient("/token/", locale, "POST", { email, password });
             setAccessToken(data.access);
             await fetchUser();
         } catch (err: any) {
@@ -47,7 +49,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setAccessToken(null);  // efface access token stocké localement
 
         try {
-            await fetch("/api/logout", { method: "POST" }); // proxie vers Django
+            const res = await fetchFromClient("/logout/", locale, "POST");
         } catch (err) {
             console.error("Erreur logout", err);
         }
