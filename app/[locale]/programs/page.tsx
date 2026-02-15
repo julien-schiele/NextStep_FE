@@ -1,30 +1,20 @@
 import { fetchFromServer } from "@/lib/fetchForServerComponent";
-import { ProgramListItemType } from "@/types/api/programs";
-import { H1, P } from "@/components/ui/text";
-import { Card } from "@/components/ui/card";
+import { H1 } from "@/components/ui/text";
+import { getTranslations } from "next-intl/server";
+import { ProgramListClient } from "@/features/programs/components/list/ProgramListClient";
+import { ProgramListType, ProgramFiltersType } from "@/types/api/programs/index";
 
 
-export default async function ProgressPage() {
-
-    const programs = await fetchFromServer<ProgramListItemType[]>("/programs");
+export default async function ProgramListPage() {
+    const programs = await fetchFromServer<ProgramListType[]>("/programs");
+    const filters = await fetchFromServer<ProgramFiltersType>("/programs/filters");
+    const t = await getTranslations()
 
     return (
-        <section className="pt-16 pb-24 space-y-8">
-            <H1>Program List</H1>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {programs.map((p) => {
-                    if (p) {
-                        return (
-                            <Card key={p.id ?? p.slug} className="p-4">
-                                {p.slug}
-                                <P>{p.level}</P>
-                            </Card>
-                        )
-                    }
-                    return null
-                })}
-            </div>
+        <section>
+            <H1 className="mb-8">{t("ProgramListPage.title")}</H1>
+            {/* Client Component for dynamic filtering */}
+            <ProgramListClient initialPrograms={programs} filters={filters} />
         </section>
     );
 }

@@ -8,7 +8,7 @@ type CardProps = HTMLAttributes<HTMLDivElement> & {
 
 export const Card = ({ children, className = "", ...props }: CardProps) => (
     <div
-        className={twMerge("bg-card text-card-foreground rounded-2xl p-5", className)}
+        className={twMerge("bg-card text-card-foreground border border-card rounded-2xl p-5", className)}
         {...props}
     >
         {children}

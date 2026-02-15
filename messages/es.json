@@ -7,7 +7,8 @@
         "sign_in_or_log_in": "Iniciar sesión / Acceder",
         "edit": "Editar",
         "logout": "Deconnexion"
-    },"Footer": {
+    },
+    "Footer": {
         "know_more": "Saber más"
     },
     "HomePage": {
@@ -39,5 +40,23 @@
         "last_name": "Apellido",
         "confirm_password": "Confirmar contraseña",
         "create_account": "Crear cuenta"
+    },
+    "ProgramListPage": {
+        "title": "Todos los programas",
+        "focus": "Enfoque",
+        "level": "Nivel de dificultad",
+        "focus_axes": "Ejes de enfoque",
+        "day": "{count, plural, one {día} other {días}}"
+    },
+    "ProgramDetailPage": {
+        "program_difficulty": "Dificultad del programa",
+        "realistic_if": "Se ajusta bien si",
+        "not_realistic_if": "No se ajusta bien si",
+        "historic": "Histórico",
+        "program_sessions": "Sesiones del programa",
+        "session": "Sesión",
+        "repetition": "{count, plural, one {repetición} other {repeticiones}}",
+        "duration": "{count, plural, one {segundo} other {segundos}}",
+        "day": "{count, plural, one {día} other {días}}"
     }
 }

@@ -40,5 +40,23 @@
         "last_name": "Last name",
         "confirm_password": "Confirm password",
         "create_account": "Create account"
+    },
+    "ProgramListPage":{
+        "title": "Training programs",
+        "focus":"Focus",
+        "level": "Difficulty level",
+        "focus_axes": "Focus axes",
+        "day": "{count, plural, one {day} other {days}}"
+    },
+    "ProgramDetailPage":{
+        "program_difficulty": "Program difficulty",
+        "realistic_if": "Good fit if",
+        "not_realistic_if": "Not a good fit if",
+        "historic": "Historic",
+        "program_sessions": "Program sessions",
+        "session": "Session",
+        "repetition": "{count, plural, one {repetition} other {repetitions}}",
+        "duration": "{count, plural, one {second} other {seconds}}",
+        "day": "{count, plural, one {day} other {days}}"
     }
 }

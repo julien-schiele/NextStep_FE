@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { fetchFromClient, setAccessToken } from "./fetchForClientComponent";
-import { UserType } from "@/types/api/user";
+import { UserType } from "@/types/api/users";
 import { useLocale } from "next-intl";
 
 type AuthContextType = {
@@ -45,8 +45,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
 
     const logout = async () => {
-        setUser(null);         // reset état user côté FE
-        setAccessToken(null);  // efface access token stocké localement
+        setUser(null);         // reset state on frontend
+        setAccessToken(null);  // remove access token stored on client
 
         try {
             const res = await fetchFromClient("/logout/", locale, "POST");

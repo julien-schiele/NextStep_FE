@@ -16,7 +16,7 @@ export default function Header() {
     if(loading)return null
 
     return (
-        <header className="sticky top-0 z-10 bg-background/70 dark:bg-background/70 backdrop-blur border-b border-border">
+        <header className="w-full fixed top-0 z-10 bg-background/70 dark:bg-background/70 backdrop-blur border-b border-border">
             <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
 
                 {/* LEFT */}

@@ -34,6 +34,15 @@ export const H3 = ({ children, className = "", ...props }: HeadingProps) => (
     </h3>
 );
 
+export const H4 = ({ children, className = "", ...props }: HeadingProps) => (
+    <h3
+        className={twMerge("text-md md:text-md font-semibold leading-snug", className)}
+        {...props}
+    >
+        {children}
+    </h3>
+);
+
 export const P = ({ children, className = "", ...props }: HeadingProps) => (
     <p className={twMerge("text-sm text-muted-foreground", className)}
         {...props}

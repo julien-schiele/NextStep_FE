@@ -38,8 +38,8 @@ export async function fetchFromClient<T>(path: string, locale: string, method: s
         }
 
         const data = await refreshRes.json();
-        const accessToken = data.access;
-        if (!accessToken) throw new Error("Refresh succeeded but no access token returned");
+        if (!data.access) throw new Error("Refresh succeeded but no access token returned");
+        setAccessToken(data.access)
 
         // replay request with new access token
         res = await fetch(`${baseUrl}${path}`, {
