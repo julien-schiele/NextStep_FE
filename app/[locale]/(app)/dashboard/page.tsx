@@ -7,14 +7,14 @@ import { StatsGrid } from "@/features/dashboard/components/StatsGrid";
 import { HistorySection } from "@/features/dashboard/components/HistorySection";
 import { getCompletedSessions, getTodaySequences } from "@/features/training/services";
 import { capitalize } from "@/lib/utils";
-import { getCurrentUser } from "@/lib/auth/server";
+import { getCurrentUser, protectedPage } from "@/lib/auth/server";
 import { fetchFromServer } from "@/lib/api/server";
 import { UserProgramType, UserStatsType } from "@/types/api/tracking";
 import { ProgramDetailType } from "@/types/api/programs";
 import { Button } from "@/components/ui/button";
 
 
-export default async function DashboardPage() {
+async function DashboardPage() {
     const user = await getCurrentUser();
     const t = await getTranslations("DashboardPage")
 
@@ -55,3 +55,5 @@ export default async function DashboardPage() {
         </section>
     );
 }
+
+export default protectedPage(DashboardPage)

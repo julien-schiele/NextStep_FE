@@ -2,6 +2,7 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { AuthProvider } from '@/lib/auth/authProvider';
+import OpenAuthDialogFromQuery from '@/components/layout/OpenAuthDialogFromQuery';
 
 
 type Props = {
@@ -27,6 +28,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     return (
         <NextIntlClientProvider>
             <AuthProvider>
+                <OpenAuthDialogFromQuery/>
                 {children}
             </AuthProvider>
         </NextIntlClientProvider>

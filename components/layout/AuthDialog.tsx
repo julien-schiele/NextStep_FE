@@ -29,8 +29,12 @@ type RegisterFormInputs = {
     confirm_password: string;
 };
 
-export default function AuthDialog() {
-    const [open, setOpen] = useState(false);
+type Props = {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+};
+
+export default function AuthDialog({ open, onOpenChange }: Props) {
     const [activeTab, setActiveTab] = useState<"connexion" | "register">("connexion");
     const t = useTranslations("AuthPage");
     const locale = useLocale()
@@ -78,10 +82,10 @@ export default function AuthDialog() {
 
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
+        <Dialog open={open} onOpenChange={onOpenChange}>
+            {/* <DialogTrigger asChild>
                 <Button variant="default">{t("sign_in_or_log_in")}</Button>
-            </DialogTrigger>
+            </DialogTrigger> */}
             <DialogContent className="sm:max-w-md">
                 <DialogTitle></DialogTitle>
 

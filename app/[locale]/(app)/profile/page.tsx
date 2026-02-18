@@ -3,12 +3,13 @@
 import { Card } from "@/components/ui/card";
 import { ChangePasswordCard } from "@/features/profile/components/ChangePasswordCard";
 import { useAuth } from "@/lib/auth/authProvider";
+import { protectedPage } from "@/lib/auth/server";
 import { capitalize, formatDateToLocale } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { LuScanFace } from "react-icons/lu";
 
 
-export default function ProfilePage() {
+function ProfilePage() {
     const { user } = useAuth()
     const t = useTranslations()
 
@@ -32,3 +33,5 @@ export default function ProfilePage() {
         </section>
     );
 }
+
+export default protectedPage(ProfilePage)

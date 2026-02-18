@@ -2,9 +2,10 @@ import { TrainingPageClient } from "@/features/training/components/TrainingPageC
 import { ProgramDetailType, SequenceType } from "@/types/api/programs";
 import { UserProgramType } from "@/types/api/tracking";
 import { fetchFromServer } from "@/lib/api/server"
+import { protectedPage } from "@/lib/auth/server";
 
 
-export default async function TrainingPage() {
+async function TrainingPage() {
     const currentUserProgram: UserProgramType | null = await fetchFromServer("/user-programs/active/", "GET")
     const currentProgram: ProgramDetailType | null = await fetchFromServer(`/programs/${currentUserProgram?.program}`, "GET")
 
@@ -27,3 +28,5 @@ export default async function TrainingPage() {
         </main>
     )
 }
+
+export default protectedPage(TrainingPage)

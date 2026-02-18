@@ -4,13 +4,18 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 import { fetchFromClient, setAccessToken } from "@/lib/api/client";
 import { UserType } from "@/types/api/users";
 import { useLocale } from "next-intl";
+import AuthDialog from "@/components/layout/AuthDialog";
+
 
 type AuthContextType = {
     user: UserType | null;
     login: (email: string, password: string) => Promise<void>;
     logout: () => void;
     loading: boolean;
+    openAuth: () => void;
+    closeAuth: () => void;
 };
+
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -18,6 +23,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const locale = useLocale()
     const [user, setUser] = useState<UserType | null>(null);
     const [loading, setLoading] = useState(true);
+    const [isOpen, setIsOpen] = useState(false)
 
     const fetchUser = async () => {
         try {
@@ -39,6 +45,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             const data = await fetchFromClient("/token/", locale, "POST", { email, password });
             setAccessToken(data.access);
             await fetchUser();
+            setIsOpen(false);
         } catch (err: any) {
             alert(err.message);
         }
@@ -57,8 +64,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, loading }}>
+        <AuthContext.Provider
+            value={{
+                user,
+                login,
+                logout,
+                loading,
+                openAuth: () => setIsOpen(true),
+                closeAuth: () => setIsOpen(false),
+            }}
+        >
             {children}
+            <AuthDialog open={isOpen} onOpenChange={setIsOpen} />
         </AuthContext.Provider>
     );
 }

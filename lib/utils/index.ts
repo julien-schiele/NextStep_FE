@@ -16,7 +16,7 @@ export function getDurationInDays(start_date?: string | null, end_date?: string 
 
     const start = Date.parse(start_date);
     const end = end_date ? Date.parse(end_date) : Date.now();
-    return differenceInDays(end, start)
+    return differenceInDays(end, start) + 1
 }
 
 

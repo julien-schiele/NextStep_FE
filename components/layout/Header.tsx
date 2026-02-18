@@ -1,19 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { useTranslations } from "next-intl";
-import AuthDialog from "./AuthDialog";
 import { Link } from "@/i18n/navigation";
 import LocaleSelector from "./LocalSelector";
 import { useAuth } from "@/lib/auth/authProvider";
 import { UserMenu } from "./UserMenu";
+import ProtectedLink from "../auth/ProtectedLink";
+import ProtectedButton from "../auth/ProtectedButton";
 
 export default function Header() {
     const t = useTranslations('Header');
     const { loading, user } = useAuth();
 
-    if(loading)return null
+    if (loading) return null
 
     return (
         <header className="w-full fixed top-0 z-10 bg-background/70 dark:bg-background/70 backdrop-blur border-b border-border">
@@ -32,20 +32,20 @@ export default function Header() {
                     <Link href="/" className="hover:text-primary transition-colors">
                         {t("home")}
                     </Link>
-                    <Link href="/programs" className="hover:text-primary transition-colors">
+                    <ProtectedLink href="/programs" className="hover:text-primary transition-colors">
                         {t("program")}
-                    </Link>
-                    <Link href="/dashboard" className="hover:text-primary transition-colors">
+                    </ProtectedLink>
+                    <ProtectedLink href="/dashboard" className="hover:text-primary transition-colors">
                         {t("dashboard")}
-                    </Link>
+                    </ProtectedLink>
                 </nav>
 
                 {/* RIGHT */}
                 <div className="flex items-center gap-4 h-16">
-                    { user ? (
+                    {user ? (
                         <UserMenu user={user} />
                     ) : (
-                        <AuthDialog />
+                        <ProtectedButton variant="default">{t("sign_in_or_log_in")}</ProtectedButton>
                     )}
                     <ThemeToggle />
                 </div>

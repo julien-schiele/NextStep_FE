@@ -1,15 +1,14 @@
-"use client";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { H1, H3, P } from "@/components/ui/text";
-import { useTranslations } from "next-intl";
-import Link from "next/link";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
+import ProtectedLink from "@/components/auth/ProtectedLink";
 
 
-export default function HomePage() {
-    const t = useTranslations("HomePage");
+export default async function HomePage({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+    const t = await getTranslations("HomePage");
 
     return (
         <section className="flex flex-col gap-8">
@@ -23,9 +22,8 @@ export default function HomePage() {
                     <P className="text-lg">{t("hp_text")}</P>
 
                     <Button asChild variant="default" size="lg">
-                        <Link href="/dashboard">{t('hp_cta')}</Link>
+                        <ProtectedLink href="/dashboard">{t('hp_cta')}</ProtectedLink>
                     </Button>
-
                 </div>
 
                 <Card className="aspect-video relative overflow-hidden rounded-2xl">

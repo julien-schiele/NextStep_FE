@@ -4,6 +4,7 @@ import { ProgramHistorySection } from "@/features/programs/components/detail/Pro
 import { ProgramRealisticSection } from "@/features/programs/components/detail/ProgramRealisticSection";
 import { ProgramSessionsTimeline } from "@/features/programs/components/detail/ProgramSessionsTimeline";
 import { ProgramDetailType, ProgramFiltersType } from "@/types/api/programs";
+import { protectedPage } from "@/lib/auth/server";
 
 
 type PageProps = {
@@ -13,7 +14,7 @@ type PageProps = {
 };
 
 
-export default async function ProgramPage({ params }: PageProps) {
+async function ProgramPage({ params }: PageProps) {
     const { id } = await params;
     const program = await fetchFromServer<ProgramDetailType>(`/programs/${id}`, "GET");
     const filters = await fetchFromServer<ProgramFiltersType>("/programs/filters");
@@ -68,3 +69,5 @@ export default async function ProgramPage({ params }: PageProps) {
         </section>
     )
 }
+
+export default protectedPage(ProgramPage)
