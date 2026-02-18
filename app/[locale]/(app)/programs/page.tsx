@@ -1,4 +1,4 @@
-import { fetchFromServer } from "@/lib/fetchForServerComponent";
+import { fetchFromServer } from "@/lib/api/server";
 import { H1 } from "@/components/ui/text";
 import { getTranslations } from "next-intl/server";
 import { ProgramListClient } from "@/features/programs/components/list/ProgramListClient";

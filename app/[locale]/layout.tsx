@@ -1,9 +1,7 @@
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
-import { AuthProvider } from '@/lib/authProvider';
+import { AuthProvider } from '@/lib/auth/authProvider';
 
 
 type Props = {
@@ -29,13 +27,8 @@ export default async function LocaleLayout({ children, params }: Props) {
     return (
         <NextIntlClientProvider>
             <AuthProvider>
-                <Header />
-                <main className="max-w-6xl mx-auto px-6 pb-32 pt-28 space-y-20">
-
-                    {children}
-                </main>
+                {children}
             </AuthProvider>
-            <Footer/>
         </NextIntlClientProvider>
     );
 }

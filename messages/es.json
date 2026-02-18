@@ -58,5 +58,34 @@
         "repetition": "{count, plural, one {repetición} other {repeticiones}}",
         "duration": "{count, plural, one {segundo} other {segundos}}",
         "day": "{count, plural, one {día} other {días}}"
+    },
+    "Dashboard": {
+        "hello": "Hola",
+        "select_new_program": "Selecciona un nuevo programa",
+        "next_session": "Tu próxima sesión",
+        "sequence": "{count, plural, one {Secuencia} other {Secuencias}}",
+        "completed_session_count": "Número de sesiones completadas",
+        "completed_program_count": "Número de programas completados",
+        "level": "Nivel",
+        "start": "Inicio",
+        "day": "{count, plural, one {día} other {días}}",
+        "historic": "Tu historial",
+        "no_historic_yet": "Aún no has completado ningún programa",
+        "completed": "Completado",
+        "motivation": "¿Listo para tu próximo entrenamiento?"
+    },
+    "TrainingPage": {
+        "header_motivation": "¡Vamos!",
+        "sequence": "Superset",
+        "previous": "Anterior",
+        "next": "Siguiente",
+        "complete": "Completar",
+        "too_easy": "Demasiado fácil",
+        "ok": "Bien",
+        "too_hard": "Demasiado difícil",
+        "save_session": "Guardar la sesión",
+        "session_completed": "Sesión completada",
+        "congrat_for_progress": "¡Felicidades por tu progreso!",
+        "how_did_you_feel": "¿Cómo te sentiste durante esta sesión?"
     }
 }

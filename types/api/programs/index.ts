@@ -10,19 +10,18 @@ export type ProgramFiltersType = components["schemas"]["ProgramFilters"];
 export type LevelEnumType = components["schemas"]["LevelEnum"];
 export type FocusEnumType = components["schemas"]["FocusEnum"];
 export type FocusAxesEnumType = components["schemas"]["FocusAxesEnum"];
+export type StatusEnumType = components["schemas"]["StatusEnum"];
 
 
 /**
  * Derived helper types (strongly typed, non-nullable)
  */
-export type ProgramContentType =
-    NonNullable<ProgramDetailType["content"]>;
+export type ProgramContentType = NonNullable<ProgramDetailType["content"]>;
 
-export type CycleType =
-    ProgramContentType["cycles"][number];
+export type CycleType = ProgramContentType["cycles"][number];
 
-export type SessionType =
-    CycleType["sessions"][number];
+export type SessionType = CycleType["sessions"][number];
 
-export type ExercisePreviewType =
-    SessionType["sequences"][number][number];
+export type SequenceType = SessionType["sequences"]
+
+export type ExercisePreviewType = SequenceType[number][number];

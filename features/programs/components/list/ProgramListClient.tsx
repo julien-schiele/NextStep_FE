@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
-import { fetchFromClient } from "@/lib/fetchForClientComponent";
+import { fetchFromClient } from "@/lib/api/client";
 import { ProgramFilters } from "./ProgramFilters";
 import { ProgramGrid } from "./ProgramGrid";
 import { ProgramListType, ProgramFiltersType, FocusEnumType, LevelEnumType, FocusAxesEnumType } from "@/types/api/programs/index";

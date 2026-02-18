@@ -13,8 +13,8 @@ import {
 import { H2 } from "../ui/text";
 import { Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { fetchFromClient } from "@/lib/fetchForClientComponent";
-import { useAuth } from "@/lib/authProvider";
+import { fetchFromClient } from "@/lib/api/client";
+import { useAuth } from "@/lib/auth/authProvider";
 
 
 type LoginFormInputs = {

@@ -1,8 +1,13 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { H2, P } from "@/components/ui/text";
-import { Link } from "@/i18n/navigation";
-import { getTranslations } from "next-intl/server"
-
+import { Link, useRouter } from "@/i18n/navigation";
+import { fetchFromClient } from "@/lib/api/client";
+import { useLocale, useTranslations } from "next-intl";
+import { MouseEventHandler } from "react";
+import { StatusEnumType } from "@/types/api/programs"
+import { UserProgramType } from "@/types/api/tracking";
 
 export type ProgramHistoryStatus =
     | "completed"
@@ -18,15 +23,39 @@ export type ProgramHistoryType = {
 };
 
 interface ProgramHistorySectionProps {
+    programId: string;
     history: ProgramHistoryType[];
-    locale: string;
     inProgress: boolean;
 }
 
 
 
-export async function ProgramHistorySection({ history, locale, inProgress }: ProgramHistorySectionProps) {
-    const t = await getTranslations("ProgramDetailPage")
+export function ProgramHistorySection({ programId, history, inProgress }: ProgramHistorySectionProps) {
+    const t = useTranslations("ProgramDetailPage")
+    const locale = useLocale()
+    const router = useRouter()
+
+    const handleStart: MouseEventHandler<HTMLButtonElement> = async (e) => {
+        e.preventDefault();
+
+        try {
+            const userProgram = await fetchFromClient<UserProgramType>(
+                "/user-programs/",
+                locale,
+                "POST",
+                {
+                    program: programId,
+                }
+            );
+            router.push("/dashboard");
+        } catch (error: any) {
+            console.error("Start program error:", error);
+            alert(error.message ?? "Une erreur est survenue.");
+            // TODO: setState to displau error message in UI, or https://github.com/bvaughn/react-error-boundary
+            // setError(error.message);
+        }
+    };
+
     return (
         <div className="space-y-10">
             <H2>{t("historic")}</H2>
@@ -51,7 +80,7 @@ export async function ProgramHistorySection({ history, locale, inProgress }: Pro
                         <Link href={"#"}>Continue the program</Link>
                     </Button>
                 ) : (
-                    <Button asChild>
+                    <Button onClick={handleStart}>
                         <Link href={"#"}>Start the program</Link>
                     </Button>
                 )}

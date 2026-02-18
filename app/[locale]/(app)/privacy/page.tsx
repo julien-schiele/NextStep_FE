@@ -1,4 +1,4 @@
-import { fetchFromServer } from "@/lib/fetchForServerComponent";
+import { fetchFromServer } from "@/lib/api/server";
 import { PrivacyPolicyType } from "@/types/api/utils";
 import parse, { domToReact, Element } from "html-react-parser";
 import { P, H1, H2, H3, UL, LI, OL } from "@/components/ui/text"
@@ -15,7 +15,7 @@ export default async function PrivacyPage() {
         );
     }
 
-    // Map HTML tags to your custom components
+    // Map HTML tags to custom components
     const options = {
         replace: (node: any) => {
             if (!(node instanceof Element)) return;
@@ -36,7 +36,7 @@ export default async function PrivacyPage() {
                 case "li":
                     return <LI>{domToReact(node.children, options)}</LI>;
                 default:
-                    return undefined; // laisse les autres balises inchangées
+                    return undefined;
             }
         },
     };

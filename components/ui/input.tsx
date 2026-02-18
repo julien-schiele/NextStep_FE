@@ -5,9 +5,9 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const inputVariants = cva(
-    "w-full rounded-xl border bg-background px-3 py-2 text-sm \
+    "w-full rounded-sm border bg-background px-3 py-2 text-sm \
    ring-offset-background placeholder:text-muted-foreground \
-   focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 \
+   focus:outline-none focus:ring-2 focus:ring-ring \
    disabled:opacity-50 disabled:cursor-not-allowed",
     {
         variants: {

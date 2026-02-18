@@ -41,14 +41,14 @@
         "confirm_password": "Confirm password",
         "create_account": "Create account"
     },
-    "ProgramListPage":{
+    "ProgramListPage": {
         "title": "Training programs",
-        "focus":"Focus",
+        "focus": "Focus",
         "level": "Difficulty level",
         "focus_axes": "Focus axes",
         "day": "{count, plural, one {day} other {days}}"
     },
-    "ProgramDetailPage":{
+    "ProgramDetailPage": {
         "program_difficulty": "Program difficulty",
         "realistic_if": "Good fit if",
         "not_realistic_if": "Not a good fit if",
@@ -58,5 +58,35 @@
         "repetition": "{count, plural, one {repetition} other {repetitions}}",
         "duration": "{count, plural, one {second} other {seconds}}",
         "day": "{count, plural, one {day} other {days}}"
+    },
+    "DashboardPage": {
+        "hello": "Hello",
+        "select_new_program": "Select a new program",
+        "next_session": "Your next session",
+        "sequence": "{count, plural, one {Superset} other {Supersets}}",
+        "completed_session_count": "Number of sessions completed",
+        "completed_program_count": "Number of programs completed",
+        "highest_level_completed": "Highest level achieved",
+        "current_level": "Current program level",
+        "start": "Start",
+        "day": "{count, plural, one {day} other {days}}",
+        "historic": "Your historic",
+        "no_historic_yet": "You haven't completed any programs yet.",
+        "completed": "Completed",
+        "motivation": "Ready for your next workout?"
+    },
+    "TrainingPage":{
+        "header_motivation": "Let's go !",
+        "sequence": "Superset",
+        "previous": "Previous",
+        "next": "Next",
+        "complete": "Complete",
+        "too_easy": "Too easy",
+        "ok": "Ok",
+        "too_hard": "Too hard",
+        "save_session": "Save the session",
+        "session_completed": "Session completed",
+        "congrat_for_progress": "Congratulations for your progression !",
+        "how_did_you_feel": "How did you feel during this session ?"
     }
 }

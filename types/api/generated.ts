@@ -204,15 +204,19 @@ export interface paths {
         };
         /**
          * @description Only:
-         *     - GET /user-programs/{id}/feedbacks/
-         *     - POST /user-programs/{id}/feedbacks/
+         *     - GET /user-programs/
+         *     - POST /user-programs/
+         *     - GET /user-programs/{id}/
+         *     - PATCH /user-programs/{id}/
          */
         get: operations["user_programs_list"];
         put?: never;
         /**
          * @description Only:
-         *     - GET /user-programs/{id}/feedbacks/
-         *     - POST /user-programs/{id}/feedbacks/
+         *     - GET /user-programs/
+         *     - POST /user-programs/
+         *     - GET /user-programs/{id}/
+         *     - PATCH /user-programs/{id}/
          */
         post: operations["user_programs_create"];
         delete?: never;
@@ -230,8 +234,10 @@ export interface paths {
         };
         /**
          * @description Only:
-         *     - GET /user-programs/{id}/feedbacks/
-         *     - POST /user-programs/{id}/feedbacks/
+         *     - GET /user-programs/
+         *     - POST /user-programs/
+         *     - GET /user-programs/{id}/
+         *     - PATCH /user-programs/{id}/
          */
         get: operations["user_programs_retrieve"];
         put?: never;
@@ -241,8 +247,10 @@ export interface paths {
         head?: never;
         /**
          * @description Only:
-         *     - GET /user-programs/{id}/feedbacks/
-         *     - POST /user-programs/{id}/feedbacks/
+         *     - GET /user-programs/
+         *     - POST /user-programs/
+         *     - GET /user-programs/{id}/
+         *     - PATCH /user-programs/{id}/
          */
         patch: operations["user_programs_partial_update"];
         trace?: never;
@@ -258,6 +266,7 @@ export interface paths {
          * @description Only:
          *     - GET /user-programs/{id}/feedback/
          *     - POST /user-programs/{id}/feedback/
+         *     - GET /user-programs/{id}/feedback/{id}/
          */
         get: operations["user_programs_feedbacks_list"];
         put?: never;
@@ -265,6 +274,7 @@ export interface paths {
          * @description Only:
          *     - GET /user-programs/{id}/feedback/
          *     - POST /user-programs/{id}/feedback/
+         *     - GET /user-programs/{id}/feedback/{id}/
          */
         post: operations["user_programs_feedbacks_create"];
         delete?: never;
@@ -284,6 +294,7 @@ export interface paths {
          * @description Only:
          *     - GET /user-programs/{id}/feedback/
          *     - POST /user-programs/{id}/feedback/
+         *     - GET /user-programs/{id}/feedback/{id}/
          */
         get: operations["user_programs_feedbacks_retrieve"];
         put?: never;
@@ -305,6 +316,7 @@ export interface paths {
          * @description Only:
          *     - GET /user-programs/{id}/sessions/
          *     - POST /user-programs/{id}/sessions/
+         *     - GET /user-programs/{user_program_id}/sessions/{id}/
          *     - PATCH /user-programs/{user_program_id}/sessions/{id}/
          *     - DELETE /user-programs/{user_program_id}/sessions/{id}/
          */
@@ -314,6 +326,7 @@ export interface paths {
          * @description Only:
          *     - GET /user-programs/{id}/sessions/
          *     - POST /user-programs/{id}/sessions/
+         *     - GET /user-programs/{user_program_id}/sessions/{id}/
          *     - PATCH /user-programs/{user_program_id}/sessions/{id}/
          *     - DELETE /user-programs/{user_program_id}/sessions/{id}/
          */
@@ -335,6 +348,7 @@ export interface paths {
          * @description Only:
          *     - GET /user-programs/{id}/sessions/
          *     - POST /user-programs/{id}/sessions/
+         *     - GET /user-programs/{user_program_id}/sessions/{id}/
          *     - PATCH /user-programs/{user_program_id}/sessions/{id}/
          *     - DELETE /user-programs/{user_program_id}/sessions/{id}/
          */
@@ -345,6 +359,7 @@ export interface paths {
          * @description Only:
          *     - GET /user-programs/{id}/sessions/
          *     - POST /user-programs/{id}/sessions/
+         *     - GET /user-programs/{user_program_id}/sessions/{id}/
          *     - PATCH /user-programs/{user_program_id}/sessions/{id}/
          *     - DELETE /user-programs/{user_program_id}/sessions/{id}/
          */
@@ -355,10 +370,47 @@ export interface paths {
          * @description Only:
          *     - GET /user-programs/{id}/sessions/
          *     - POST /user-programs/{id}/sessions/
+         *     - GET /user-programs/{user_program_id}/sessions/{id}/
          *     - PATCH /user-programs/{user_program_id}/sessions/{id}/
          *     - DELETE /user-programs/{user_program_id}/sessions/{id}/
          */
         patch: operations["user_programs_sessions_partial_update"];
+        trace?: never;
+    };
+    "/api/user-programs/active/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description GET /user-programs/active/
+         *     Return active instance for current user, or null if none.
+         */
+        get: operations["user_programs_active_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/user-stats/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["user_stats_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/api/users/": {
@@ -518,7 +570,7 @@ export interface components {
          *     * `advanced` - Advanced
          * @enum {string}
          */
-        LevelEnum: "beginner" | "intermediate" | "advanced";
+        HighestLevelCompletedEnum: "beginner" | "intermediate" | "advanced";
         /** @enum {unknown} */
         NullEnum: null;
         PatchedExercise: {
@@ -555,7 +607,7 @@ export interface components {
             readonly realistic_if?: string;
             readonly not_realistic_if?: string;
             focus?: components["schemas"]["FocusEnum"];
-            level?: components["schemas"]["LevelEnum"];
+            level?: components["schemas"]["HighestLevelCompletedEnum"];
             /** @description Duration of program in days */
             duration_days?: number;
             is_public?: boolean;
@@ -579,8 +631,14 @@ export interface components {
             readonly created_at?: string;
             /** Format: date-time */
             readonly updated_at?: string;
-            readonly next_cycle?: string;
-            readonly next_session_in_cycle?: string;
+            readonly next_cycle?: number;
+            readonly next_session_in_cycle?: number;
+            readonly program_name?: string;
+            /** Format: date-time */
+            readonly start_date?: string;
+            /** Format: date-time */
+            readonly end_date?: string;
+            readonly status_display?: string;
         };
         PatchedUserProgramSessionPatch: {
             /** Format: uuid */
@@ -617,7 +675,7 @@ export interface components {
             readonly realistic_if: string;
             readonly not_realistic_if: string;
             focus?: components["schemas"]["FocusEnum"];
-            level?: components["schemas"]["LevelEnum"];
+            level?: components["schemas"]["HighestLevelCompletedEnum"];
             /** @description Duration of program in days */
             duration_days?: number;
             is_public?: boolean;
@@ -637,7 +695,7 @@ export interface components {
             readonly realistic_if: string;
             readonly not_realistic_if: string;
             focus?: components["schemas"]["FocusEnum"];
-            level?: components["schemas"]["LevelEnum"];
+            level?: components["schemas"]["HighestLevelCompletedEnum"];
             /** @description Duration of program in days */
             duration_days?: number;
             focus_axes?: components["schemas"]["FocusAxesEnum"][];
@@ -650,6 +708,8 @@ export interface components {
         ProgramDetailContent: {
             cycles: components["schemas"]["Cycle"][];
             total_cycles: number;
+            sessions_per_cycles: number;
+            total_sessions: number;
         };
         ProgramFilters: {
             level: components["schemas"]["FilterOption"][];
@@ -661,7 +721,7 @@ export interface components {
             readonly id: string;
             readonly name: string;
             readonly description: string;
-            level?: components["schemas"]["LevelEnum"];
+            level?: components["schemas"]["HighestLevelCompletedEnum"];
             focus?: components["schemas"]["FocusEnum"];
             /** @description Duration of program in days */
             duration_days?: number;
@@ -738,8 +798,14 @@ export interface components {
             readonly created_at: string;
             /** Format: date-time */
             readonly updated_at: string;
-            readonly next_cycle: string;
-            readonly next_session_in_cycle: string;
+            readonly next_cycle: number;
+            readonly next_session_in_cycle: number;
+            readonly program_name: string;
+            /** Format: date-time */
+            readonly start_date: string;
+            /** Format: date-time */
+            readonly end_date: string;
+            readonly status_display: string;
         };
         UserProgramFeedback: {
             /** Format: uuid */
@@ -779,6 +845,12 @@ export interface components {
             readonly created_at: string;
             /** Format: date-time */
             readonly updated_at: string;
+        };
+        UserStats: {
+            total_sessions_completed: number;
+            total_programs_completed: number;
+            current_level: (components["schemas"]["HighestLevelCompletedEnum"] | components["schemas"]["NullEnum"]) | null;
+            highest_level_completed: (components["schemas"]["HighestLevelCompletedEnum"] | components["schemas"]["NullEnum"]) | null;
         };
     };
     responses: never;
@@ -1276,7 +1348,14 @@ export interface operations {
     };
     user_programs_list: {
         parameters: {
-            query?: never;
+            query?: {
+                /**
+                 * @description * `active` - Active
+                 *     * `completed` - Completed
+                 *     * `abandoned` - Abandoned
+                 */
+                status?: "abandoned" | "active" | "completed";
+            };
             header?: never;
             path?: never;
             cookie?: never;
@@ -1553,6 +1632,44 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["UserProgramSessionPatch"];
+                };
+            };
+        };
+    };
+    user_programs_active_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserProgram"];
+                };
+            };
+        };
+    };
+    user_stats_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserStats"];
                 };
             };
         };

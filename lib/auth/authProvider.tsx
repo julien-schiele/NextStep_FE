@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { fetchFromClient, setAccessToken } from "./fetchForClientComponent";
+import { fetchFromClient, setAccessToken } from "@/lib/api/client";
 import { UserType } from "@/types/api/users";
 import { useLocale } from "next-intl";
 

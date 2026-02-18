@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { UserType } from "@/types/api/user";
 import { useTranslations } from "next-intl";
-import { useAuth} from "@/lib/authProvider";
+import { useAuth} from "@/lib/auth/authProvider";
 import { useRouter } from "@/i18n/navigation";
 
 

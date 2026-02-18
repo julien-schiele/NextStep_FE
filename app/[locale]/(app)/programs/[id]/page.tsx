@@ -1,4 +1,4 @@
-import { fetchFromServer } from "@/lib/fetchForServerComponent";
+import { fetchFromServer } from "@/lib/api/server";
 import { ProgramHeader } from "@/features/programs/components/detail/ProgramHeader";
 import { ProgramHistorySection } from "@/features/programs/components/detail/ProgramHistorySection";
 import { ProgramRealisticSection } from "@/features/programs/components/detail/ProgramRealisticSection";
@@ -9,20 +9,20 @@ import { ProgramDetailType, ProgramFiltersType } from "@/types/api/programs";
 type PageProps = {
     params: {
         id: string;
-        locale: string;
     };
 };
 
 
 export default async function ProgramPage({ params }: PageProps) {
-    const { id, locale } = await params;
+    const { id } = await params;
     const program = await fetchFromServer<ProgramDetailType>(`/programs/${id}`, "GET");
     const filters = await fetchFromServer<ProgramFiltersType>("/programs/filters");
 
     const levelDict = Object.fromEntries(filters.level.map(i => [i.value, i.label]));
     const focusAxesDict = Object.fromEntries(filters.focus_axes.map(i => [i.value, i.label]));
 
-    const userProgramInProgress = true;
+    // TODO: get user current program and historic for this program
+    const userProgramInProgress = false;
     let userHistory: any[] = []
     if (userProgramInProgress) {
         userHistory = [
@@ -57,8 +57,8 @@ export default async function ProgramPage({ params }: PageProps) {
             />
 
             <ProgramHistorySection
+                programId={id}
                 history={userHistory}
-                locale={locale}
                 inProgress={userProgramInProgress}
             />
 

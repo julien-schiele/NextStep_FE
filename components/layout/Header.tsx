@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import AuthDialog from "./AuthDialog";
 import { Link } from "@/i18n/navigation";
 import LocaleSelector from "./LocalSelector";
-import { useAuth } from "@/lib/authProvider";
+import { useAuth } from "@/lib/auth/authProvider";
 import { UserMenu } from "./UserMenu";
 
 export default function Header() {

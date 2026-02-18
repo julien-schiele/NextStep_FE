@@ -1,4 +1,4 @@
-import { fetchFromServer } from "@/lib/fetchForServerComponent";
+import { fetchFromServer } from "@/lib/api/server";
 import { PrivacyPolicyType } from "@/types/api/utils";
 import { Link } from "@/i18n/navigation";
 import parse from "html-react-parser";
