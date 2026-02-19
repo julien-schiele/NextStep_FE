@@ -7,7 +7,7 @@ RUN apt-get update -yq
 WORKDIR /app
 
 # Copy package files first for cache Docker
-COPY package.json package-lock.json ./
+COPY package.json yarn.lock ./
 
 # Install dependencies
 RUN yarn install --frozen-lockfile

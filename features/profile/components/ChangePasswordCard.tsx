@@ -1,18 +1,15 @@
 import { Card } from "@/components/ui/card";
+import { ChangePasswordForm } from "./ChangePasswordForm";
+import { useTranslations } from "next-intl";
 import { H3 } from "@/components/ui/text";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 export function ChangePasswordCard() {
-    // TODO
+    const t = useTranslations("Profile.ChangePassword");
+
     return (
         <Card className="p-6 space-y-4">
-            <H3>Changer votre mot de passe</H3>
-
-            <Input type="password" placeholder="Nouveau mot de passe" />
-            <Input type="password" placeholder="Confirmer mot de passe" />
-
-            <Button>Valider</Button>
+            <H3>{t("title")}</H3>
+            <ChangePasswordForm />
         </Card>
     );
 }

@@ -59,24 +59,25 @@
         "duration": "{count, plural, one {segundo} other {segundos}}",
         "day": "{count, plural, one {día} other {días}}"
     },
-    "Dashboard": {
+    "DashboardPage": {
         "hello": "Hola",
         "select_new_program": "Selecciona un nuevo programa",
         "next_session": "Tu próxima sesión",
-        "sequence": "{count, plural, one {Secuencia} other {Secuencias}}",
+        "sequence": "{count, plural, one {Superserie} other {Superseries}}",
         "completed_session_count": "Número de sesiones completadas",
         "completed_program_count": "Número de programas completados",
-        "level": "Nivel",
-        "start": "Inicio",
+        "highest_level_completed": "Nivel más alto alcanzado",
+        "current_level": "Nivel actual del programa",
+        "start": "Empezar",
         "day": "{count, plural, one {día} other {días}}",
         "historic": "Tu historial",
-        "no_historic_yet": "Aún no has completado ningún programa",
+        "no_historic_yet": "Aún no has completado ningún programa.",
         "completed": "Completado",
         "motivation": "¿Listo para tu próximo entrenamiento?"
     },
     "TrainingPage": {
         "header_motivation": "¡Vamos!",
-        "sequence": "Superset",
+        "sequence": "Superserie",
         "previous": "Anterior",
         "next": "Siguiente",
         "complete": "Completar",
@@ -87,5 +88,41 @@
         "session_completed": "Sesión completada",
         "congrat_for_progress": "¡Felicidades por tu progreso!",
         "how_did_you_feel": "¿Cómo te sentiste durante esta sesión?"
+    },
+    "ForgotPasswordPage": {
+        "title": "¿Olvidaste tu contraseña?",
+        "success_msg": "Revisa tu correo electrónico para las instrucciones de restablecimiento.",
+        "sending": "Enviando...",
+        "send_email": "Enviar correo de restablecimiento"
+    },
+    "ResetPasswordPage": {
+        "title": "Restablecer tu contraseña",
+        "success_msg": "¡Tu contraseña se ha restablecido correctamente!",
+        "new_password_label": "Nueva contraseña",
+        "confirm_password_label": "Confirmar nueva contraseña",
+        "password_required": "La contraseña es obligatoria",
+        "confirmation_required": "La confirmación de la contraseña es obligatoria",
+        "passwords_do_not_match": "Las contraseñas no coinciden",
+        "resetting": "Restableciendo...",
+        "reset_button": "Restablecer contraseña"
+    },
+    "Profile": {
+        "member_since": "Miembro desde",
+        "ChangePassword": {
+            "title": "Cambiar contraseña",
+            "old_password": "Contraseña actual",
+            "new_password": "Nueva contraseña",
+            "confirm_password": "Confirmar nueva contraseña",
+            "submit": "Actualizar contraseña",
+            "loading": "Actualizando...",
+            "success": "Contraseña actualizada correctamente",
+            "errors": {
+                "old_password_required": "La contraseña actual es obligatoria",
+                "new_password_required": "La nueva contraseña es obligatoria",
+                "confirm_password_required": "Por favor confirma tu contraseña",
+                "password_min_length": "La contraseña debe tener al menos 8 caracteres",
+                "passwords_do_not_match": "Las contraseñas no coinciden"
+            }
+        }
     }
 }

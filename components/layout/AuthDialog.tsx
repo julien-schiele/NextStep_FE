@@ -133,7 +133,7 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
                             {loginLoading ? "Loading..." : t("connect")}
                         </Button>
                         <div className="flex items-center justify-center">
-                            <Link href="/forget_password" className="text-text text-xs">
+                            <Link href="/forgot-password" onClick={() => onOpenChange(false)} className="text-text text-xs">
                                 {t("forgotten_password")}
                             </Link>
                         </div>

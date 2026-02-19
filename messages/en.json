@@ -75,7 +75,7 @@
         "completed": "Completed",
         "motivation": "Ready for your next workout?"
     },
-    "TrainingPage":{
+    "TrainingPage": {
         "header_motivation": "Let's go !",
         "sequence": "Superset",
         "previous": "Previous",
@@ -88,5 +88,41 @@
         "session_completed": "Session completed",
         "congrat_for_progress": "Congratulations for your progression !",
         "how_did_you_feel": "How did you feel during this session ?"
+    },
+    "ForgotPasswordPage": {
+        "title": "Forgot your password?",
+        "success_msg": "Check your email for reset instructions.",
+        "sending": "Sending...",
+        "send_email": "Send reset email"
+    },
+    "ResetPasswordPage": {
+        "title": "Reset your password",
+        "success_msg": "Your password has been reset successfully!",
+        "new_password_label": "New password",
+        "confirm_password_label": "Confirm new password",
+        "password_required": "Password is required",
+        "confirmation_required": "Password confirmation is required",
+        "passwords_do_not_match": "Passwords do not match",
+        "resetting": "Resetting...",
+        "reset_button": "Reset password"
+    },
+    "Profile": {
+        "member_since": "Member since",
+        "ChangePassword": {
+            "title": "Change password",
+            "old_password": "Current password",
+            "new_password": "New password",
+            "confirm_password": "Confirm new password",
+            "submit": "Update password",
+            "loading": "Updating...",
+            "success": "Password updated successfully",
+            "errors": {
+                "old_password_required": "Current password is required",
+                "new_password_required": "New password is required",
+                "confirm_password_required": "Please confirm your password",
+                "password_min_length": "Password must be at least 8 characters",
+                "passwords_do_not_match": "Passwords do not match"
+            }
+        }
     }
 }
