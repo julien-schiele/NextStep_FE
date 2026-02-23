@@ -5,6 +5,7 @@ import { ProgramRealisticSection } from "@/features/programs/components/detail/P
 import { ProgramSessionsTimeline } from "@/features/programs/components/detail/ProgramSessionsTimeline";
 import { ProgramDetailType, ProgramFiltersType } from "@/types/api/programs";
 import { protectedPage } from "@/lib/auth/server";
+import { UserProgramType } from "@/types/api/tracking";
 
 
 type PageProps = {
@@ -19,30 +20,17 @@ async function ProgramPage({ params }: PageProps) {
     const program = await fetchFromServer<ProgramDetailType>(`/programs/${id}`, "GET");
     const filters = await fetchFromServer<ProgramFiltersType>("/programs/filters");
 
+    const userProgramHistoric: UserProgramType[] = await fetchFromServer(`/user-programs/?program=${id}`, "GET")
+
     const levelDict = Object.fromEntries(filters.level.map(i => [i.value, i.label]));
     const focusAxesDict = Object.fromEntries(filters.focus_axes.map(i => [i.value, i.label]));
 
-    // TODO: get user current program and historic for this program
-    const userProgramInProgress = false;
-    let userHistory: any[] = []
-    if (userProgramInProgress) {
-        userHistory = [
-            {
-                program_id: id,
-                started_at: "2026-01-01T10:00:00Z",
-                ended_at: "2026-01-14T10:00:00Z",
-                days_taken: 14,
-                status: "completed"
-            },
-            {
-                program_id: id,
-                started_at: "2025-12-01T10:00:00Z",
-                ended_at: "2025-12-14T10:00:00Z",
-                days_taken: 14,
-                status: "completed"
-            }
-        ];
-    }
+    let userProgramInProgress = false
+    userProgramHistoric.map(up=>{
+        if(up.status === "active"){
+            userProgramInProgress = true
+        }
+    });
 
     return (
         <section className="space-y-14">
@@ -59,7 +47,7 @@ async function ProgramPage({ params }: PageProps) {
 
             <ProgramHistorySection
                 programId={id}
-                history={userHistory}
+                history={userProgramHistoric}
                 inProgress={userProgramInProgress}
             />
 

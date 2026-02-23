@@ -13,9 +13,9 @@ import {
     DropdownMenuTrigger,
     DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
-import { UserType } from "@/types/api/user";
+import { UserType } from "@/types/api/users";
 import { useTranslations } from "next-intl";
-import { useAuth} from "@/lib/auth/authProvider";
+import { useAuth } from "@/lib/auth/authProvider";
 import { useRouter } from "@/i18n/navigation";
 
 
@@ -33,7 +33,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
             <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="flex items-center gap-2">
                     <MdVerifiedUser className="text-primary" />
-                    {user.first_name.toLocaleUpperCase()}
+                    {user.first_name!.toLocaleUpperCase()}
                     {user.last_name ? user.last_name.slice(0, 3).toUpperCase() : ""}
                 </Button>
             </DropdownMenuTrigger>

@@ -2,9 +2,11 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { fetchFromClient, setAccessToken } from "@/lib/api/client";
-import { UserType } from "@/types/api/users";
+import { TokenResponseType, UserType } from "@/types/api/users";
 import { useLocale } from "next-intl";
 import AuthDialog from "@/components/layout/AuthDialog";
+import { toast } from "sonner";
+import { useRouter } from "@/i18n/navigation";
 
 
 type AuthContextType = {
@@ -24,13 +26,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<UserType | null>(null);
     const [loading, setLoading] = useState(true);
     const [isOpen, setIsOpen] = useState(false)
+    const router = useRouter()
 
     const fetchUser = async () => {
         try {
             const u = await fetchFromClient<UserType>("/users/me/", locale);
             setUser(u);
-        } catch {
+        } catch (e) {
             setUser(null);
+            // toast.error(e.message, { position: "bottom-center" })
         } finally {
             setLoading(false);
         }
@@ -42,23 +46,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const login = async (email: string, password: string) => {
         try {
-            const data = await fetchFromClient("/token/", locale, "POST", { email, password });
+            const data: TokenResponseType = await fetchFromClient("/token/", locale, "POST", { email, password });
             setAccessToken(data.access);
             await fetchUser();
             setIsOpen(false);
-        } catch (err: any) {
-            alert(err.message);
+            router.push("/dashboard")
+        } catch (e) {
+            toast.error(e.message, { position: "bottom-center" })
         }
     };
 
     const logout = async () => {
-        setUser(null);         // reset state on frontend
-        setAccessToken(null);  // remove access token stored on client
-
         try {
-            const res = await fetchFromClient("/logout/", locale, "POST");
-        } catch (err) {
-            console.error("Erreur logout", err);
+            await fetchFromClient("/logout/", locale, "POST");
+            setUser(null);
+            setAccessToken(null);
+            router.push("/")
+        } catch (e) {
+            toast.error(e.message, { position: "bottom-center" })
         }
     };
 

@@ -20,7 +20,7 @@ export default async function Footer() {
 
     return (
         <footer className="fixed bottom-0 bg-accent flex w-full h-14 items-center justify-center">
-            <small className="flex">
+            <small className="flex items-center justify-center flex-wrap">
                 {policy.short_text ? parse(policy.short_text) : "No short here"}
                 &nbsp;
                 <Link href="/privacy" className="hover:text-primary transition-colors">

@@ -9,10 +9,11 @@ type Props = {
     href: string;
     children: ReactNode;
     className?: string;
+    onClick?: () => void;
 };
 
 
-export default function ProtectedLink({ href, children, className }: Props) {
+export default function ProtectedLink({ href, children, className, onClick }: Props) {
     const { user, openAuth } = useAuth();
 
     const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -20,6 +21,7 @@ export default function ProtectedLink({ href, children, className }: Props) {
             e.preventDefault();
             openAuth();
         }
+        onClick?.()
     };
 
     return (

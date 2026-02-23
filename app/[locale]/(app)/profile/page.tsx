@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import { ClientDate } from "@/components/ui/date";
 import { ChangePasswordCard } from "@/features/profile/components/ChangePasswordCard";
 import { getCurrentUser, protectedPage } from "@/lib/auth/server";
 import { capitalize, formatDateToLocale } from "@/lib/utils";
@@ -20,8 +21,11 @@ async function ProfilePage() {
                         <LuScanFace size={50} />
                     </div>
                     <div className="font-semibold text-primary">{capitalize(user?.first_name)}</div>
-                    <div className="font-semibold">{t("member_since") + " " + formatDateToLocale(user?.date_joined)}</div>
-                    <div className="text-sm text-gray-500">Niveau : Avancé</div>
+                    <div className="font-semibold">
+                        {t("member_since")} 
+                        {" "}
+                        <ClientDate dateString={user?.date_joined} />
+                    </div>
                 </Card>
 
                 <ChangePasswordCard />

@@ -1,4 +1,4 @@
-import { ProgramContentType, ProgramDetailType, SequenceType } from "@/types/api/programs";
+import { ProgramContentType, ProgramDetailType, SequenceListType } from "@/types/api/programs";
 import { UserProgramType } from "@/types/api/tracking";
 
 
@@ -24,21 +24,20 @@ export function getCompletedSessions({ currentProgram, currentUserProgram }: get
 
 
 type getTodaySequencesProps = {
-    currentProgram: ProgramDetailType | null,
-    currentUserProgram: UserProgramType | null
+    currentProgram: ProgramDetailType,
+    currentUserProgram: UserProgramType
 }
 
-export function getTodaySequences({ currentProgram, currentUserProgram }: getTodaySequencesProps): SequenceType[] {
+export function getTodaySequences({ currentProgram, currentUserProgram }: getTodaySequencesProps): SequenceListType {
     if (!currentProgram || !currentUserProgram) return [];
 
-    const todaySequences: SequenceType[] = [];
-
-    const currentProgramContent:ProgramContentType = currentProgram?.content!
-    currentProgramContent.cycles.map(c=>{
-        if(c.cycle == currentUserProgram?.next_cycle){
-            c.sessions.map(s=>{
-                if(s.session == currentUserProgram.next_session_in_cycle){
-                    todaySequences.push(s.sequences)
+    let todaySequences: SequenceListType = []
+    const currentProgramContent: ProgramContentType = currentProgram?.content!
+    currentProgramContent.cycles.map(c => {
+        if (c.cycle == currentUserProgram?.next_cycle) {
+            c.sessions.map(s => {
+                if (s.session == currentUserProgram.next_session_in_cycle) {
+                    todaySequences = s.sequences
                 }
             })
         }

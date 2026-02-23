@@ -22,10 +22,8 @@ export function TrainingSequenceSlider({ sequence, index, total, onNext, onPrev 
         <div className="flex-1 flex flex-col  items-center mt-2 overflow-auto pb-10">
             <div className="w-full flex flex-col justify-center item-center h-full overflow-auto">
                 <div className="w-full h-fit justify-center flex flex-wrap gap-6 overflow-auto">
-                    {sequence.map((exercises) => (
-                        exercises.map((exercise: ExercisePreviewType, i: number) => (
-                            <TrainingExerciseCard exercise={exercise} key={i} />
-                        ))
+                    {sequence.map((exercise: ExercisePreviewType, i: number) => (
+                        <TrainingExerciseCard exercise={exercise} key={i} />
                     ))}
                 </div>
             </div>

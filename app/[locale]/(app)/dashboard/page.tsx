@@ -10,7 +10,7 @@ import { capitalize } from "@/lib/utils";
 import { getCurrentUser, protectedPage } from "@/lib/auth/server";
 import { fetchFromServer } from "@/lib/api/server";
 import { UserProgramType, UserStatsType } from "@/types/api/tracking";
-import { ProgramDetailType } from "@/types/api/programs";
+import { ProgramDetailType, SequenceListType } from "@/types/api/programs";
 import { Button } from "@/components/ui/button";
 
 
@@ -21,11 +21,12 @@ async function DashboardPage() {
     const currentUserProgram: UserProgramType | null = await fetchFromServer("/user-programs/active/", "GET")
     const currentProgram: ProgramDetailType | null = currentUserProgram?.program ? await fetchFromServer(`/programs/${currentUserProgram?.program}`, "GET") : null;
     const userPrograms: UserProgramType[] = await fetchFromServer("/user-programs/", "GET")
-    const userStats:UserStatsType = await fetchFromServer("/user-stats/", "GET")
+    const userStats: UserStatsType = await fetchFromServer("/user-stats/", "GET")
+
 
     let completedSessions = null
-    let todaySequences = null
-    if (currentUserProgram) {
+    let todaySequences: SequenceListType | null = null
+    if (currentProgram && currentUserProgram) {
         completedSessions = getCompletedSessions({ currentProgram, currentUserProgram })
         todaySequences = getTodaySequences({ currentProgram, currentUserProgram })
     }
@@ -33,15 +34,15 @@ async function DashboardPage() {
     return (
         <section className="space-y-16">
             <DashboardHeader firstName={capitalize(user?.first_name)} />
-            
-            {currentUserProgram?.program ? <>
+
+            {currentProgram ? <>
                 <ProgramProgressCard
                     programName={currentProgram?.name!}
                     completedSessions={completedSessions!}
                     totalSessions={currentProgram?.content.total_sessions!}
                 />
 
-                <TodaySessionCard sequences={todaySequences!} />
+                <TodaySessionCard sequenceList={todaySequences!} userProgramId={currentUserProgram!.id} />
             </>
                 :
                 <Button asChild>

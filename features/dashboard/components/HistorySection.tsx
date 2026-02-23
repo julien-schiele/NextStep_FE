@@ -1,8 +1,9 @@
 import { Card } from "@/components/ui/card";
+import { ClientDate } from "@/components/ui/date";
 import { Tag, tagVariants } from "@/components/ui/tag";
 import { H3, P } from "@/components/ui/text";
 import { Link } from "@/i18n/navigation";
-import { formatDateToLocale, getDurationInDays } from "@/lib/utils";
+import { getDurationInDays } from "@/lib/utils";
 import { UserProgramType } from "@/types/api/tracking";
 import { VariantProps } from "class-variance-authority";
 import { getTranslations } from "next-intl/server";
@@ -41,8 +42,8 @@ export async function HistorySection({ userPrograms }: Props) {
                             <div className="text-xs text-muted-foreground">
                                 {up.start_date || up.end_date ? (
                                     <>
-                                        {up.start_date ? formatDateToLocale(up.start_date) : "—"} -{" "}
-                                        {up.end_date ? formatDateToLocale(up.end_date) : "—"}
+                                        {up.start_date ? <ClientDate dateString={up.start_date}/> : "—"} -{" "}
+                                        {up.end_date ? <ClientDate dateString={up.end_date}/> : "—"}
                                     </>
                                 ) : (
                                     "—"

@@ -6,7 +6,7 @@ import { getTranslations } from "next-intl/server";
 export default async function ForgetPasswordPage() {
     const t = await getTranslations("ForgotPasswordPage")
     return (
-        <section className="max-w-md mx-auto p-4">
+        <section className="max-w-lg mx-auto space-y-10">
             <H1>{t("title")}</H1>
             <ForgotPasswordForm />
         </section>

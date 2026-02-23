@@ -22,6 +22,9 @@ export type CycleType = ProgramContentType["cycles"][number];
 
 export type SessionType = CycleType["sessions"][number];
 
-export type SequenceType = SessionType["sequences"]
+export type SequenceListType = SessionType["sequences"]
 
-export type ExercisePreviewType = SequenceType[number][number];
+export type SequenceType = SequenceListType[number];
+
+export type ExercisePreviewType = SequenceType[number];
+
