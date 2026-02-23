@@ -4,6 +4,22 @@
  */
 
 export interface paths {
+    "/api/change-password/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["change_password_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/exercises/": {
         parameters: {
             query?: never;
@@ -133,6 +149,38 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/request-password-reset/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["request_password_reset_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/reset-password/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["reset_password_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/schema/": {
         parameters: {
             query?: never;
@@ -165,8 +213,10 @@ export interface paths {
         get?: never;
         put?: never;
         /**
-         * @description Takes a set of user credentials and returns an access and refresh JSON web
-         *     token pair to prove the authentication of those credentials.
+         * @description Return JWT tokens.
+         *         - `access`: always returned
+         *         - `refresh`: only for mobile clients
+         *         - `refresh_token` cookie is set (HttpOnly)
          */
         post: operations["token_create"];
         delete?: never;
@@ -317,7 +367,6 @@ export interface paths {
          *     - GET /user-programs/{id}/sessions/
          *     - POST /user-programs/{id}/sessions/
          *     - GET /user-programs/{user_program_id}/sessions/{id}/
-         *     - PATCH /user-programs/{user_program_id}/sessions/{id}/
          *     - DELETE /user-programs/{user_program_id}/sessions/{id}/
          */
         get: operations["user_programs_sessions_list"];
@@ -327,7 +376,6 @@ export interface paths {
          *     - GET /user-programs/{id}/sessions/
          *     - POST /user-programs/{id}/sessions/
          *     - GET /user-programs/{user_program_id}/sessions/{id}/
-         *     - PATCH /user-programs/{user_program_id}/sessions/{id}/
          *     - DELETE /user-programs/{user_program_id}/sessions/{id}/
          */
         post: operations["user_programs_sessions_create"];
@@ -349,7 +397,6 @@ export interface paths {
          *     - GET /user-programs/{id}/sessions/
          *     - POST /user-programs/{id}/sessions/
          *     - GET /user-programs/{user_program_id}/sessions/{id}/
-         *     - PATCH /user-programs/{user_program_id}/sessions/{id}/
          *     - DELETE /user-programs/{user_program_id}/sessions/{id}/
          */
         get: operations["user_programs_sessions_retrieve"];
@@ -360,21 +407,12 @@ export interface paths {
          *     - GET /user-programs/{id}/sessions/
          *     - POST /user-programs/{id}/sessions/
          *     - GET /user-programs/{user_program_id}/sessions/{id}/
-         *     - PATCH /user-programs/{user_program_id}/sessions/{id}/
          *     - DELETE /user-programs/{user_program_id}/sessions/{id}/
          */
         delete: operations["user_programs_sessions_destroy"];
         options?: never;
         head?: never;
-        /**
-         * @description Only:
-         *     - GET /user-programs/{id}/sessions/
-         *     - POST /user-programs/{id}/sessions/
-         *     - GET /user-programs/{user_program_id}/sessions/{id}/
-         *     - PATCH /user-programs/{user_program_id}/sessions/{id}/
-         *     - DELETE /user-programs/{user_program_id}/sessions/{id}/
-         */
-        patch: operations["user_programs_sessions_partial_update"];
+        patch?: never;
         trace?: never;
     };
     "/api/user-programs/active/": {
@@ -487,6 +525,16 @@ export interface components {
     schemas: {
         /** @enum {unknown} */
         BlankEnum: "";
+        ChangePassword: {
+            old_password: string;
+            new_password: string;
+        };
+        ChangePasswordError: {
+            detail: string;
+        };
+        ChangePasswordResponse: {
+            message: string;
+        };
         Cycle: {
             cycle: number;
             sessions: components["schemas"]["Session"][];
@@ -573,6 +621,24 @@ export interface components {
         HighestLevelCompletedEnum: "beginner" | "intermediate" | "advanced";
         /** @enum {unknown} */
         NullEnum: null;
+        PasswordReset: {
+            /** Format: uuid */
+            token: string;
+            new_password: string;
+        };
+        PasswordResetErrorResponse: {
+            detail: string;
+        };
+        PasswordResetRequest: {
+            /** Format: email */
+            email: string;
+        };
+        PasswordResetRequestResponse: {
+            message: string;
+        };
+        PasswordResetResponse: {
+            message: string;
+        };
         PatchedExercise: {
             /** @description Slugified version of the English name, auto-generated */
             readonly slug?: string;
@@ -639,21 +705,6 @@ export interface components {
             /** Format: date-time */
             readonly end_date?: string;
             readonly status_display?: string;
-        };
-        PatchedUserProgramSessionPatch: {
-            /** Format: uuid */
-            readonly id?: string;
-            /** Format: uuid */
-            readonly user_program?: string;
-            readonly session_in_cycle?: number;
-            readonly cycle_count?: number;
-            readonly completed?: string;
-            readonly session_snapshot?: unknown;
-            rating?: (components["schemas"]["RatingEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
-            /** Format: date-time */
-            readonly created_at?: string;
-            /** Format: date-time */
-            readonly updated_at?: string;
         };
         /**
          * @description * `everywhere` - Everywhere
@@ -760,6 +811,10 @@ export interface components {
             readonly access: string;
             refresh: string;
         };
+        TokenResponse: {
+            access: string;
+            refresh?: string;
+        };
         /**
          * @description * `not_useful` - Not Useful
          *     * `useful` - Useful
@@ -831,26 +886,11 @@ export interface components {
             /** Format: date-time */
             readonly updated_at: string;
         };
-        UserProgramSessionPatch: {
-            /** Format: uuid */
-            readonly id: string;
-            /** Format: uuid */
-            readonly user_program: string;
-            readonly session_in_cycle: number;
-            readonly cycle_count: number;
-            readonly completed: string;
-            readonly session_snapshot: unknown;
-            rating?: (components["schemas"]["RatingEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
-            /** Format: date-time */
-            readonly created_at: string;
-            /** Format: date-time */
-            readonly updated_at: string;
-        };
         UserStats: {
             total_sessions_completed: number;
             total_programs_completed: number;
-            current_level: (components["schemas"]["HighestLevelCompletedEnum"] | components["schemas"]["NullEnum"]) | null;
-            highest_level_completed: (components["schemas"]["HighestLevelCompletedEnum"] | components["schemas"]["NullEnum"]) | null;
+            current_level: (components["schemas"]["HighestLevelCompletedEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            highest_level_completed: (components["schemas"]["HighestLevelCompletedEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
         };
     };
     responses: never;
@@ -861,6 +901,47 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    change_password_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ChangePassword"];
+                "application/x-www-form-urlencoded": components["schemas"]["ChangePassword"];
+                "multipart/form-data": components["schemas"]["ChangePassword"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChangePasswordResponse"];
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChangePasswordError"];
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ChangePasswordError"];
+                };
+            };
+        };
+    };
     exercises_list: {
         parameters: {
             query?: never;
@@ -1263,6 +1344,64 @@ export interface operations {
             };
         };
     };
+    request_password_reset_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PasswordResetRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["PasswordResetRequest"];
+                "multipart/form-data": components["schemas"]["PasswordResetRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PasswordResetRequestResponse"];
+                };
+            };
+        };
+    };
+    reset_password_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PasswordReset"];
+                "application/x-www-form-urlencoded": components["schemas"]["PasswordReset"];
+                "multipart/form-data": components["schemas"]["PasswordReset"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PasswordResetResponse"];
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PasswordResetErrorResponse"];
+                };
+            };
+        };
+    };
     schema_retrieve: {
         parameters: {
             query?: {
@@ -1316,7 +1455,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["TokenObtainPair"];
+                    "application/json": components["schemas"]["TokenResponse"];
                 };
             };
         };
@@ -1349,6 +1488,7 @@ export interface operations {
     user_programs_list: {
         parameters: {
             query?: {
+                program?: string;
                 /**
                  * @description * `active` - Active
                  *     * `completed` - Completed
@@ -1605,34 +1745,6 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
-            };
-        };
-    };
-    user_programs_sessions_partial_update: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: string;
-                user_program_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["PatchedUserProgramSessionPatch"];
-                "application/x-www-form-urlencoded": components["schemas"]["PatchedUserProgramSessionPatch"];
-                "multipart/form-data": components["schemas"]["PatchedUserProgramSessionPatch"];
-            };
-        };
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserProgramSessionPatch"];
-                };
             };
         };
     };

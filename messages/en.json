@@ -1,4 +1,10 @@
 {
+    "ErrorPage":{
+        "something_happens": "Something happens",
+        "please_retry": "Please retry",
+        "retry": "Retry",
+        "back_home": "Go bach home"
+    },
     "Header": {
         "home": "Home",
         "program": "Programs",
@@ -28,6 +34,10 @@
         "illustration_alt": "Product illustration / video"
     },
     "AuthPage": {
+        "welcome": "Welcome on NextStep",
+        "required_field": "This field is required",
+        "confirmation_needed": "Confirmation is needed",
+        "password_mismatch": "The passwords do not match",
         "sign_in_or_log_in": "SIgn In / Log In",
         "connexion": "Login",
         "logIn": "Log in",
@@ -90,12 +100,14 @@
         "how_did_you_feel": "How did you feel during this session ?"
     },
     "ForgotPasswordPage": {
+        "required_field": "This field is required",
         "title": "Forgot your password?",
         "success_msg": "Check your email for reset instructions.",
         "sending": "Sending...",
         "send_email": "Send reset email"
     },
     "ResetPasswordPage": {
+        "required_field": "This field is required",
         "title": "Reset your password",
         "success_msg": "Your password has been reset successfully!",
         "new_password_label": "New password",

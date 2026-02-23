@@ -7,14 +7,15 @@ import { Input } from "@/components/ui/input";
 import {
     Dialog,
     DialogContent,
-    DialogTrigger,
+    DialogDescription,
     DialogTitle,
 } from "@/components/ui/dialog";
 import { H2 } from "../ui/text";
-import { Link } from "@/i18n/navigation";
+import { Link, redirect } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { fetchFromClient } from "@/lib/api/client";
 import { useAuth } from "@/lib/auth/authProvider";
+import { toast } from "sonner";
 
 
 type LoginFormInputs = {
@@ -56,7 +57,11 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
 
     // LOGIN
     const onLogin: SubmitHandler<LoginFormInputs> = async (data) => {
-        login(data.email, data.password)
+        try {
+            await login(data.email, data.password)
+        } catch (e) {
+            toast.error(e.message, { position: "bottom-center" })
+        }
     };
 
 
@@ -67,14 +72,14 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
             return;
         }
         try {
-            const newUser = await fetchFromClient("/users/create/", locale, "POST", {
+            await fetchFromClient("/users/create/", locale, "POST", {
                 first_name: data.first_name,
                 email: data.email,
                 password: data.password,
             });
             setActiveTab("connexion");
-        } catch (err: any) {
-            alert(err.message);
+        } catch (e) {
+            toast.error(e.message, { position: "bottom-center" })
         }
     };
 
@@ -88,7 +93,9 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
             </DialogTrigger> */}
             <DialogContent className="sm:max-w-md">
                 <DialogTitle></DialogTitle>
-
+                <DialogDescription>
+                    {t("welcome")}
+                </DialogDescription>
                 {/* Tabs */}
                 <div className="flex justify-around mb-4">
                     <button
@@ -119,14 +126,14 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
                             label={t("email")}
                             type="email"
                             placeholder="exemple@mail.com"
-                            {...loginRegister("email", { required: "Email requis" })}
+                            {...loginRegister("email", { required: t("required_field") })}
                             error={loginErrors.email?.message}
                         />
                         <Input
                             label={t("password")}
                             type="password"
                             placeholder="••••••••"
-                            {...loginRegister("password", { required: "Mot de passe requis" })}
+                            {...loginRegister("password", { required: t("required_field") })}
                             error={loginErrors.password?.message}
                         />
                         <Button type="submit" className="w-full" disabled={loginLoading}>
@@ -148,21 +155,21 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
                             label={t("first_name")}
                             type="text"
                             placeholder="Julien"
-                            {...registerRegister("first_name", { required: "Prénom requis" })}
+                            {...registerRegister("first_name", { required: t("required_field") })}
                             error={registerErrors.first_name?.message}
                         />
                         <Input
                             label={t("email")}
                             type="email"
                             placeholder="exemple@mail.com"
-                            {...registerRegister("email", { required: "Email requis" })}
+                            {...registerRegister("email", { required: t("required_field") })}
                             error={registerErrors.email?.message}
                         />
                         <Input
                             label={t("password")}
                             type="password"
                             placeholder="••••••••"
-                            {...registerRegister("password", { required: "Mot de passe requis" })}
+                            {...registerRegister("password", { required: t("required_field") })}
                             error={registerErrors.password?.message}
                         />
                         <Input
@@ -170,9 +177,9 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
                             type="password"
                             placeholder="••••••••"
                             {...registerRegister("confirm_password", {
-                                required: "Confirmation requise",
+                                required: t("confirmation_needed"),
                                 validate: (val) =>
-                                    val === passwordValue || "Les mots de passe ne correspondent pas",
+                                    val === passwordValue || t("password_mismatch"),
                             })}
                             error={registerErrors.confirm_password?.message}
                         />

@@ -2,7 +2,7 @@
 
 import { useRouter } from "@/i18n/navigation";
 import { useState } from "react";
-import { SequenceType } from "@/types/api/programs";
+import { SequenceListType } from "@/types/api/programs";
 import { TrainingHeader } from "./TrainingHeader";
 import { TrainingSequenceSlider } from "./TrainingSequenceSlider";
 import { TrainingSessionCompleteScreen } from "./TrainingSessionCompleteScreen";
@@ -10,34 +10,39 @@ import { TrainingProgress } from "./TrainingProgress";
 import { fetchFromClient } from "@/lib/api/client";
 import { useLocale } from "next-intl";
 import { UserProgramType } from "@/types/api/tracking";
+import { toast } from "sonner";
 
 
 type Props = {
-    sequences: SequenceType[];
+    sequenceList: SequenceListType;
     userProgram: UserProgramType;
 }
 
 
-export function TrainingPageClient({ sequences, userProgram }: Props) {
+export function TrainingPageClient({ sequenceList, userProgram }: Props) {
     const router = useRouter();
     const locale = useLocale()
     const [sequenceIndex, setSequenceIndex] = useState(0);
     const [sessionFinished, setSessionFinished] = useState(false);
 
-    const totalSequences = sequences.length;
+    const totalSequences = sequenceList.length;
     const progressPercent = Math.round((sequenceIndex / totalSequences) * 100);
 
 
-    const saveSession = (rating:string) => {
-        fetchFromClient(`/user-programs/${userProgram.id}/sessions/`, locale, "POST",
-            {
-                "session_in_cycle": userProgram.next_session_in_cycle,
-                "cycle_count": userProgram.next_cycle,
-                "session_snapshot": sequences,
-                "rating": rating
-            }
-        )
-        router.push("/dashboard")
+    const saveSession = async (rating: string) => {
+        try {
+            await fetchFromClient(`/user-programs/${userProgram.id}/sessions/`, locale, "POST",
+                {
+                    "session_in_cycle": userProgram.next_session_in_cycle,
+                    "cycle_count": userProgram.next_cycle,
+                    "session_snapshot": sequenceList,
+                    "rating": rating
+                }
+            )
+            router.push("/dashboard")
+        } catch (e) {
+            toast.error(e.message, { position: "bottom-center" })
+        }
     };
 
     const nextSequence = () => {
@@ -69,7 +74,7 @@ export function TrainingPageClient({ sequences, userProgram }: Props) {
             />
 
             <TrainingSequenceSlider
-                sequence={sequences[sequenceIndex]}
+                sequence={sequenceList[sequenceIndex]}
                 index={sequenceIndex}
                 total={totalSequences}
                 onNext={nextSequence}

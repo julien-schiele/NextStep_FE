@@ -8,6 +8,8 @@ import { useState } from "react";
 import { fetchFromClient } from "@/lib/api/client";
 import { P } from "../ui/text";
 import { useLocale, useTranslations } from "next-intl";
+import { toast } from "sonner";
+import { useRouter } from "@/i18n/navigation";
 
 
 type FormInputs = {
@@ -22,6 +24,7 @@ export function ResetPasswordForm() {
     const searchParams = useSearchParams();
     const token = searchParams.get("token") || "";
     const [success, setSuccess] = useState(false);
+    const router = useRouter()
 
     const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm<FormInputs>();
     const passwordValue = watch("password", "");
@@ -38,8 +41,9 @@ export function ResetPasswordForm() {
                 new_password: data.password,
             });
             setSuccess(true);
-        } catch (err: any) {
-            alert(err.message || "Error");
+            router.push("/?showAuthDialog=true")
+        } catch (e) {
+            toast.error(e.message, { position: "bottom-center" })
         }
     };
 

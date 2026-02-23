@@ -6,28 +6,20 @@ import { Link, useRouter } from "@/i18n/navigation";
 import { fetchFromClient } from "@/lib/api/client";
 import { useLocale, useTranslations } from "next-intl";
 import { MouseEventHandler } from "react";
-import { StatusEnumType } from "@/types/api/programs"
 import { UserProgramType } from "@/types/api/tracking";
+import { getDurationInDays } from "@/lib/utils";
+import { ClientDate } from "@/components/ui/date";
+import { Tag, tagVariants } from "@/components/ui/tag";
+import { VariantProps } from "class-variance-authority";
+import { Card } from "@/components/ui/card";
+import { toast } from "sonner";
 
-export type ProgramHistoryStatus =
-    | "completed"
-    | "in_progress"
-    | "abandoned";
-
-export type ProgramHistoryType = {
-    program_id: string;
-    started_at: string;   // ISO date string
-    ended_at: string;     // ISO date string
-    days_taken: number;
-    status: ProgramHistoryStatus;
-};
 
 interface ProgramHistorySectionProps {
     programId: string;
-    history: ProgramHistoryType[];
+    history: UserProgramType[];
     inProgress: boolean;
 }
-
 
 
 export function ProgramHistorySection({ programId, history, inProgress }: ProgramHistorySectionProps) {
@@ -35,11 +27,20 @@ export function ProgramHistorySection({ programId, history, inProgress }: Progra
     const locale = useLocale()
     const router = useRouter()
 
+    const tagStatus: Record<
+        "active" | "abandoned" | "completed",
+        VariantProps<typeof tagVariants>["variant"]
+    > = {
+        active: "default",
+        abandoned: "destructive",
+        completed: "outline",
+    }
+
     const handleStart: MouseEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault();
 
         try {
-            const userProgram = await fetchFromClient<UserProgramType>(
+            await fetchFromClient<UserProgramType>(
                 "/user-programs/",
                 locale,
                 "POST",
@@ -48,11 +49,8 @@ export function ProgramHistorySection({ programId, history, inProgress }: Progra
                 }
             );
             router.push("/dashboard");
-        } catch (error: any) {
-            console.error("Start program error:", error);
-            alert(error.message ?? "Une erreur est survenue.");
-            // TODO: setState to displau error message in UI, or https://github.com/bvaughn/react-error-boundary
-            // setError(error.message);
+        } catch (e: any) {
+            toast.error(e.message, { position: "bottom-center" })
         }
     };
 
@@ -60,28 +58,32 @@ export function ProgramHistorySection({ programId, history, inProgress }: Progra
         <div className="space-y-10">
             <H2>{t("historic")}</H2>
             <div className="flex flex-col gap-4">
-                {history.map((h, i) => (
-                    <div key={i} className="flex justify-between p-3 rounded-md border border-border bg-card">
-                        <div>
-                            <P className="font-semibold">
-                                {h.status}
+                {history.map((h, i) => {
+                    const durationInDays = getDurationInDays(h.start_date, h.end_date)
+                    return (
+                        <Card key={i} className="flex justify-between items-center">
+                            <P className="flex-1 text-start">
+                                <ClientDate dateString={h.start_date} />
+                                -
+                                <ClientDate dateString={h.end_date} />
                             </P>
-                            <P className="text-xs text-muted-foreground">
-                                {new Date(h.started_at).toLocaleDateString(locale)} - {new Date(h.ended_at).toLocaleDateString(locale)}
+                            <P className="flex-1 text-center">Feedaback ?</P>
+                            <P className="flex-1 text-center">{durationInDays} {t("day", { count: durationInDays! })}</P>
+                            <P className="flex-1 text-center">
+                                <Tag variant={tagStatus[h.status!]} className="text-xs capitalize">{h.status_display}</Tag>
                             </P>
-                        </div>
-                        <P className="text-sm font-medium">{h.days_taken} {t("day", { count: h.days_taken })}</P>
-                    </div>
-                ))}
+                        </Card>
+                    )
+                })}
             </div>
             <div className="flex justify-center">
                 {inProgress ? (
                     <Button asChild>
-                        <Link href={"#"}>Continue the program</Link>
+                        <Link href={"/dashboard"}>Continue the program</Link>
                     </Button>
                 ) : (
                     <Button onClick={handleStart}>
-                        <Link href={"#"}>Start the program</Link>
+                        <Link href={"#"}>Start this program</Link>
                     </Button>
                 )}
             </div>

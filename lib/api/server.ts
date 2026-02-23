@@ -1,70 +1,56 @@
 import { getLocale } from "next-intl/server";
 import { cookies } from "next/headers";
+import { buildHeaders, parseErrorResponse } from "./core";
 
-export async function fetchFromServer<T>(path: string, method: string = "GET", body?: any): Promise<T> {
-    const locale = await getLocale()
-    const cookieStore = cookies();
-    const cookieHeader = (await cookieStore)
+export async function fetchFromServer<T>(
+    path: string,
+    method: string = "GET",
+    body?: any
+): Promise<T> {
+    const locale = await getLocale();
+    const cookieStore = await cookies();
+
+    const cookieHeader = cookieStore
         .getAll()
-        .map(c => `${c.name}=${c.value}`)
+        .map((c) => `${c.name}=${c.value}`)
         .join("; ");
 
     const baseUrl = process.env.NEXT_SERVER_API_URL!;
 
-    let res = await fetch(`${baseUrl}${path}`, {
-        method,
-        headers: {
-            "Content-Type": "application/json",
-            "Accept-Language": locale,
-            ...(cookieHeader ? { Cookie: cookieHeader } : {})
-        },
-        body: body ? JSON.stringify(body) : undefined,
-        credentials: "include",
-    });
+    const makeRequest = (accessToken?: string) =>
+        fetch(`${baseUrl}${path}`, {
+            method,
+            headers: buildHeaders({ locale, accessToken, cookieHeader }),
+            body: body ? JSON.stringify(body) : undefined,
+            credentials: "include",
+            cache: "no-store",
+        });
+
+    let res = await makeRequest();
 
     if (res.status === 401) {
-        // try to refresh token
         const refreshRes = await fetch(`${baseUrl}/token/refresh/`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept-Language": locale,
-                ...(cookieHeader ? { Cookie: cookieHeader } : {})
-            },
+            headers: buildHeaders({ locale, cookieHeader }),
             credentials: "include",
+            cache: "no-store",
         });
 
         if (!refreshRes.ok) {
-            throw new Error("Session expired, please login again");
+            throw new Error("Session expirée");
         }
 
         const data = await refreshRes.json();
-        const accessToken = data.access;
-        if (!accessToken) throw new Error("Refresh succeeded but no access token returned");
+        const accessToken = data?.access;
 
-        // replay request with new access token
-        res = await fetch(`${baseUrl}${path}`, {
-            method,
-            headers: {
-                "Content-Type": "application/json",
-                "Accept-Language": locale,
-                Authorization: `Bearer ${accessToken}`,
-                ...(cookieHeader ? { Cookie: cookieHeader } : {}),
-            },
-            body: body ? JSON.stringify(body) : undefined,
-            credentials: "include",
-        });
+        res = await makeRequest(accessToken);
     }
 
     if (!res.ok) {
-        const text = await res.text();
-        let message = `API Error ${res.status}`;
-        try {
-            const err = JSON.parse(text);
-            if (err.detail) message = err.detail;
-        } catch { }
-        throw new Error(message);
+        throw new Error(await parseErrorResponse(res));
     }
+
+    if (res.status === 204) return {} as T;
 
     return res.json();
 }

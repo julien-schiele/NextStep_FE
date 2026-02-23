@@ -9,6 +9,7 @@ import { P } from "../ui/text";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
+import { toast } from "sonner";
 
 
 type FormInputs = {
@@ -28,8 +29,8 @@ export function ForgotPasswordForm() {
                 email: data.email,
             });
             setSuccess(true);
-        } catch (err: any) {
-            alert(err.message || "Error");
+        } catch (e) {
+            toast.error(e.message, { position: "bottom-center" })
         }
     };
 
@@ -37,12 +38,14 @@ export function ForgotPasswordForm() {
         return (
             <div className="space-y-10">
                 <P>{t("success_msg")}</P>
-                <Button asChild>
-                    <Link href={"http://localhost:8025"}>
-                        Open Mailhog <MdOutlineMarkEmailUnread />
-                    </Link>
-                </Button>
-            </div>)
+                {process.env.NODE_ENV === "development" && (
+                    <Button asChild>
+                        <Link href="http://localhost:8025">
+                            Open Mailhog <MdOutlineMarkEmailUnread />
+                        </Link>
+                    </Button>
+                )}
+            </div >)
     }
 
     return (
@@ -51,7 +54,7 @@ export function ForgotPasswordForm() {
                 label="Email"
                 type="email"
                 placeholder="you@example.com"
-                {...register("email", { required: "Email required" })}
+                {...register("email", { required: t("required_field") })}
                 error={errors.email?.message}
             />
             <Button type="submit" className="w-full" disabled={isSubmitting}>

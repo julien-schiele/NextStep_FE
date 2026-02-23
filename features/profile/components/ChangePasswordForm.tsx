@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { fetchFromClient } from "@/lib/api/client";
 import { P } from "@/components/ui/text";
+import { toast } from "sonner";
 
 type FormValues = {
     old_password: string;
@@ -31,10 +32,14 @@ export function ChangePasswordForm() {
     const onSubmit = async (data: FormValues) => {
         setSuccess(false);
 
-        await fetchFromClient("/change-password/", locale, "POST", {
-            old_password: data.old_password,
-            new_password: data.new_password
-        })
+        try {
+            await fetchFromClient("/change-password/", locale, "POST", {
+                old_password: data.old_password,
+                new_password: data.new_password
+            })
+        } catch (e) {
+            toast.error(e.message, { position: "bottom-center" })
+        }
 
         setSuccess(true);
     };

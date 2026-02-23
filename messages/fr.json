@@ -1,4 +1,10 @@
 {
+    "ErrorPage": {
+        "something_happens": "Une erreur est survenue",
+        "please_retry": "Merci de réessayer",
+        "retry": "Réessayer",
+        "back_home": "Retour à l’accueil"
+    },
     "Header": {
         "home": "Accueil",
         "program": "Programmes",
@@ -28,6 +34,10 @@
         "illustration_alt": "Illustration / vidéo du produit"
     },
     "AuthPage": {
+        "welcome": "Bienvenue sur NextStep",
+        "required_field": "Ce champs est recquis",
+        "confirmation_needed": "Confirmation recquise",
+        "password_mismatch": "Les mots de passe ne correspondent pas",
         "sign_in_or_log_in": "S'inscrire / Se connecter",
         "connexion": "Connexion",
         "logIn": "Se connecter",
@@ -63,7 +73,7 @@
         "hello": "Bonjour",
         "select_new_program": "Sélectionner un nouveau programme",
         "next_session": "Votre prochaine séance",
-        "sequence": "{count, plural, one {Superset} other {Supersets}}",
+        "sequence": "{count, plural, one {Série} other {Séries}}",
         "completed_session_count": "Nombre de séances complétées",
         "completed_program_count": "Nombre de programmes terminés",
         "highest_level_completed": "Niveau le plus élevé atteint",
@@ -77,7 +87,7 @@
     },
     "TrainingPage": {
         "header_motivation": "C’est parti !",
-        "sequence": "Superset",
+        "sequence": "Série",
         "previous": "Précédent",
         "next": "Suivant",
         "complete": "Terminer",
@@ -90,12 +100,14 @@
         "how_did_you_feel": "Comment vous êtes-vous senti(e) pendant cette séance ?"
     },
     "ForgotPasswordPage": {
+        "required_field": "Ce champs est recquis",
         "title": "Mot de passe oublié ?",
         "success_msg": "Vérifiez votre email pour les instructions de réinitialisation.",
         "sending": "Envoi en cours...",
         "send_email": "Envoyer l’email de réinitialisation"
     },
     "ResetPasswordPage": {
+        "required_field": "Ce champs est recquis",
         "title": "Réinitialiser votre mot de passe",
         "success_msg": "Votre mot de passe a été réinitialisé avec succès !",
         "new_password_label": "Nouveau mot de passe",

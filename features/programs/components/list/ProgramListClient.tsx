@@ -6,6 +6,7 @@ import { fetchFromClient } from "@/lib/api/client";
 import { ProgramFilters } from "./ProgramFilters";
 import { ProgramGrid } from "./ProgramGrid";
 import { ProgramListType, ProgramFiltersType, FocusEnumType, LevelEnumType, FocusAxesEnumType } from "@/types/api/programs/index";
+import { toast } from "sonner";
 
 
 interface Props {
@@ -30,13 +31,17 @@ export function ProgramListClient({ initialPrograms, filters }: Props) {
             if (selectedLevel) params.append("level", selectedLevel);
             if (selectedFocusAxes) params.append("focus_axes", selectedFocusAxes);
 
-            const data: ProgramListType[] = await fetchFromClient(
-                `/programs/?${params.toString()}`,
-                locale,
-                "GET"
-            );
+            try {
+                const data: ProgramListType[] = await fetchFromClient(
+                    `/programs/?${params.toString()}`,
+                    locale,
+                    "GET"
+                );
 
-            setPrograms(data);
+                setPrograms(data);
+            } catch (e) {
+                toast.error(e.message, { position: "bottom-center" })
+            }
         }
 
         fetchFiltered();

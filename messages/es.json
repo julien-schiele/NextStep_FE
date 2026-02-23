@@ -1,4 +1,10 @@
 {
+    "ErrorPage": {
+        "something_happens": "Ha ocurrido un error",
+        "please_retry": "Por favor, inténtalo de nuevo",
+        "retry": "Reintentar",
+        "back_home": "Volver al inicio"
+    },
     "Header": {
         "home": "Inicio",
         "program": "Programas",
@@ -28,6 +34,10 @@
         "illustration_alt": "Ilustración / video del producto"
     },
     "AuthPage": {
+        "welcome": "Bienvenido a NextStep",
+        "required_field": "Este campo es obligatorio",
+        "confirmation_needed": "Se necesita confirmación",
+        "password_mismatch": "Las palabras clave no corresponden",
         "sign_in_or_log_in": "Iniciar sesión / Acceder",
         "connexion": "Iniciar sesión",
         "logIn": "Acceder",
@@ -90,12 +100,14 @@
         "how_did_you_feel": "¿Cómo te sentiste durante esta sesión?"
     },
     "ForgotPasswordPage": {
+        "required_field": "Este campo es obligatorio",
         "title": "¿Olvidaste tu contraseña?",
         "success_msg": "Revisa tu correo electrónico para las instrucciones de restablecimiento.",
         "sending": "Enviando...",
         "send_email": "Enviar correo de restablecimiento"
     },
     "ResetPasswordPage": {
+        "required_field": "Este campo es obligatorio",
         "title": "Restablecer tu contraseña",
         "success_msg": "¡Tu contraseña se ha restablecido correctamente!",
         "new_password_label": "Nueva contraseña",

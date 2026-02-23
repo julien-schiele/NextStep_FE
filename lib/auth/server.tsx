@@ -1,7 +1,8 @@
+import { redirect } from "@/i18n/navigation";
 import { fetchFromServer } from "@/lib/api/server";
 import { UserType } from "@/types/api/users";
+import { getLocale } from "next-intl/server";
 import { ComponentType } from "react"
-import { redirect } from "next/navigation"
 
 
 export async function getCurrentUser() {
@@ -22,10 +23,19 @@ export function protectedPage<P extends WithAuthProps>(
     WrappedComponent: ComponentType<P>
 ) {
     return async function AuthenticatedComponent(props: P) {
+        const locale = await getLocale()
         const user = await getCurrentUser()
 
+        console.log("user = ",user)
+
         if (!user) {
-            redirect("/?showAuthDialog=true")
+            redirect({
+                locale,
+                href: {
+                    pathname: "/",
+                    query: { showAuthDialog: "true" }
+                }
+            });
         }
 
         return <WrappedComponent {...props} />
