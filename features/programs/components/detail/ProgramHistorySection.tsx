@@ -50,7 +50,7 @@ export function ProgramHistorySection({ programId, history, inProgress }: Progra
             );
             router.push("/dashboard");
         } catch (e: any) {
-            toast.error(e.message, { position: "bottom-center" })
+            toast.error((e as Error).message, { position: "bottom-center" });
         }
     };
 

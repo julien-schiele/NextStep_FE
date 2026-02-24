@@ -9,16 +9,6 @@ interface ProgramRealisticSectionProps {
     notRealistic: ProgramDetailType["not_realistic_if"];
 }
 
-// type ProgramRealistics = Pick<
-//   ProgramType,
-//   "realistic_if" | "not_realistic_if"
-// >;
-
-// export async function ProgramRealisticSection({
-//   realistic_if,
-//   not_realistic_if,
-// }: ProgramRealisticSectionProps) {
-
 
 export async function ProgramRealisticSection({ realistic, notRealistic }: ProgramRealisticSectionProps) {
     const t = await getTranslations("ProgramDetailPage")
@@ -27,7 +17,7 @@ export async function ProgramRealisticSection({ realistic, notRealistic }: Progr
             <Card className="space-y-5">
                 <H3>{t("realistic_if")} :</H3>
                 <UL>
-                    {realistic.map((criteria: string) => (
+                    {realistic?.map((criteria: string) => (
                         <LI key={criteria}>{criteria}</LI>
                     ))}
                 </UL>
@@ -35,7 +25,7 @@ export async function ProgramRealisticSection({ realistic, notRealistic }: Progr
             <Card className="space-y-5">
                 <H3>{t("not_realistic_if")} :</H3>
                 <UL>
-                    {notRealistic.map((criteria: string) => (
+                    {notRealistic?.map((criteria: string) => (
                         <LI key={criteria}>{criteria}</LI>
                     ))}
                 </UL>

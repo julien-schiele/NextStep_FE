@@ -213,10 +213,8 @@ export interface paths {
         get?: never;
         put?: never;
         /**
-         * @description Return JWT tokens.
-         *         - `access`: always returned
-         *         - `refresh`: only for mobile clients
-         *         - `refresh_token` cookie is set (HttpOnly)
+         * @description Takes a set of user credentials and returns an access and refresh JSON web
+         *     token pair to prove the authentication of those credentials.
          */
         post: operations["token_create"];
         delete?: never;
@@ -535,6 +533,13 @@ export interface components {
         ChangePasswordResponse: {
             message: string;
         };
+        /**
+         * @description * `beginner` - Beginner
+         *     * `intermediate` - Intermediate
+         *     * `advanced` - Advanced
+         * @enum {string}
+         */
+        CurrentLevelEnum: "beginner" | "intermediate" | "advanced";
         Cycle: {
             cycle: number;
             sessions: components["schemas"]["Session"][];
@@ -571,10 +576,6 @@ export interface components {
             practice_zone: string;
             value: number;
         };
-        FilterOption: {
-            value: string;
-            label: string;
-        };
         /**
          * @description * `technical_bouldering` - Technical bouldering
          *     * `project_bouldering` - Project bouldering
@@ -606,12 +607,20 @@ export interface components {
          * @enum {string}
          */
         FocusAxesEnum: "technical_bouldering" | "project_bouldering" | "route_technique" | "movement_quality" | "coordination" | "footwork" | "power" | "max_strength" | "power_endurance" | "endurance_continuity" | "climbing_volume" | "finger_strength" | "upper_body_strength" | "core_tension" | "lock_off_strength" | "pulling_strength" | "general_strength" | "mobility" | "stability" | "balance" | "conditioning" | "active_recovery" | "injury_prevention" | "antagonist_training" | "progressive_overload" | "deload" | "movement_efficiency";
+        FocusAxesFilter: {
+            value: components["schemas"]["Value0fbEnum"];
+            label: string;
+        };
         /**
          * @description * `general_fitness` - General fitness
          *     * `climbing_performance` - Climbing performance
          * @enum {string}
          */
         FocusEnum: "general_fitness" | "climbing_performance";
+        FocusFilter: {
+            value: components["schemas"]["Value231Enum"];
+            label: string;
+        };
         /**
          * @description * `beginner` - Beginner
          *     * `intermediate` - Intermediate
@@ -619,6 +628,17 @@ export interface components {
          * @enum {string}
          */
         HighestLevelCompletedEnum: "beginner" | "intermediate" | "advanced";
+        /**
+         * @description * `beginner` - Beginner
+         *     * `intermediate` - Intermediate
+         *     * `advanced` - Advanced
+         * @enum {string}
+         */
+        LevelEnum: "beginner" | "intermediate" | "advanced";
+        LevelFilter: {
+            value: components["schemas"]["ValueDbcEnum"];
+            label: string;
+        };
         /** @enum {unknown} */
         NullEnum: null;
         PasswordReset: {
@@ -670,10 +690,10 @@ export interface components {
             readonly slug?: string;
             readonly name?: string;
             readonly description?: string;
-            readonly realistic_if?: string;
-            readonly not_realistic_if?: string;
+            realistic_if?: string[];
+            not_realistic_if?: string[];
             focus?: components["schemas"]["FocusEnum"];
-            level?: components["schemas"]["HighestLevelCompletedEnum"];
+            level?: components["schemas"]["LevelEnum"];
             /** @description Duration of program in days */
             duration_days?: number;
             is_public?: boolean;
@@ -723,10 +743,10 @@ export interface components {
             readonly slug: string;
             readonly name: string;
             readonly description: string;
-            readonly realistic_if: string;
-            readonly not_realistic_if: string;
+            realistic_if?: string[];
+            not_realistic_if?: string[];
             focus?: components["schemas"]["FocusEnum"];
-            level?: components["schemas"]["HighestLevelCompletedEnum"];
+            level?: components["schemas"]["LevelEnum"];
             /** @description Duration of program in days */
             duration_days?: number;
             is_public?: boolean;
@@ -743,10 +763,10 @@ export interface components {
             readonly id: string;
             readonly name: string;
             readonly description: string;
-            readonly realistic_if: string;
-            readonly not_realistic_if: string;
+            realistic_if?: string[];
+            not_realistic_if?: string[];
             focus?: components["schemas"]["FocusEnum"];
-            level?: components["schemas"]["HighestLevelCompletedEnum"];
+            level?: components["schemas"]["LevelEnum"];
             /** @description Duration of program in days */
             duration_days?: number;
             focus_axes?: components["schemas"]["FocusAxesEnum"][];
@@ -763,16 +783,16 @@ export interface components {
             total_sessions: number;
         };
         ProgramFilters: {
-            level: components["schemas"]["FilterOption"][];
-            focus: components["schemas"]["FilterOption"][];
-            focus_axes: components["schemas"]["FilterOption"][];
+            level: components["schemas"]["LevelFilter"][];
+            focus: components["schemas"]["FocusFilter"][];
+            focus_axes: components["schemas"]["FocusAxesFilter"][];
         };
         ProgramList: {
             /** Format: uuid */
             readonly id: string;
             readonly name: string;
             readonly description: string;
-            level?: components["schemas"]["HighestLevelCompletedEnum"];
+            level?: components["schemas"]["LevelEnum"];
             focus?: components["schemas"]["FocusEnum"];
             /** @description Duration of program in days */
             duration_days?: number;
@@ -889,9 +909,53 @@ export interface components {
         UserStats: {
             total_sessions_completed: number;
             total_programs_completed: number;
-            current_level: (components["schemas"]["HighestLevelCompletedEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            current_level: (components["schemas"]["CurrentLevelEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
             highest_level_completed: (components["schemas"]["HighestLevelCompletedEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
         };
+        /**
+         * @description * `technical_bouldering` - Technical bouldering
+         *     * `project_bouldering` - Project bouldering
+         *     * `route_technique` - Route technique
+         *     * `movement_quality` - Movement quality
+         *     * `coordination` - Coordination
+         *     * `footwork` - Footwork
+         *     * `power` - Power
+         *     * `max_strength` - Max strength
+         *     * `power_endurance` - Power endurance
+         *     * `endurance_continuity` - Endurance / continuity
+         *     * `climbing_volume` - Climbing volume
+         *     * `finger_strength` - Finger strength
+         *     * `upper_body_strength` - Upper body strength
+         *     * `core_tension` - Core tension
+         *     * `lock_off_strength` - Lock-off strength
+         *     * `pulling_strength` - Pulling strength
+         *     * `general_strength` - General strength
+         *     * `mobility` - Mobility
+         *     * `stability` - Stability
+         *     * `balance` - Balance
+         *     * `conditioning` - Conditioning
+         *     * `active_recovery` - Active recovery
+         *     * `injury_prevention` - Injury prevention
+         *     * `antagonist_training` - Antagonist training
+         *     * `progressive_overload` - Progressive overload
+         *     * `deload` - Deload / recovery
+         *     * `movement_efficiency` - Movement efficiency
+         * @enum {string}
+         */
+        Value0fbEnum: "technical_bouldering" | "project_bouldering" | "route_technique" | "movement_quality" | "coordination" | "footwork" | "power" | "max_strength" | "power_endurance" | "endurance_continuity" | "climbing_volume" | "finger_strength" | "upper_body_strength" | "core_tension" | "lock_off_strength" | "pulling_strength" | "general_strength" | "mobility" | "stability" | "balance" | "conditioning" | "active_recovery" | "injury_prevention" | "antagonist_training" | "progressive_overload" | "deload" | "movement_efficiency";
+        /**
+         * @description * `general_fitness` - General fitness
+         *     * `climbing_performance` - Climbing performance
+         * @enum {string}
+         */
+        Value231Enum: "general_fitness" | "climbing_performance";
+        /**
+         * @description * `beginner` - Beginner
+         *     * `intermediate` - Intermediate
+         *     * `advanced` - Advanced
+         * @enum {string}
+         */
+        ValueDbcEnum: "beginner" | "intermediate" | "advanced";
     };
     responses: never;
     parameters: never;
@@ -1450,6 +1514,7 @@ export interface operations {
             };
         };
         responses: {
+            /** @description JWT tokens + HttpOnly refresh_token cookie */
             200: {
                 headers: {
                     [name: string]: unknown;

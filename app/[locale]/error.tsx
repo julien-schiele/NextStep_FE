@@ -16,10 +16,9 @@ export default function GlobalError({ error, reset, }: Props) {
     const t = useTranslations("ErrorPage")
 
     const errorId = crypto.randomUUID();
-    console.error(errorId, error);
-
+    
     if (process.env.NODE_ENV === "development") {
-        console.error(error);
+        console.error(errorId, error);
     }
 
     return (

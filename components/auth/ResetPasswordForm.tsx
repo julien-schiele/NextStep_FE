@@ -43,7 +43,7 @@ export function ResetPasswordForm() {
             setSuccess(true);
             router.push("/?showAuthDialog=true")
         } catch (e) {
-            toast.error(e.message, { position: "bottom-center" })
+            toast.error((e as Error).message, { position: "bottom-center" });
         }
     };
 

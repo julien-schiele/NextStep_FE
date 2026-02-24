@@ -60,7 +60,7 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
         try {
             await login(data.email, data.password)
         } catch (e) {
-            toast.error(e.message, { position: "bottom-center" })
+            toast.error((e as Error).message, { position: "bottom-center" });
         }
     };
 
@@ -79,7 +79,7 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
             });
             setActiveTab("connexion");
         } catch (e) {
-            toast.error(e.message, { position: "bottom-center" })
+            toast.error((e as Error).message, { position: "bottom-center" });
         }
     };
 

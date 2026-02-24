@@ -1,8 +1,7 @@
 import { fetchFromServer } from "@/lib/api/server";
 import { PrivacyPolicyType } from "@/types/api/utils";
-import parse, { domToReact, Element } from "html-react-parser";
-import { P, H1, H2, H3, UL, LI, OL } from "@/components/ui/text"
-
+import parse, { domToReact, Element, DOMNode } from "html-react-parser";
+import { P, H1, H2, H3, UL, LI, OL } from "@/components/ui/text";
 
 export default async function PrivacyPage() {
     const policy: PrivacyPolicyType = await fetchFromServer(`/privacy/`, "GET");
@@ -15,28 +14,29 @@ export default async function PrivacyPage() {
         );
     }
 
-    // Map HTML tags to custom components
     const options = {
-        replace: (node: any) => {
+        replace: (node: DOMNode) => {
             if (!(node instanceof Element)) return;
+
+            const children = node.children as DOMNode[];
 
             switch (node.tagName) {
                 case "p":
-                    return <P>{domToReact(node.children, options)}</P>;
+                    return <P>{domToReact(children, options)}</P>;
                 case "h1":
-                    return <H1>{domToReact(node.children, options)}</H1>;
+                    return <H1>{domToReact(children, options)}</H1>;
                 case "h2":
-                    return <H2>{domToReact(node.children, options)}</H2>;
+                    return <H2>{domToReact(children, options)}</H2>;
                 case "h3":
-                    return <H3>{domToReact(node.children, options)}</H3>;
+                    return <H3>{domToReact(children, options)}</H3>;
                 case "ul":
-                    return <UL>{domToReact(node.children, options)}</UL>;
+                    return <UL>{domToReact(children, options)}</UL>;
                 case "ol":
-                    return <OL>{domToReact(node.children, options)}</OL>;
+                    return <OL>{domToReact(children, options)}</OL>;
                 case "li":
-                    return <LI>{domToReact(node.children, options)}</LI>;
+                    return <LI>{domToReact(children, options)}</LI>;
                 default:
-                    return undefined;
+                    return;
             }
         },
     };

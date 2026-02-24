@@ -38,7 +38,7 @@ export function ChangePasswordForm() {
                 new_password: data.new_password
             })
         } catch (e) {
-            toast.error(e.message, { position: "bottom-center" })
+            toast.error((e as Error).message, { position: "bottom-center" });
         }
 
         setSuccess(true);

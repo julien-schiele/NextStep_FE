@@ -40,7 +40,7 @@ export function ProgramListClient({ initialPrograms, filters }: Props) {
 
                 setPrograms(data);
             } catch (e) {
-                toast.error(e.message, { position: "bottom-center" })
+                toast.error((e as Error).message, { position: "bottom-center" });
             }
         }
 

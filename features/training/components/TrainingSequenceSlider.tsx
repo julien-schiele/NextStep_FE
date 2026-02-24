@@ -29,7 +29,7 @@ export function TrainingSequenceSlider({ sequence, index, total, onNext, onPrev 
             </div>
 
             <div className="flex justify-between w-full  gap-6 mt-10">
-                {index === 1 ?
+                {index >= 1 ?
                     <Button className="w-full" onClick={onPrev} variant="secondary" >
                         {t("previous")}
                     </Button>

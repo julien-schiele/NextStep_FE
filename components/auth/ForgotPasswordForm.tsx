@@ -30,7 +30,7 @@ export function ForgotPasswordForm() {
             });
             setSuccess(true);
         } catch (e) {
-            toast.error(e.message, { position: "bottom-center" })
+            toast.error((e as Error).message, { position: "bottom-center" });
         }
     };
 

@@ -34,7 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setUser(u);
         } catch (e) {
             setUser(null);
-            // toast.error(e.message, { position: "bottom-center" })
+            // toast.error((e as Error).message, { position: "bottom-center" });
         } finally {
             setLoading(false);
         }
@@ -52,7 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setIsOpen(false);
             router.push("/dashboard")
         } catch (e) {
-            toast.error(e.message, { position: "bottom-center" })
+            toast.error((e as Error).message, { position: "bottom-center" });
         }
     };
 
@@ -63,7 +63,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setAccessToken(null);
             router.push("/")
         } catch (e) {
-            toast.error(e.message, { position: "bottom-center" })
+            toast.error((e as Error).message, { position: "bottom-center" });
         }
     };
 

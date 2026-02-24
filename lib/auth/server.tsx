@@ -26,8 +26,6 @@ export function protectedPage<P extends WithAuthProps>(
         const locale = await getLocale()
         const user = await getCurrentUser()
 
-        console.log("user = ",user)
-
         if (!user) {
             redirect({
                 locale,

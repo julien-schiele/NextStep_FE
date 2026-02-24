@@ -27,8 +27,10 @@ export async function ProgramHeader({ program, levelDict, focusAxesDict }: Progr
                 <P className="mb-6">{program.description}</P>
                 {/* Level & focus axes */}
                 <div className="flex gap-4 flex-wrap">
-                    <Tag variant="secondary" size="sm">{levelDict[program.level]}</Tag>
-                    {program.focus_axes.map((axes: string, index: number) => (
+                    {program.level &&
+                        <Tag variant="secondary" size="sm">{levelDict[program.level!]}</Tag>
+                    }
+                    {program.focus_axes?.map((axes: string, index: number) => (
                         <Tag key={index} variant="secondary" size="sm">{focusAxesDict[axes]}</Tag>
                     ))}
                 </div>

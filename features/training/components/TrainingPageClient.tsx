@@ -41,7 +41,7 @@ export function TrainingPageClient({ sequenceList, userProgram }: Props) {
             )
             router.push("/dashboard")
         } catch (e) {
-            toast.error(e.message, { position: "bottom-center" })
+            toast.error((e as Error).message, { position: "bottom-center" });
         }
     };
 

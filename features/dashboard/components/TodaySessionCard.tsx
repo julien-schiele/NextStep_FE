@@ -31,7 +31,7 @@ export function TodaySessionCard({ sequenceList, userProgramId }: Props) {
             );
             window.location.reload();
         } catch (e) {
-            toast.error(e.message, { position: "bottom-center" })
+            toast.error((e as Error).message, { position: "bottom-center" });
         }
     };
 

@@ -3,14 +3,20 @@ export function extractErrorMessage(data: any): string {
 
     if (typeof data === "string") return data;
 
-    return (
-        data.detail ||
-        data.message ||
-        data.error ||
-        (typeof data === "object" ? JSON.stringify(data) : null) ||
-        "Une erreur est survenue"
-    );
+    if (Array.isArray(data)) return data.join(", ");
+
+    if (typeof data === "object") {
+        if (Array.isArray(data.detail)) return data.detail.join(", ");
+        if (typeof data.detail === "string") return data.detail;
+        if (typeof data.message === "string") return data.message;
+        if (typeof data.error === "string") return data.error;
+        // fallback stringify
+        return JSON.stringify(data);
+    }
+
+    return "Une erreur est survenue";
 }
+
 
 export async function parseErrorResponse(res: Response): Promise<string> {
     try {
@@ -20,6 +26,7 @@ export async function parseErrorResponse(res: Response): Promise<string> {
         return `API Error ${res.status}`;
     }
 }
+
 
 export function buildHeaders({
     locale,

@@ -27,8 +27,13 @@ const SelectVariants = cva(
     }
 );
 
+type NativeSelectProps = Omit<
+    React.SelectHTMLAttributes<HTMLSelectElement>,
+    "size"
+>;
+
 export interface SelectProps
-    extends React.SelectHTMLAttributes<HTMLSelectElement>,
+    extends NativeSelectProps,
     VariantProps<typeof SelectVariants> {
     label?: string;
 }

@@ -15,7 +15,7 @@ export type StatusEnumType = components["schemas"]["StatusEnum"];
 
 /**
  * Derived helper types (strongly typed, non-nullable)
- */
+*/
 export type ProgramContentType = NonNullable<ProgramDetailType["content"]>;
 
 export type CycleType = ProgramContentType["cycles"][number];
@@ -27,4 +27,3 @@ export type SequenceListType = SessionType["sequences"]
 export type SequenceType = SequenceListType[number];
 
 export type ExercisePreviewType = SequenceType[number];
-

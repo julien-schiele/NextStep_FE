@@ -12,11 +12,15 @@ COPY package.json yarn.lock ./
 # Install dependencies
 RUN yarn install --frozen-lockfile
 
-# Install plop globally
-RUN yarn global add plop
+# Install plop globally, not used in this project
+# RUN yarn global add plop
 
 # Copy project
 COPY . .
+
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Ports
 EXPOSE 3000
@@ -24,5 +28,6 @@ EXPOSE 3000
 # Dev-friendly volumes
 VOLUME [ "/app/node_modules" ]
 
-# Default command
+# Default command → use entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["sleep", "infinity"]
