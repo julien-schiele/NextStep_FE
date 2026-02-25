@@ -1,0 +1,140 @@
+{
+    "ErrorPage": {
+        "something_happens": "Ha ocurrido un error",
+        "please_retry": "Por favor, inténtalo de nuevo",
+        "retry": "Reintentar",
+        "back_home": "Volver al inicio"
+    },
+    "Header": {
+        "home": "Inicio",
+        "program": "Programas",
+        "profile": "Perfil",
+        "dashboard": "Panel",
+        "sign_in": "Iniciar sesión",
+        "edit": "Editar",
+        "logout": "Deconnexion"
+    },
+    "Footer": {
+        "know_more": "Saber más"
+    },
+    "HomePage": {
+        "progress": "Progreso",
+        "one_day": "un día",
+        "at_a_time": "a la vez.",
+        "hp_text": "NextStep te ayuda a estructurar tu entrenamiento, seguir tu progreso y mantener la constancia — sin complejidad innecesaria.",
+        "hp_cta": "Comenzar",
+        "cards": {
+            "clarity_title": "Claridad",
+            "clarity_text": "Objetivos simples y medibles.",
+            "consistency_title": "Constancia",
+            "consistency_text": "Hábitos sostenibles.",
+            "progression_title": "Progresión",
+            "progression_text": "Visualiza tu progreso."
+        },
+        "illustration_alt": "Ilustración / video del producto"
+    },
+    "AuthPage": {
+        "welcome": "Bienvenido a NextStep",
+        "required_field": "Este campo es obligatorio",
+        "confirmation_needed": "Se necesita confirmación",
+        "password_mismatch": "Las palabras clave no corresponden",
+        "sign_in": "Iniciar sesión",
+        "connexion": "Iniciar sesión",
+        "logIn": "Acceder",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "connect": "Conectar",
+        "forgotten_password": "¿Olvidaste tu contraseña?",
+        "register": "Registrarse",
+        "first_name": "Nombre",
+        "last_name": "Apellido",
+        "confirm_password": "Confirmar contraseña",
+        "create_account": "Crear cuenta"
+    },
+    "ProgramListPage": {
+        "title": "Todos los programas",
+        "focus": "Enfoque",
+        "level": "Nivel de dificultad",
+        "focus_axes": "Ejes de enfoque",
+        "day": "{count, plural, one {día} other {días}}"
+    },
+    "ProgramDetailPage": {
+        "program_difficulty": "Dificultad del programa",
+        "realistic_if": "Se ajusta bien si",
+        "not_realistic_if": "No se ajusta bien si",
+        "historic": "Histórico",
+        "program_sessions": "Sesiones del programa",
+        "session": "Sesión",
+        "repetition": "{count, plural, one {repetición} other {repeticiones}}",
+        "duration": "{count, plural, one {segundo} other {segundos}}",
+        "day": "{count, plural, one {día} other {días}}"
+    },
+    "DashboardPage": {
+        "hello": "Hola",
+        "select_new_program": "Selecciona un nuevo programa",
+        "next_session": "Tu próxima sesión",
+        "sequence": "{count, plural, one {Superserie} other {Superseries}}",
+        "completed_session_count": "Número de sesiones completadas",
+        "completed_program_count": "Número de programas completados",
+        "highest_level_completed": "Nivel más alto alcanzado",
+        "current_level": "Nivel actual del programa",
+        "start": "Empezar",
+        "day": "{count, plural, one {día} other {días}}",
+        "historic": "Tu historial",
+        "no_historic_yet": "Aún no has completado ningún programa.",
+        "completed": "Completado",
+        "motivation": "¿Listo para tu próximo entrenamiento?"
+    },
+    "TrainingPage": {
+        "header_motivation": "¡Vamos!",
+        "sequence": "Superserie",
+        "previous": "Anterior",
+        "next": "Siguiente",
+        "complete": "Completar",
+        "too_easy": "Demasiado fácil",
+        "ok": "Bien",
+        "too_hard": "Demasiado difícil",
+        "save_session": "Guardar la sesión",
+        "session_completed": "Sesión completada",
+        "congrat_for_progress": "¡Felicidades por tu progreso!",
+        "how_did_you_feel": "¿Cómo te sentiste durante esta sesión?"
+    },
+    "ForgotPasswordPage": {
+        "required_field": "Este campo es obligatorio",
+        "title": "¿Olvidaste tu contraseña?",
+        "success_msg": "Revisa tu correo electrónico para las instrucciones de restablecimiento.",
+        "sending": "Enviando...",
+        "send_email": "Enviar correo de restablecimiento"
+    },
+    "ResetPasswordPage": {
+        "required_field": "Este campo es obligatorio",
+        "title": "Restablecer tu contraseña",
+        "success_msg": "¡Tu contraseña se ha restablecido correctamente!",
+        "new_password_label": "Nueva contraseña",
+        "confirm_password_label": "Confirmar nueva contraseña",
+        "password_required": "La contraseña es obligatoria",
+        "confirmation_required": "La confirmación de la contraseña es obligatoria",
+        "passwords_do_not_match": "Las contraseñas no coinciden",
+        "resetting": "Restableciendo...",
+        "reset_button": "Restablecer contraseña"
+    },
+    "Profile": {
+        "member_since": "Miembro desde",
+        "ChangePassword": {
+            "title": "Cambiar contraseña",
+            "old_password": "Contraseña actual",
+            "new_password": "Nueva contraseña",
+            "confirm_password": "Confirmar nueva contraseña",
+            "submit": "Actualizar contraseña",
+            "loading": "Actualizando...",
+            "success": "Contraseña actualizada correctamente",
+            "errors": {
+                "old_password_required": "La contraseña actual es obligatoria",
+                "new_password_required": "La nueva contraseña es obligatoria",
+                "confirm_password_required": "Por favor confirma tu contraseña",
+                "password_min_length": "La contraseña debe tener al menos 8 caracteres",
+                "passwords_do_not_match": "Las contraseñas no coinciden"
+            }
+        }
+    }
+}

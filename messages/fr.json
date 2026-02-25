@@ -1,0 +1,140 @@
+{
+    "ErrorPage": {
+        "something_happens": "Une erreur est survenue",
+        "please_retry": "Merci de réessayer",
+        "retry": "Réessayer",
+        "back_home": "Retour à l’accueil"
+    },
+    "Header": {
+        "home": "Accueil",
+        "program": "Programmes",
+        "profile": "Profil",
+        "dashboard": "Tableau de bord",
+        "sign_in": "Se connecter",
+        "edit": "Editer",
+        "logout": "Deconnexion"
+    },
+    "Footer": {
+        "know_more": "En savoir plus"
+    },
+    "HomePage": {
+        "progress": "Progresses",
+        "one_day": "un jour",
+        "at_a_time": "à la fois.",
+        "hp_text": "NextStep t’aide à structurer ton entraînement, suivre tes progrès et rester constant — sans complexité inutile.",
+        "hp_cta": "Commencer",
+        "cards": {
+            "clarity_title": "Clarté",
+            "clarity_text": "Objectifs simples et mesurables.",
+            "consistency_title": "Constante",
+            "consistency_text": "Des habitudes durables.",
+            "progression_title": "Progression",
+            "progression_text": "Visualise tes progrès."
+        },
+        "illustration_alt": "Illustration / vidéo du produit"
+    },
+    "AuthPage": {
+        "welcome": "Bienvenue sur NextStep",
+        "required_field": "Ce champs est recquis",
+        "confirmation_needed": "Confirmation recquise",
+        "password_mismatch": "Les mots de passe ne correspondent pas",
+        "sign_in": "Se Connecter",
+        "connexion": "Connexion",
+        "logIn": "Se connecter",
+        "email": "Email",
+        "password": "Mot de passe",
+        "connect": "Se connecter",
+        "forgotten_password": "Mot de passe oublié ?",
+        "register": "Inscription",
+        "first_name": "Prénom",
+        "last_name": "Nom",
+        "confirm_password": "Confirmer le mot de passe",
+        "create_account": "Créer un compte"
+    },
+    "ProgramListPage": {
+        "title": "Tous les programmes",
+        "focus": "Focus",
+        "level": "Niveau de difficulté",
+        "focus_axes": "Axes de travail",
+        "day": "{count, plural, one {jour} other {jours}}"
+    },
+    "ProgramDetailPage": {
+        "program_difficulty": "Difficulté du programme",
+        "realistic_if": "Convient si",
+        "not_realistic_if": "Ne convient pas si",
+        "historic": "Historique",
+        "program_sessions": "Sessions du programme",
+        "session": "Session",
+        "repetition": "{count, plural, one {répétition} other {répétitions}}",
+        "duration": "{count, plural, one {seconde} other {secondes}}",
+        "day": "{count, plural, one {jour} other {jours}}"
+    },
+    "DashboardPage": {
+        "hello": "Bonjour",
+        "select_new_program": "Sélectionner un nouveau programme",
+        "next_session": "Votre prochaine séance",
+        "sequence": "{count, plural, one {Série} other {Séries}}",
+        "completed_session_count": "Nombre de séances complétées",
+        "completed_program_count": "Nombre de programmes terminés",
+        "highest_level_completed": "Niveau le plus élevé atteint",
+        "current_level": "Niveau actuel du programme",
+        "start": "Commencer",
+        "day": "{count, plural, one {jour} other {jours}}",
+        "historic": "Votre historique",
+        "no_historic_yet": "Vous n'avez encore terminé aucun programme.",
+        "completed": "Terminé",
+        "motivation": "Prêt(e) pour votre prochain entraînement ?"
+    },
+    "TrainingPage": {
+        "header_motivation": "C’est parti !",
+        "sequence": "Série",
+        "previous": "Précédent",
+        "next": "Suivant",
+        "complete": "Terminer",
+        "too_easy": "Trop facile",
+        "ok": "Ça va",
+        "too_hard": "Trop difficile",
+        "save_session": "Enregistrer la séance",
+        "session_completed": "Séance terminée",
+        "congrat_for_progress": "Félicitations pour votre progression !",
+        "how_did_you_feel": "Comment vous êtes-vous senti(e) pendant cette séance ?"
+    },
+    "ForgotPasswordPage": {
+        "required_field": "Ce champs est recquis",
+        "title": "Mot de passe oublié ?",
+        "success_msg": "Vérifiez votre email pour les instructions de réinitialisation.",
+        "sending": "Envoi en cours...",
+        "send_email": "Envoyer l’email de réinitialisation"
+    },
+    "ResetPasswordPage": {
+        "required_field": "Ce champs est recquis",
+        "title": "Réinitialiser votre mot de passe",
+        "success_msg": "Votre mot de passe a été réinitialisé avec succès !",
+        "new_password_label": "Nouveau mot de passe",
+        "confirm_password_label": "Confirmer le nouveau mot de passe",
+        "password_required": "Le mot de passe est requis",
+        "confirmation_required": "La confirmation du mot de passe est requise",
+        "passwords_do_not_match": "Les mots de passe ne correspondent pas",
+        "resetting": "Réinitialisation en cours...",
+        "reset_button": "Réinitialiser le mot de passe"
+    },
+    "Profile": {
+        "member_since": "Membre depuis le",
+        "ChangePassword": {
+            "title": "Changer le mot de passe",
+            "old_password": "Mot de passe actuel",
+            "new_password": "Nouveau mot de passe",
+            "confirm_password": "Confirmer le nouveau mot de passe",
+            "submit": "Mettre à jour le mot de passe",
+            "loading": "Mise à jour en cours...",
+            "success": "Mot de passe mis à jour avec succès",
+            "errors": {
+                "old_password_required": "Le mot de passe actuel est requis",
+                "new_password_required": "Le nouveau mot de passe est requis",
+                "confirm_password_required": "Veuillez confirmer votre mot de passe",
+                "password_min_length": "Le mot de passe doit contenir au moins 8 caractères",
+                "passwords_do_not_match": "Les mots de passe ne correspondent pas"
+            }
+        }
+    }
+}

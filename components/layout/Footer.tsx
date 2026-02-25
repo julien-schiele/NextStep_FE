@@ -1,0 +1,34 @@
+import { fetchFromServer } from "@/lib/api/server";
+import { PrivacyPolicyType } from "@/types/api/utils";
+import { Link } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
+
+
+export default async function Footer() {
+    const t = await getTranslations("Footer");
+
+    const policy: PrivacyPolicyType = await fetchFromServer(`/privacy/`, "GET");
+
+    if (!policy) {
+        return (
+            <footer className="fixed bottom-0 bg-accent flex w-full h-14 items-center justify-center">
+                <small>Loading...</small>
+            </footer>
+        );
+    }
+
+    const cleanText = policy.short_text
+        ?.replace(/^<p>/, "")
+        .replace(/<\/p>$/, "");
+
+    return (
+        <footer className="fixed bottom-0 bg-accent flex w-full h-14 items-center justify-center">
+            <div className="text-center text-xs">
+                {cleanText}{" "}
+                <Link href="/privacy" className="hover:text-primary transition-colors">
+                    {t("know_more")}
+                </Link>.
+            </div>
+        </footer>
+    );
+}

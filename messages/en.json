@@ -1,0 +1,140 @@
+{
+    "ErrorPage":{
+        "something_happens": "Something happens",
+        "please_retry": "Please retry",
+        "retry": "Retry",
+        "back_home": "Go bach home"
+    },
+    "Header": {
+        "home": "Home",
+        "program": "Programs",
+        "profile": "Profile",
+        "dashboard": "Dashboard",
+        "sign_in": "Sign In",
+        "edit": "Edit",
+        "logout": "Logout"
+    },
+    "Footer": {
+        "know_more": "Know more"
+    },
+    "HomePage": {
+        "progress": "Progress",
+        "one_day": "one day",
+        "at_a_time": "at a time.",
+        "hp_text": "NextStep helps you structure your training, track your progress, and stay consistent — without unnecessary complexity.",
+        "hp_cta": "Get Started",
+        "cards": {
+            "clarity_title": "Clarity",
+            "clarity_text": "Simple, measurable goals.",
+            "consistency_title": "Consistency",
+            "consistency_text": "Sustainable habits.",
+            "progression_title": "Progression",
+            "progression_text": "Visualize your progress."
+        },
+        "illustration_alt": "Product illustration / video"
+    },
+    "AuthPage": {
+        "welcome": "Welcome on NextStep",
+        "required_field": "This field is required",
+        "confirmation_needed": "Confirmation is needed",
+        "password_mismatch": "The passwords do not match",
+        "sign_in": "SIgn In / Log In",
+        "connexion": "Login",
+        "logIn": "Log in",
+        "email": "Email",
+        "password": "Password",
+        "connect": "Connect",
+        "forgotten_password": "Forgotten password?",
+        "register": "Register",
+        "first_name": "First name",
+        "last_name": "Last name",
+        "confirm_password": "Confirm password",
+        "create_account": "Create account"
+    },
+    "ProgramListPage": {
+        "title": "Training programs",
+        "focus": "Focus",
+        "level": "Difficulty level",
+        "focus_axes": "Focus axes",
+        "day": "{count, plural, one {day} other {days}}"
+    },
+    "ProgramDetailPage": {
+        "program_difficulty": "Program difficulty",
+        "realistic_if": "Good fit if",
+        "not_realistic_if": "Not a good fit if",
+        "historic": "Historic",
+        "program_sessions": "Program sessions",
+        "session": "Session",
+        "repetition": "{count, plural, one {repetition} other {repetitions}}",
+        "duration": "{count, plural, one {second} other {seconds}}",
+        "day": "{count, plural, one {day} other {days}}"
+    },
+    "DashboardPage": {
+        "hello": "Hello",
+        "select_new_program": "Select a new program",
+        "next_session": "Your next session",
+        "sequence": "{count, plural, one {Superset} other {Supersets}}",
+        "completed_session_count": "Number of sessions completed",
+        "completed_program_count": "Number of programs completed",
+        "highest_level_completed": "Highest level achieved",
+        "current_level": "Current program level",
+        "start": "Start",
+        "day": "{count, plural, one {day} other {days}}",
+        "historic": "Your historic",
+        "no_historic_yet": "You haven't completed any programs yet.",
+        "completed": "Completed",
+        "motivation": "Ready for your next workout?"
+    },
+    "TrainingPage": {
+        "header_motivation": "Let's go !",
+        "sequence": "Superset",
+        "previous": "Previous",
+        "next": "Next",
+        "complete": "Complete",
+        "too_easy": "Too easy",
+        "ok": "Ok",
+        "too_hard": "Too hard",
+        "save_session": "Save the session",
+        "session_completed": "Session completed",
+        "congrat_for_progress": "Congratulations for your progression !",
+        "how_did_you_feel": "How did you feel during this session ?"
+    },
+    "ForgotPasswordPage": {
+        "required_field": "This field is required",
+        "title": "Forgot your password?",
+        "success_msg": "Check your email for reset instructions.",
+        "sending": "Sending...",
+        "send_email": "Send reset email"
+    },
+    "ResetPasswordPage": {
+        "required_field": "This field is required",
+        "title": "Reset your password",
+        "success_msg": "Your password has been reset successfully!",
+        "new_password_label": "New password",
+        "confirm_password_label": "Confirm new password",
+        "password_required": "Password is required",
+        "confirmation_required": "Password confirmation is required",
+        "passwords_do_not_match": "Passwords do not match",
+        "resetting": "Resetting...",
+        "reset_button": "Reset password"
+    },
+    "Profile": {
+        "member_since": "Member since",
+        "ChangePassword": {
+            "title": "Change password",
+            "old_password": "Current password",
+            "new_password": "New password",
+            "confirm_password": "Confirm new password",
+            "submit": "Update password",
+            "loading": "Updating...",
+            "success": "Password updated successfully",
+            "errors": {
+                "old_password_required": "Current password is required",
+                "new_password_required": "New password is required",
+                "confirm_password_required": "Please confirm your password",
+                "password_min_length": "Password must be at least 8 characters",
+                "passwords_do_not_match": "Passwords do not match"
+            }
+        }
+    }
+}
