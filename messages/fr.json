@@ -10,7 +10,7 @@
         "program": "Programmes",
         "profile": "Profil",
         "dashboard": "Tableau de bord",
-        "sign_in_or_log_in": "S'inscrire / Se connecter",
+        "sign_in": "Se connecter",
         "edit": "Editer",
         "logout": "Deconnexion"
     },
@@ -38,7 +38,7 @@
         "required_field": "Ce champs est recquis",
         "confirmation_needed": "Confirmation recquise",
         "password_mismatch": "Les mots de passe ne correspondent pas",
-        "sign_in_or_log_in": "S'inscrire / Se connecter",
+        "sign_in": "Se Connecter",
         "connexion": "Connexion",
         "logIn": "Se connecter",
         "email": "Email",

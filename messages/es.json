@@ -10,7 +10,7 @@
         "program": "Programas",
         "profile": "Perfil",
         "dashboard": "Panel",
-        "sign_in_or_log_in": "Iniciar sesión / Acceder",
+        "sign_in": "Iniciar sesión",
         "edit": "Editar",
         "logout": "Deconnexion"
     },
@@ -38,7 +38,7 @@
         "required_field": "Este campo es obligatorio",
         "confirmation_needed": "Se necesita confirmación",
         "password_mismatch": "Las palabras clave no corresponden",
-        "sign_in_or_log_in": "Iniciar sesión / Acceder",
+        "sign_in": "Iniciar sesión",
         "connexion": "Iniciar sesión",
         "logIn": "Acceder",
         "email": "Correo electrónico",

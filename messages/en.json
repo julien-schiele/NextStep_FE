@@ -10,7 +10,7 @@
         "program": "Programs",
         "profile": "Profile",
         "dashboard": "Dashboard",
-        "sign_in_or_log_in": "Sign In / Log In",
+        "sign_in": "Sign In",
         "edit": "Edit",
         "logout": "Logout"
     },
@@ -38,7 +38,7 @@
         "required_field": "This field is required",
         "confirmation_needed": "Confirmation is needed",
         "password_mismatch": "The passwords do not match",
-        "sign_in_or_log_in": "SIgn In / Log In",
+        "sign_in": "SIgn In / Log In",
         "connexion": "Login",
         "logIn": "Log in",
         "email": "Email",

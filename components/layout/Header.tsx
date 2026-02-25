@@ -48,7 +48,7 @@ export default function Header() {
 
                 {/* RIGHT */}
                 <div className="flex items-center gap-4 h-16">
-                    {user ? <UserMenu user={user} /> : <ProtectedButton>{t("sign_in_or_log_in")}</ProtectedButton>}
+                    {user ? <UserMenu user={user} /> : <ProtectedButton>{t("sign_in")}</ProtectedButton>}
                     <ThemeToggle />
 
                     {/* Burger menu for smartphone */}

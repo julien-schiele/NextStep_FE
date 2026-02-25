@@ -89,7 +89,7 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
             {/* <DialogTrigger asChild>
-                <Button variant="default">{t("sign_in_or_log_in")}</Button>
+                <Button variant="default">{t("sign_in")}</Button>
             </DialogTrigger> */}
             <DialogContent className="sm:max-w-md">
                 <DialogTitle></DialogTitle>

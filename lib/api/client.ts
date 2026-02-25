@@ -10,9 +10,15 @@ export async function fetchFromClient<T>(
     path: string,
     locale: string,
     method: string = "GET",
-    body?: any
+    body?: any,
+    retry = true
 ): Promise<T> {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL!;
+
+    const isAuthRoute =
+        path.includes("/token") ||
+        path.includes("/users/create/") ||
+        path.includes("/token/refresh");
 
     const makeRequest = () =>
         fetch(`${baseUrl}${path}`, {
@@ -24,11 +30,7 @@ export async function fetchFromClient<T>(
 
     let res = await makeRequest();
 
-    if (res.status === 401) {
-        if (!accessToken) {
-            const errorMsg = await parseErrorResponse(res);
-            throw new Error(errorMsg || "Not authenticated");
-        }
+    if (res.status === 401 && retry && !isAuthRoute) {
         const refreshRes = await fetch(`${baseUrl}/token/refresh/`, {
             method: "POST",
             headers: buildHeaders({ locale }),
@@ -36,13 +38,20 @@ export async function fetchFromClient<T>(
         });
 
         if (!refreshRes.ok) {
-            throw new Error("Session expirée");
+            setAccessToken(null);
+            throw new Error(await parseErrorResponse(refreshRes));
         }
 
         const data = await refreshRes.json();
-        setAccessToken(data?.access);
 
-        res = await makeRequest();
+        if (!data?.access) {
+            setAccessToken(null);
+            throw new Error("Invalid refresh response");
+        }
+
+        setAccessToken(data.access);
+
+        return fetchFromClient<T>(path, locale, method, body, false);
     }
 
     if (!res.ok) {

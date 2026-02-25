@@ -12,7 +12,7 @@ export default async function HomePage({ searchParams }: { searchParams: { [key:
 
     return (
         <section className="flex flex-col gap-8">
-            <div className="grid md:grid-cols-2 gap-12 items-start space-y-16">
+            <div className="grid md:grid-cols-2 gap-12 items-start md:space-y-16">
                 <div className="space-y-6">
                     <H1>
                         {t("progress")} <span className="text-primary">{t("one_day")}</span>
