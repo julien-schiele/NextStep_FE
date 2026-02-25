@@ -6,7 +6,9 @@ if [ "$1" = "dev" ]; then
     echo "Starting Next.js frontend in dev mode..."
     exec yarn dev
 elif [ "$1" = "start" ]; then
-    echo "Starting Next.js frontend from build..."
+    echo "Building Next.js frontend..."
+    yarn build
+    echo "Starting Next.js frontend..."
     exec yarn start
 else
     # Allow running arbitrary commands
