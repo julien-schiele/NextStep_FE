@@ -49,7 +49,9 @@
         "first_name": "Prénom",
         "last_name": "Nom",
         "confirm_password": "Confirmer le mot de passe",
-        "create_account": "Créer un compte"
+        "create_account": "Créer un compte",
+        "i_accept_policy": "J'accepte la politique de confidentialité",
+        "see_details": "Voir les détails"
     },
     "ProgramListPage": {
         "title": "Tous les programmes",
@@ -135,6 +137,13 @@
                 "password_min_length": "Le mot de passe doit contenir au moins 8 caractères",
                 "passwords_do_not_match": "Les mots de passe ne correspondent pas"
             }
+        },
+        "DeleteAccountDialog": {
+            "delete_account": "Supprimer mon compte",
+            "delete_account_title": "Êtes-vous sûr ?",
+            "delete_account_description": "Cette action est définitive. Votre compte et toutes vos données seront supprimés.",
+            "cancel": "Annuler",
+            "delete_account_confirm": "Oui, supprimer mon compte"
         }
     }
 }

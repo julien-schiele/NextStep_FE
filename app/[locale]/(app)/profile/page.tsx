@@ -2,9 +2,10 @@ import { Card } from "@/components/ui/card";
 import { ClientDate } from "@/components/ui/date";
 import { ChangePasswordCard } from "@/features/profile/components/ChangePasswordCard";
 import { getCurrentUser, protectedPage } from "@/lib/auth/server";
-import { capitalize, formatDateToLocale } from "@/lib/utils";
+import { capitalize } from "@/lib/utils";
 import { getTranslations } from "next-intl/server";
 import { LuScanFace } from "react-icons/lu";
+import { DeleteAccountButton } from "@/features/profile/components/DeleteAccountButton";
 
 
 async function ProfilePage() {
@@ -30,6 +31,9 @@ async function ProfilePage() {
 
                 <ChangePasswordCard />
             </div>
+
+            <DeleteAccountButton/>
+
         </section>
     );
 }

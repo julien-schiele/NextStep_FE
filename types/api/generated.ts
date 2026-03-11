@@ -449,40 +449,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/users/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** @description List all users (admin only) */
-        get: operations["users_list"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/users/{id}/": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** @description Retrieve a single user by UUID (admin only) */
-        get: operations["users_retrieve"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/api/users/create/": {
         parameters: {
             query?: never;
@@ -511,7 +477,8 @@ export interface paths {
         get: operations["users_me_retrieve"];
         put?: never;
         post?: never;
-        delete?: never;
+        /** @description Retrieve the current authenticated user */
+        delete: operations["users_me_destroy"];
         options?: never;
         head?: never;
         patch?: never;
@@ -842,24 +809,13 @@ export interface components {
          * @enum {string}
          */
         UsefulnessEnum: "not_useful" | "useful" | "very_useful";
-        User: {
-            /** Format: uuid */
-            readonly id: string;
-            /** Format: email */
-            email: string;
-            first_name?: string;
-            last_name?: string;
-            is_active?: boolean;
-            readonly is_staff: boolean;
-            /** Format: date-time */
-            readonly date_joined: string;
-        };
         UserCreate: {
             /** Format: email */
             email: string;
             first_name?: string;
             last_name?: string;
             password: string;
+            gdpr_consent?: boolean;
         };
         UserProgram: {
             /** Format: uuid */
@@ -1851,46 +1807,6 @@ export interface operations {
             };
         };
     };
-    users_list: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["User"][];
-                };
-            };
-        };
-    };
-    users_retrieve: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["User"];
-                };
-            };
-        };
-    };
     users_create_create: {
         parameters: {
             query?: never;
@@ -1927,6 +1843,24 @@ export interface operations {
         responses: {
             /** @description No response body */
             200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    users_me_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
                 headers: {
                     [name: string]: unknown;
                 };

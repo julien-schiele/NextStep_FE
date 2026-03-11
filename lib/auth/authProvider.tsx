@@ -59,12 +59,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const logout = async () => {
         try {
             await fetchFromClient("/logout/", locale, "POST");
-            setUser(null);
-            setAccessToken(null);
+            clearUser()
             router.push("/")
         } catch (e) {
             toast.error((e as Error).message, { position: "bottom-center" });
         }
+    };
+
+    const clearUser = () => {
+        setUser(null);
+        setAccessToken(null);
     };
 
 
@@ -74,6 +78,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 user,
                 login,
                 logout,
+                clearUser,
                 loading,
                 openAuth: () => setIsOpen(true),
                 closeAuth: () => setIsOpen(false),

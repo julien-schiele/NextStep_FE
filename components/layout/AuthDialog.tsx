@@ -10,7 +10,7 @@ import {
     DialogDescription,
     DialogTitle,
 } from "@/components/ui/dialog";
-import { H2 } from "../ui/text";
+import { H2, P } from "../ui/text";
 import { Link, redirect } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { fetchFromClient } from "@/lib/api/client";
@@ -28,6 +28,7 @@ type RegisterFormInputs = {
     email: string;
     password: string;
     confirm_password: string;
+    gdpr_consent: boolean;
 };
 
 type Props = {
@@ -39,7 +40,7 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
     const [activeTab, setActiveTab] = useState<"connexion" | "register">("connexion");
     const t = useTranslations("AuthPage");
     const locale = useLocale()
-    const { login } = useAuth()
+    const { login, closeAuth } = useAuth()
 
     // Hooks react-hook-form
     const {
@@ -53,7 +54,9 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
         handleSubmit: handleRegisterSubmit,
         watch,
         formState: { errors: registerErrors, isSubmitting: registerLoading },
-    } = useForm<RegisterFormInputs>();
+    } = useForm<RegisterFormInputs>({
+        defaultValues: { gdpr_consent: false },
+    });
 
     // LOGIN
     const onLogin: SubmitHandler<LoginFormInputs> = async (data) => {
@@ -76,6 +79,7 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
                 first_name: data.first_name,
                 email: data.email,
                 password: data.password,
+                gdpr_consent: data.gdpr_consent
             });
             setActiveTab("connexion");
         } catch (e) {
@@ -183,6 +187,11 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
                             })}
                             error={registerErrors.confirm_password?.message}
                         />
+                        <label className="block text-sm font-medium mb-4">
+                            <input type="checkbox" {...registerRegister("gdpr_consent")} className="mr-2" />
+                            {t("i_accept_policy")} : <Link href="/privacy" onClick={closeAuth} className="underline hover:text-primary transition-colors">{t("see_details")}</Link>
+                            {registerErrors.gdpr_consent && <P>{registerErrors.gdpr_consent?.message}</P>}
+                        </label>
                         <Button type="submit" className="w-full" disabled={registerLoading}>
                             {registerLoading ? "Loading..." : t("create_account")}
                         </Button>
