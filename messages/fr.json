@@ -69,7 +69,9 @@
         "session": "Session",
         "repetition": "{count, plural, one {répétition} other {répétitions}}",
         "duration": "{count, plural, one {seconde} other {secondes}}",
-        "day": "{count, plural, one {jour} other {jours}}"
+        "day": "{count, plural, one {jour} other {jours}}",
+        "continue_program": "Continuer le programme",
+        "start_program": "Démarrer ce programme"
     },
     "DashboardPage": {
         "hello": "Bonjour",

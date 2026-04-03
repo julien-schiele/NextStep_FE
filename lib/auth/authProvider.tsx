@@ -13,6 +13,7 @@ type AuthContextType = {
     user: UserType | null;
     login: (email: string, password: string) => Promise<void>;
     logout: () => void;
+    clearUser: () => void;
     loading: boolean;
     openAuth: () => void;
     closeAuth: () => void;

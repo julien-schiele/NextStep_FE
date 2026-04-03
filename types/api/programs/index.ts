@@ -9,7 +9,7 @@ export type ProgramDetailType = components["schemas"]["ProgramDetail"];
 export type ProgramFiltersType = components["schemas"]["ProgramFilters"];
 export type LevelEnumType = components["schemas"]["LevelEnum"];
 export type FocusEnumType = components["schemas"]["FocusEnum"];
-export type FocusAxesEnumType = components["schemas"]["FocusAxesEnum"];
+export type FocusAxesEnumType = components["schemas"]["FocusAxisEnum"];
 export type StatusEnumType = components["schemas"]["StatusEnum"];
 
 

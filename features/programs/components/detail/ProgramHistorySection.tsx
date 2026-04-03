@@ -67,6 +67,7 @@ export function ProgramHistorySection({ programId, history, inProgress }: Progra
                                 -
                                 <ClientDate dateString={h.end_date} />
                             </P>
+                            {/* TODO: implement feedback for program */}
                             <P className="flex-1 text-center">Feedaback ?</P>
                             <P className="flex-1 text-center">{durationInDays} {t("day", { count: durationInDays! })}</P>
                             <P className="flex-1 text-center">
@@ -79,11 +80,11 @@ export function ProgramHistorySection({ programId, history, inProgress }: Progra
             <div className="flex justify-center">
                 {inProgress ? (
                     <Button asChild>
-                        <Link href={"/dashboard"}>Continue the program</Link>
+                        <Link href={"/dashboard"}>{t("continue_program")}</Link>
                     </Button>
                 ) : (
                     <Button onClick={handleStart}>
-                        <Link href={"#"}>Start this program</Link>
+                        <Link href={"#"}>{t("start_program")}</Link>
                     </Button>
                 )}
             </div>

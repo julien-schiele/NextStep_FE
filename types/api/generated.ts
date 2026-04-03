@@ -500,13 +500,6 @@ export interface components {
         ChangePasswordResponse: {
             message: string;
         };
-        /**
-         * @description * `beginner` - Beginner
-         *     * `intermediate` - Intermediate
-         *     * `advanced` - Advanced
-         * @enum {string}
-         */
-        CurrentLevelEnum: "beginner" | "intermediate" | "advanced";
         Cycle: {
             cycle: number;
             sessions: components["schemas"]["Session"][];
@@ -514,8 +507,10 @@ export interface components {
         Exercise: {
             /** @description Slugified version of the English name, auto-generated */
             readonly slug: string;
-            readonly name: string;
-            readonly description: string;
+            /** @description Translated field (django-parler) */
+            name: string;
+            /** @description Translated field (django-parler) */
+            description: string;
             /**
              * @description Does this exercise count by repetitions or seconds?
              *
@@ -535,6 +530,10 @@ export interface components {
             /** Format: date-time */
             readonly updated_at: string;
         };
+        ExerciseFilters: {
+            resolution: components["schemas"]["ResolutionFilter"][];
+            practice_zone: components["schemas"]["PracticeZoneFilter"][];
+        };
         ExercisePreview: {
             slug: string;
             name: string;
@@ -542,6 +541,10 @@ export interface components {
             resolution: string;
             practice_zone: string;
             value: number;
+        };
+        FocusAxesFilter: {
+            value: components["schemas"]["FocusAxisEnum"];
+            label: string;
         };
         /**
          * @description * `technical_bouldering` - Technical bouldering
@@ -573,11 +576,7 @@ export interface components {
          *     * `movement_efficiency` - Movement efficiency
          * @enum {string}
          */
-        FocusAxesEnum: "technical_bouldering" | "project_bouldering" | "route_technique" | "movement_quality" | "coordination" | "footwork" | "power" | "max_strength" | "power_endurance" | "endurance_continuity" | "climbing_volume" | "finger_strength" | "upper_body_strength" | "core_tension" | "lock_off_strength" | "pulling_strength" | "general_strength" | "mobility" | "stability" | "balance" | "conditioning" | "active_recovery" | "injury_prevention" | "antagonist_training" | "progressive_overload" | "deload" | "movement_efficiency";
-        FocusAxesFilter: {
-            value: components["schemas"]["Value0fbEnum"];
-            label: string;
-        };
+        FocusAxisEnum: "technical_bouldering" | "project_bouldering" | "route_technique" | "movement_quality" | "coordination" | "footwork" | "power" | "max_strength" | "power_endurance" | "endurance_continuity" | "climbing_volume" | "finger_strength" | "upper_body_strength" | "core_tension" | "lock_off_strength" | "pulling_strength" | "general_strength" | "mobility" | "stability" | "balance" | "conditioning" | "active_recovery" | "injury_prevention" | "antagonist_training" | "progressive_overload" | "deload" | "movement_efficiency";
         /**
          * @description * `general_fitness` - General fitness
          *     * `climbing_performance` - Climbing performance
@@ -585,16 +584,9 @@ export interface components {
          */
         FocusEnum: "general_fitness" | "climbing_performance";
         FocusFilter: {
-            value: components["schemas"]["Value231Enum"];
+            value: components["schemas"]["FocusEnum"];
             label: string;
         };
-        /**
-         * @description * `beginner` - Beginner
-         *     * `intermediate` - Intermediate
-         *     * `advanced` - Advanced
-         * @enum {string}
-         */
-        HighestLevelCompletedEnum: "beginner" | "intermediate" | "advanced";
         /**
          * @description * `beginner` - Beginner
          *     * `intermediate` - Intermediate
@@ -603,7 +595,7 @@ export interface components {
          */
         LevelEnum: "beginner" | "intermediate" | "advanced";
         LevelFilter: {
-            value: components["schemas"]["ValueDbcEnum"];
+            value: components["schemas"]["LevelEnum"];
             label: string;
         };
         /** @enum {unknown} */
@@ -629,8 +621,10 @@ export interface components {
         PatchedExercise: {
             /** @description Slugified version of the English name, auto-generated */
             readonly slug?: string;
-            readonly name?: string;
-            readonly description?: string;
+            /** @description Translated field (django-parler) */
+            name?: string;
+            /** @description Translated field (django-parler) */
+            description?: string;
             /**
              * @description Does this exercise count by repetitions or seconds?
              *
@@ -655,8 +649,10 @@ export interface components {
             readonly id?: string;
             /** @description Slugified version of the English name, auto-generated */
             readonly slug?: string;
-            readonly name?: string;
-            readonly description?: string;
+            /** @description Translated field (django-parler) */
+            name?: string;
+            /** @description Translated field (django-parler) */
+            description?: string;
             realistic_if?: string[];
             not_realistic_if?: string[];
             focus?: components["schemas"]["FocusEnum"];
@@ -665,7 +661,7 @@ export interface components {
             duration_days?: number;
             is_public?: boolean;
             content?: unknown;
-            focus_axes?: components["schemas"]["FocusAxesEnum"][];
+            focus_axes?: components["schemas"]["FocusAxisEnum"][];
             cycle_rhythm?: unknown;
             /** Format: date-time */
             readonly created_at?: string;
@@ -699,17 +695,25 @@ export interface components {
          * @enum {string}
          */
         PracticeZoneEnum: "everywhere" | "climbing_gym";
+        PracticeZoneFilter: {
+            value: components["schemas"]["PracticeZoneEnum"];
+            label: string;
+        };
         PrivacyPolicy: {
-            readonly short_text: string;
-            readonly long_text: string;
+            /** @description Translated field (django-parler) */
+            short_text: string;
+            /** @description Translated field (django-parler) */
+            long_text: string;
         };
         Program: {
             /** Format: uuid */
             readonly id: string;
             /** @description Slugified version of the English name, auto-generated */
             readonly slug: string;
-            readonly name: string;
-            readonly description: string;
+            /** @description Translated field (django-parler) */
+            name: string;
+            /** @description Translated field (django-parler) */
+            description: string;
             realistic_if?: string[];
             not_realistic_if?: string[];
             focus?: components["schemas"]["FocusEnum"];
@@ -718,7 +722,7 @@ export interface components {
             duration_days?: number;
             is_public?: boolean;
             content?: unknown;
-            focus_axes?: components["schemas"]["FocusAxesEnum"][];
+            focus_axes?: components["schemas"]["FocusAxisEnum"][];
             cycle_rhythm?: unknown;
             /** Format: date-time */
             readonly created_at: string;
@@ -728,15 +732,17 @@ export interface components {
         ProgramDetail: {
             /** Format: uuid */
             readonly id: string;
-            readonly name: string;
-            readonly description: string;
+            /** @description Translated field (django-parler) */
+            name: string;
+            /** @description Translated field (django-parler) */
+            description: string;
             realistic_if?: string[];
             not_realistic_if?: string[];
             focus?: components["schemas"]["FocusEnum"];
             level?: components["schemas"]["LevelEnum"];
             /** @description Duration of program in days */
             duration_days?: number;
-            focus_axes?: components["schemas"]["FocusAxesEnum"][];
+            focus_axes?: components["schemas"]["FocusAxisEnum"][];
             readonly content: components["schemas"]["ProgramDetailContent"];
             /** Format: date-time */
             readonly created_at: string;
@@ -757,8 +763,10 @@ export interface components {
         ProgramList: {
             /** Format: uuid */
             readonly id: string;
-            readonly name: string;
-            readonly description: string;
+            /** @description Translated field (django-parler) */
+            name: string;
+            /** @description Translated field (django-parler) */
+            description: string;
             level?: components["schemas"]["LevelEnum"];
             focus?: components["schemas"]["FocusEnum"];
             /** @description Duration of program in days */
@@ -777,6 +785,10 @@ export interface components {
          * @enum {string}
          */
         ResolutionEnum: "repetition" | "duration";
+        ResolutionFilter: {
+            value: components["schemas"]["ResolutionEnum"];
+            label: string;
+        };
         Session: {
             session: number;
             sequences: components["schemas"]["ExercisePreview"][][];
@@ -809,6 +821,18 @@ export interface components {
          * @enum {string}
          */
         UsefulnessEnum: "not_useful" | "useful" | "very_useful";
+        User: {
+            /** Format: uuid */
+            readonly id: string;
+            /** Format: email */
+            email: string;
+            first_name?: string;
+            last_name?: string;
+            is_active?: boolean;
+            readonly is_staff: boolean;
+            /** Format: date-time */
+            readonly date_joined: string;
+        };
         UserCreate: {
             /** Format: email */
             email: string;
@@ -854,7 +878,7 @@ export interface components {
             readonly user_program: string;
             session_in_cycle: number;
             cycle_count: number;
-            readonly completed: string;
+            readonly completed: boolean;
             session_snapshot: unknown;
             rating?: (components["schemas"]["RatingEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
             /** Format: date-time */
@@ -865,53 +889,9 @@ export interface components {
         UserStats: {
             total_sessions_completed: number;
             total_programs_completed: number;
-            current_level: (components["schemas"]["CurrentLevelEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
-            highest_level_completed: (components["schemas"]["HighestLevelCompletedEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            current_level: (components["schemas"]["LevelEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            highest_level_completed: (components["schemas"]["LevelEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
         };
-        /**
-         * @description * `technical_bouldering` - Technical bouldering
-         *     * `project_bouldering` - Project bouldering
-         *     * `route_technique` - Route technique
-         *     * `movement_quality` - Movement quality
-         *     * `coordination` - Coordination
-         *     * `footwork` - Footwork
-         *     * `power` - Power
-         *     * `max_strength` - Max strength
-         *     * `power_endurance` - Power endurance
-         *     * `endurance_continuity` - Endurance / continuity
-         *     * `climbing_volume` - Climbing volume
-         *     * `finger_strength` - Finger strength
-         *     * `upper_body_strength` - Upper body strength
-         *     * `core_tension` - Core tension
-         *     * `lock_off_strength` - Lock-off strength
-         *     * `pulling_strength` - Pulling strength
-         *     * `general_strength` - General strength
-         *     * `mobility` - Mobility
-         *     * `stability` - Stability
-         *     * `balance` - Balance
-         *     * `conditioning` - Conditioning
-         *     * `active_recovery` - Active recovery
-         *     * `injury_prevention` - Injury prevention
-         *     * `antagonist_training` - Antagonist training
-         *     * `progressive_overload` - Progressive overload
-         *     * `deload` - Deload / recovery
-         *     * `movement_efficiency` - Movement efficiency
-         * @enum {string}
-         */
-        Value0fbEnum: "technical_bouldering" | "project_bouldering" | "route_technique" | "movement_quality" | "coordination" | "footwork" | "power" | "max_strength" | "power_endurance" | "endurance_continuity" | "climbing_volume" | "finger_strength" | "upper_body_strength" | "core_tension" | "lock_off_strength" | "pulling_strength" | "general_strength" | "mobility" | "stability" | "balance" | "conditioning" | "active_recovery" | "injury_prevention" | "antagonist_training" | "progressive_overload" | "deload" | "movement_efficiency";
-        /**
-         * @description * `general_fitness` - General fitness
-         *     * `climbing_performance` - Climbing performance
-         * @enum {string}
-         */
-        Value231Enum: "general_fitness" | "climbing_performance";
-        /**
-         * @description * `beginner` - Beginner
-         *     * `intermediate` - Intermediate
-         *     * `advanced` - Advanced
-         * @enum {string}
-         */
-        ValueDbcEnum: "beginner" | "intermediate" | "advanced";
     };
     responses: never;
     parameters: never;
@@ -988,7 +968,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 "application/json": components["schemas"]["Exercise"];
                 "application/x-www-form-urlencoded": components["schemas"]["Exercise"];
@@ -1038,7 +1018,7 @@ export interface operations {
             };
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 "application/json": components["schemas"]["Exercise"];
                 "application/x-www-form-urlencoded": components["schemas"]["Exercise"];
@@ -1114,12 +1094,13 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description No response body */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ExerciseFilters"];
+                };
             };
         };
     };
@@ -1132,12 +1113,15 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description No response body */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": {
+                        detail?: string;
+                    };
+                };
             };
         };
     };
@@ -1228,7 +1212,7 @@ export interface operations {
             path?: never;
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 "application/json": components["schemas"]["Program"];
                 "application/x-www-form-urlencoded": components["schemas"]["Program"];
@@ -1278,7 +1262,7 @@ export interface operations {
             };
             cookie?: never;
         };
-        requestBody?: {
+        requestBody: {
             content: {
                 "application/json": components["schemas"]["Program"];
                 "application/x-www-form-urlencoded": components["schemas"]["Program"];
@@ -1841,12 +1825,13 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description No response body */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["User"];
+                };
             };
         };
     };

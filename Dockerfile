@@ -1,7 +1,9 @@
 FROM node:lts
 
 # Install utils si besoin
-RUN apt-get update -yq
+RUN apt-get update -yq && \
+    apt-get install -y --no-install-recommends netcat-openbsd && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set working dir
 WORKDIR /app
