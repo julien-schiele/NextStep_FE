@@ -11,6 +11,7 @@ import ProtectedButton from "../auth/ProtectedButton";
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import { Button } from "../ui/button";
+import { AiOutlineLogin } from "react-icons/ai";
 
 
 export default function Header() {
@@ -36,9 +37,11 @@ export default function Header() {
             <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
 
                 {/* LEFT */}
-                <div className="flex items-center gap-4 h-16">
+                <div className="flex items-center md:gap-4 h-16 w-full md:w-auto">
                     <LocaleSelector />
-                    <div className="font-semibold text-lg text-foreground">NextStep</div>
+                    <span className="font-semibold text-lg text-foreground flex-1 text-center md:flex-none md:text-left">
+                        <Link href="/">NextStep</Link>
+                    </span>
                 </div>
 
                 {/* NAV for desktop */}
@@ -48,12 +51,19 @@ export default function Header() {
 
                 {/* RIGHT */}
                 <div className="flex items-center gap-4 h-16">
-                    {user ? <UserMenu user={user} /> : <ProtectedButton>{t("sign_in")}</ProtectedButton>}
+                    {user ?
+                        <UserMenu user={user} />
+                        :
+                        <ProtectedButton>
+                            <p className="hidden md:flex">{t("sign_in")}</p>
+                            <AiOutlineLogin className="flex md:hidden" />
+                        </ProtectedButton>
+                    }
                     <ThemeToggle />
 
                     {/* Burger menu for smartphone */}
                     <Button
-                    variant={"outline"}
+                        variant={"outline"}
                         className="md:hidden p-2"
                         onClick={() => setDisplayBurgerMenu(!displayBurgerMenu)}
                     >
@@ -71,6 +81,6 @@ export default function Header() {
                     <Links className="border-b border-border p-4" onLinkClick={() => setDisplayBurgerMenu(false)} />
                 </div>
             </nav>
-        </header>
+        </header >
     );
 }

@@ -15,7 +15,9 @@
         "logout": "Logout"
     },
     "Footer": {
-        "know_more": "Know more"
+        "demo_only": "Demo only",
+        "privacy_policy": "Privacy Policy",
+        "credits": "Credits"
     },
     "HomePage": {
         "progress": "Progress",

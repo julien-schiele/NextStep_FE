@@ -16,6 +16,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
                     attribute="class"
                     defaultTheme="system"
                     enableSystem
+                    disableTransitionOnChange
                 >
                     {children}
                 </NextThemesProvider>

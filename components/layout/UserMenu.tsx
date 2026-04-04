@@ -32,9 +32,14 @@ export const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="flex items-center gap-2">
+                    
                     <MdVerifiedUser className="text-primary" />
-                    {user.first_name!.toLocaleUpperCase()}
-                    {user.last_name ? user.last_name.slice(0, 3).toUpperCase() : ""}
+                    <span className="flex md:hidden">
+                        {user.first_name[0]!.toLocaleUpperCase()}
+                    </span>
+                    <span className="hidden md:flex">
+                        {user.first_name!.toLocaleUpperCase()}
+                    </span>
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>

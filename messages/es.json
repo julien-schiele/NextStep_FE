@@ -15,7 +15,9 @@
         "logout": "Deconnexion"
     },
     "Footer": {
-        "know_more": "Saber más"
+        "demo_only": "Solo demo",
+        "privacy_policy": "Política de privacidad",
+        "credits": "Créditos"
     },
     "HomePage": {
         "progress": "Progreso",
