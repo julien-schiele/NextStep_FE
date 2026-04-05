@@ -14,7 +14,7 @@ if [ "$1" = "start" ]; then
     echo "Generating TypeScript types..."
     yarn generate:types
     echo "Starting Next.js frontend..."
-    exec node server.js
+    exec node server.js -H 0.0.0.0
 else
     exec "$@"
 fi
