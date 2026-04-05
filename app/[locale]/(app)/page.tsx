@@ -7,7 +7,7 @@ import { getTranslations } from "next-intl/server";
 import ProtectedLink from "@/components/auth/ProtectedLink";
 
 
-export default async function HomePage({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+export default async function HomePage() {
     const t = await getTranslations("HomePage");
 
     return (

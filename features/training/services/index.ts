@@ -32,9 +32,9 @@ export function getTodaySequences({ currentProgram, currentUserProgram }: getTod
     if (!currentProgram || !currentUserProgram) return [];
 
     let todaySequences: SequenceListType = []
-    const currentProgramContent: ProgramContentType = currentProgram?.content!
+    const currentProgramContent: ProgramContentType = currentProgram!.content!
     currentProgramContent.cycles.map(c => {
-        if (c.cycle == currentUserProgram?.next_cycle) {
+        if (c.cycle == currentUserProgram!.next_cycle) {
             c.sessions.map(s => {
                 if (s.session == currentUserProgram.next_session_in_cycle) {
                     todaySequences = s.sequences

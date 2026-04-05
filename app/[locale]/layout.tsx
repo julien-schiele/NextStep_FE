@@ -22,15 +22,15 @@ export default async function LocaleLayout({ children, params }: Props) {
     let messages;
     try {
         messages = (await import(`@/messages/${locale}.json`)).default;
-    } catch (error) {
+    } catch {
         messages = {}; // fallback if file is missing
     }
 
     return (
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages} locale={locale}>
             <AuthProvider>
-                <OpenAuthDialogFromQuery/>
-                <Toaster/>
+                <OpenAuthDialogFromQuery />
+                <Toaster />
                 {children}
             </AuthProvider>
         </NextIntlClientProvider>

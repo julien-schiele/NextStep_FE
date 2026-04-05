@@ -85,25 +85,25 @@ function Section({ title, items }: { title: string; items: Credit[] }) {
                                 <span className="text-muted-foreground"> — by {item.author}</span>
                             )}
                             <span className="text-muted-foreground"> via </span>
-                            <a
+                            <Link
                                 href={item.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-primary hover:underline"
                             >
                                 {item.source}
-                            </a>
+                            </Link>
                         </div>
                         <div className="text-muted-foreground text-xs">
                             {item.licenseUrl ? (
-                                <a
+                                <Link
                                     href={item.licenseUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="hover:text-primary transition-colors hover:underline"
                                 >
                                     {item.license}
-                                </a>
+                                </Link>
                             ) : (
                                 item.license
                             )}
@@ -123,7 +123,7 @@ export default function CreditsPage() {
 
             <H1>Credits &amp; Attributions</H1>
             <P className="text-muted-foreground text-sm">
-                NextStep is built on great open-source work. Here's a partial list of
+                NextStep is built on great open-source work. Here is a partial list of
                 third-party assets and libraries used in this project.
             </P>
 

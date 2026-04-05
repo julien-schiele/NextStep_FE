@@ -37,9 +37,9 @@ async function DashboardPage() {
 
             {currentProgram ? <>
                 <ProgramProgressCard
-                    programName={currentProgram?.name!}
+                    programName={currentProgram!.name!}
                     completedSessions={completedSessions!}
-                    totalSessions={currentProgram?.content.total_sessions!}
+                    totalSessions={currentProgram!.content.total_sessions!}
                 />
 
                 <TodaySessionCard sequenceList={todaySequences!} userProgramId={currentUserProgram!.id} />

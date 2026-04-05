@@ -14,6 +14,22 @@ import { Button } from "../ui/button";
 import { AiOutlineLogin } from "react-icons/ai";
 
 
+function Links({ t, className = "", onLinkClick }: {
+    t: ReturnType<typeof useTranslations<'Header'>>;
+    className?: string;
+    onLinkClick?: () => void
+}) {
+    const completeClassName = `${className} hover:text-primary transition-colors`;
+    return (
+        <>
+            <Link href="/" onClick={onLinkClick} className={completeClassName}>{t("home")}</Link>
+            <ProtectedLink href="/programs" onClick={onLinkClick} className={completeClassName}>{t("program")}</ProtectedLink>
+            <ProtectedLink href="/dashboard" onClick={onLinkClick} className={completeClassName}>{t("dashboard")}</ProtectedLink>
+        </>
+    );
+}
+
+
 export default function Header() {
     const [displayBurgerMenu, setDisplayBurgerMenu] = useState(false);
     const t = useTranslations('Header');
@@ -21,16 +37,6 @@ export default function Header() {
 
     if (loading) return null
 
-    const Links = ({ className = "", onLinkClick }: { className?: string; onLinkClick?: () => void }) => {
-        const completeClassName = `${className} hover:text-primary transition-colors`;
-        return (
-            <>
-                <Link href="/" onClick={onLinkClick} className={completeClassName}>{t("home")}</Link>
-                <ProtectedLink href="/programs" onClick={onLinkClick} className={completeClassName}>{t("program")}</ProtectedLink>
-                <ProtectedLink href="/dashboard" onClick={onLinkClick} className={completeClassName}>{t("dashboard")}</ProtectedLink>
-            </>
-        );
-    };
 
     return (
         <header className="w-full fixed top-0 z-10 bg-background/70 dark:bg-background/70 backdrop-blur border-b border-border">
@@ -46,7 +52,7 @@ export default function Header() {
 
                 {/* NAV for desktop */}
                 <nav className="hidden md:flex items-center gap-6 text-foreground">
-                    <Links />
+                    <Links t={t} />
                 </nav>
 
                 {/* RIGHT */}
@@ -78,7 +84,7 @@ export default function Header() {
                                     ${displayBurgerMenu ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}
                                 `}
                 >
-                    <Links className="border-b border-border p-4" onLinkClick={() => setDisplayBurgerMenu(false)} />
+                    <Links t={t} className="border-b border-border p-4" onLinkClick={() => setDisplayBurgerMenu(false)} />
                 </div>
             </nav>
         </header >

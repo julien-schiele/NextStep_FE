@@ -1,4 +1,4 @@
-export function extractErrorMessage(data: any): string {
+export function extractErrorMessage(data: unknown): string {
     if (!data) return "Une erreur est survenue";
 
     if (typeof data === "string") return data;
@@ -6,11 +6,11 @@ export function extractErrorMessage(data: any): string {
     if (Array.isArray(data)) return data.join(", ");
 
     if (typeof data === "object") {
-        if (Array.isArray(data.detail)) return data.detail.join(", ");
-        if (typeof data.detail === "string") return data.detail;
-        if (typeof data.message === "string") return data.message;
-        if (typeof data.error === "string") return data.error;
-        // fallback stringify
+        const obj = data as Record<string, unknown>;
+        if (Array.isArray(obj.detail)) return (obj.detail as string[]).join(", ");
+        if (typeof obj.detail === "string") return obj.detail;
+        if (typeof obj.message === "string") return obj.message;
+        if (typeof obj.error === "string") return obj.error;
         return JSON.stringify(data);
     }
 

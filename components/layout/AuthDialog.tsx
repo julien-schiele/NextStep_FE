@@ -11,7 +11,7 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 import { H2, P } from "../ui/text";
-import { Link, redirect } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { fetchFromClient } from "@/lib/api/client";
 import { useAuth } from "@/lib/auth/authProvider";
@@ -52,7 +52,7 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
     const {
         register: registerRegister,
         handleSubmit: handleRegisterSubmit,
-        watch,
+        getValues,
         formState: { errors: registerErrors, isSubmitting: registerLoading },
     } = useForm<RegisterFormInputs>({
         defaultValues: { gdpr_consent: false },
@@ -86,9 +86,6 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
             toast.error((e as Error).message, { position: "bottom-center" });
         }
     };
-
-    const passwordValue = watch("password", "");
-
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
@@ -182,8 +179,7 @@ export default function AuthDialog({ open, onOpenChange }: Props) {
                             placeholder="••••••••"
                             {...registerRegister("confirm_password", {
                                 required: t("confirmation_needed"),
-                                validate: (val) =>
-                                    val === passwordValue || t("password_mismatch"),
+                                validate: val => val === getValues("password") || t("passwords_do_not_match")
                             })}
                             error={registerErrors.confirm_password?.message}
                         />

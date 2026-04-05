@@ -26,8 +26,7 @@ export function ResetPasswordForm() {
     const [success, setSuccess] = useState(false);
     const router = useRouter()
 
-    const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm<FormInputs>();
-    const passwordValue = watch("password", "");
+    const { register, handleSubmit, getValues, formState: { errors, isSubmitting } } = useForm<FormInputs>();
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
         if (data.password !== data.confirmPassword) {
@@ -67,7 +66,7 @@ export function ResetPasswordForm() {
                 {...register("confirmPassword", {
                     required: t("confirmation_required"),
                     validate: val =>
-                        val === passwordValue || t("passwords_do_not_match")
+                        val === getValues("password") || t("passwords_do_not_match")
                 })}
                 error={errors.confirmPassword?.message}
             />

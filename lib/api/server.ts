@@ -5,7 +5,7 @@ import { buildHeaders, parseErrorResponse } from "./core";
 export async function fetchFromServer<T>(
     path: string,
     method: string = "GET",
-    body?: any
+    body?: Record<string, unknown>,
 ): Promise<T> {
     const locale = await getLocale();
     const cookieStore = await cookies();

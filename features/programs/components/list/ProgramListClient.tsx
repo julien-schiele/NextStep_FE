@@ -45,7 +45,7 @@ export function ProgramListClient({ initialPrograms, filters }: Props) {
         }
 
         fetchFiltered();
-    }, [selectedFocus, selectedLevel, selectedFocusAxes]);
+    }, [selectedFocus, selectedLevel, selectedFocusAxes, locale]);
 
     return (
         <>

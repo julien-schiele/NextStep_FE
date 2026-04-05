@@ -10,7 +10,7 @@ export async function fetchFromClient<T>(
     path: string,
     locale: string,
     method: string = "GET",
-    body?: any,
+    body?: Record<string, unknown>,
     retry = true
 ): Promise<T> {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL!;
@@ -28,7 +28,7 @@ export async function fetchFromClient<T>(
             credentials: "include",
         });
 
-    let res = await makeRequest();
+    const res = await makeRequest();
 
     if (res.status === 401 && retry && !isAuthRoute) {
         const refreshRes = await fetch(`${baseUrl}/token/refresh/`, {

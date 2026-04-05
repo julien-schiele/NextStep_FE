@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
 import { fetchFromClient, setAccessToken } from "@/lib/api/client";
 import { TokenResponseType, UserType } from "@/types/api/users";
 import { useLocale } from "next-intl";
@@ -29,21 +29,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [isOpen, setIsOpen] = useState(false)
     const router = useRouter()
 
-    const fetchUser = async () => {
+    const fetchUser = useCallback(async () => {
         try {
             const u = await fetchFromClient<UserType>("/users/me/", locale);
             setUser(u);
-        } catch (e) {
+        } catch {
             setUser(null);
-            // toast.error((e as Error).message, { position: "bottom-center" });
         } finally {
             setLoading(false);
         }
-    };
+    }, [locale]);
 
     useEffect(() => {
         fetchUser();
-    }, []);
+    }, [fetchUser]);
 
     const login = async (email: string, password: string) => {
         try {

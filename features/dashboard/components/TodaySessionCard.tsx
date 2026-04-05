@@ -8,7 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { H2, H4 } from "@/components/ui/text";
 import { fetchFromClient } from "@/lib/api/client";
-import { SequenceListType } from "@/types/api/programs";
+import { ExercisePreviewType, SequenceListType } from "@/types/api/programs";
 import { toast } from "sonner"
 
 
@@ -49,7 +49,7 @@ export function TodaySessionCard({ sequenceList, userProgramId }: Props) {
 
                         <div className="flex flex-wrap justify-evenly gap-6 mt-4">
                             {
-                                sequence.map((exercise: any, idx: Key | null | undefined) => (
+                                sequence.map((exercise: ExercisePreviewType, idx: Key | null | undefined) => (
                                     <DashboardExerciseCard
                                         key={idx}
                                         value={exercise.value}

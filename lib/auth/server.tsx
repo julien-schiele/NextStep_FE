@@ -16,10 +16,7 @@ export async function getCurrentUser() {
 }
 
 
-type WithAuthProps = {}
-
-
-export function protectedPage<P extends WithAuthProps>(
+export function protectedPage<P extends object>(
     WrappedComponent: ComponentType<P>
 ) {
     return async function AuthenticatedComponent(props: P) {

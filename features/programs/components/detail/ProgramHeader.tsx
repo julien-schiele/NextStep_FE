@@ -1,7 +1,6 @@
 import { Card } from "@/components/ui/card"
 import { H1, P } from "@/components/ui/text"
 import { Tag } from "@/components/ui/tag"
-import { getTranslations } from "next-intl/server"
 import { GiMountainClimbing } from "react-icons/gi"
 import { MdFitnessCenter } from "react-icons/md"
 import { ProgramDetailType } from "@/types/api/programs/index"
@@ -19,7 +18,6 @@ interface ProgramHeaderProps {
 
 
 export async function ProgramHeader({ program, levelDict, focusAxesDict }: ProgramHeaderProps) {
-    const t = await getTranslations("ProgramDetailPage")
     return (
         <Card className="p-8 md:p-12 flex justify-between">
             <div>

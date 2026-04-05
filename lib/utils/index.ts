@@ -11,20 +11,21 @@ export const capitalize = (value?: string) =>
     value ? value[0].toUpperCase() + value.slice(1) : "";
 
 
-export function extractErrorMessage(data: any): string {
+export function extractErrorMessage(data: unknown): string {
     if (!data) return "Une erreur est survenue";
 
     if (typeof data === "string") return data;
 
-    return (
-        data.detail ||
-        data.message ||
-        data.error ||
-        (typeof data === "object" ? JSON.stringify(data) : null) ||
-        "Une erreur est survenue"
-    );
-}
+    if (typeof data === "object") {
+        const obj = data as Record<string, unknown>;
+        if (typeof obj.detail === "string") return obj.detail;
+        if (typeof obj.message === "string") return obj.message;
+        if (typeof obj.error === "string") return obj.error;
+        return JSON.stringify(data);
+    }
 
+    return "Une erreur est survenue";
+}
 
 /**
  * Calculates the duration in days between two ISO dates.
