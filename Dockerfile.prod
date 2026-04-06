@@ -10,7 +10,7 @@ COPY . .
 # NEXT_PUBLIC_* vars are inlined at build time by Next.js compiler into the client bundle.
 # Unlike server-side vars, they cannot be injected at runtime via env_file — the browser
 # never sees the container environment. They must be defined here, before `yarn build`.
-ENV NEXT_PUBLIC_API_URL=https://api.nextstep.julien-schiele.dev/api
+ENV NEXT_PUBLIC_API_URL=https://nextstep.julien-schiele.dev/api
 
 # Build without generate:types — types will be generated at runtime
 RUN yarn build
