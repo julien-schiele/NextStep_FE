@@ -84,6 +84,7 @@
         "completed_program_count": "Nombre de programmes terminés",
         "highest_level_completed": "Niveau le plus élevé atteint",
         "current_level": "Niveau actuel du programme",
+        "abandon": "Abandonner",
         "start": "Commencer",
         "day": "{count, plural, one {jour} other {jours}}",
         "historic": "Votre historique",

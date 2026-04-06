@@ -1,4 +1,4 @@
-import { buildHeaders, parseErrorResponse } from "./core";
+import { ApiError, buildHeaders, parseErrorResponse } from "./core";
 
 let accessToken: string | null = null;
 
@@ -37,9 +37,12 @@ export async function fetchFromClient<T>(
             credentials: "include",
         });
 
+
         if (!refreshRes.ok) {
-            setAccessToken(null);
-            throw new Error(await parseErrorResponse(refreshRes));
+            if (refreshRes.status === 401) {
+                setAccessToken(null);
+            }
+            throw new ApiError(refreshRes.status, await parseErrorResponse(refreshRes));
         }
 
         const data = await refreshRes.json();
@@ -55,7 +58,7 @@ export async function fetchFromClient<T>(
     }
 
     if (!res.ok) {
-        throw new Error(await parseErrorResponse(res));
+        throw new ApiError(res.status, await parseErrorResponse(res));
     }
 
     if (res.status === 204) return {} as T;

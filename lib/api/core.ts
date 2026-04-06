@@ -28,6 +28,14 @@ export async function parseErrorResponse(res: Response): Promise<string> {
 }
 
 
+export class ApiError extends Error {
+    constructor(public status: number, message: string) {
+        super(message);
+        this.name = "ApiError";
+    }
+}
+
+
 export function buildHeaders({
     locale,
     accessToken,

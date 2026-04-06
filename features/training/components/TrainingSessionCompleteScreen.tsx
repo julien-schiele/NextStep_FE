@@ -17,7 +17,7 @@ export function TrainingSessionCompleteScreen({ onFinish }: Props) {
     const t = useTranslations("TrainingPage")
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="min-h-[100dvh] flex items-center justify-center">
             <Card className="w-full max-w-xl p-10 text-center space-y-12">
 
                 <div className="space-y-3">

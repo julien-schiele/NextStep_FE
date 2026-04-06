@@ -65,8 +65,8 @@ export function TodaySessionCard({ sequenceList, userProgramId }: Props) {
             })}
 
             <div className="flex justify-around">
-                <Button variant={"destructive"} className="w-1/4" size="lg" onClick={abandonTheProgram}>Abandon</Button>
-                <Button asChild className="w-1/3" size="lg">
+                <Button variant={"destructive"} className="w-1/4" size="lg" onClick={abandonTheProgram}>{t("abandon")}</Button>
+                <Button asChild className="w-1/4" size="lg">
                     <Link href="/training/">{t("start")}</Link>
                 </Button>
             </div>

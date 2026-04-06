@@ -7,6 +7,7 @@ import { useLocale } from "next-intl";
 import AuthDialog from "@/components/layout/AuthDialog";
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
+import { ApiError } from "../api/core";
 
 
 type AuthContextType = {
@@ -33,8 +34,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         try {
             const u = await fetchFromClient<UserType>("/users/me/", locale);
             setUser(u);
-        } catch {
-            setUser(null);
+        } catch (e) {
+            if (e instanceof ApiError && e.status === 401) {
+                setUser(null);
+            }
         } finally {
             setLoading(false);
         }
