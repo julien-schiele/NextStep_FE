@@ -85,6 +85,7 @@
         "highest_level_completed": "Highest level achieved",
         "current_level": "Current program level",
         "abandon": "Abandon",
+        "cancel": "Cancel",
         "start": "Start",
         "abandon_confirm_title": "Abandon this program?",
         "abandon_confirm_description": "This action is irreversible. Your progress will be saved but the program will be marked as abandoned.",

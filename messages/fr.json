@@ -85,6 +85,7 @@
         "highest_level_completed": "Niveau le plus élevé atteint",
         "current_level": "Niveau actuel du programme",
         "abandon": "Abandonner",
+        "cancel": "Annuler",
         "start": "Commencer",
         "abandon_confirm_title": "Abandonner ce programme ?",
         "abandon_confirm_description": "Cette action est irréversible. Votre progression sera sauvegardée mais le programme sera marqué comme abandonné.",
