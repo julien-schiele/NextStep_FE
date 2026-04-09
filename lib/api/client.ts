@@ -1,3 +1,4 @@
+// lib/api/client.ts
 import { ApiError, buildHeaders, parseErrorResponse } from "./core";
 
 let accessToken: string | null = null;
@@ -30,31 +31,33 @@ export async function fetchFromClient<T>(
 
     const res = await makeRequest();
 
+    let refreshPromise: Promise<string> | null = null;
+
     if (res.status === 401 && retry && !isAuthRoute) {
-        const refreshRes = await fetch(`${baseUrl}/token/refresh/`, {
-            method: "POST",
-            headers: buildHeaders({ locale }),
-            credentials: "include",
-        });
-
-
-        if (!refreshRes.ok) {
-            if (refreshRes.status === 401) {
-                setAccessToken(null);
+        try {
+            if (!refreshPromise) {
+                refreshPromise = fetch(`${baseUrl}/token/refresh/`, {
+                    method: "POST",
+                    headers: buildHeaders({ locale }),
+                    credentials: "include",
+                })
+                    .then(async (refreshRes) => {
+                        if (!refreshRes.ok) throw new ApiError(refreshRes.status, await parseErrorResponse(refreshRes));
+                        const data = await refreshRes.json();
+                        if (!data?.access) throw new Error("Invalid refresh response");
+                        return data.access as string;
+                    })
+                    .finally(() => { refreshPromise = null; });
             }
-            throw new ApiError(refreshRes.status, await parseErrorResponse(refreshRes));
-        }
 
-        const data = await refreshRes.json();
+            const newToken = await refreshPromise;
+            setAccessToken(newToken);
+            return fetchFromClient<T>(path, locale, method, body, false);
 
-        if (!data?.access) {
+        } catch (e) {
             setAccessToken(null);
-            throw new Error("Invalid refresh response");
+            throw e;
         }
-
-        setAccessToken(data.access);
-
-        return fetchFromClient<T>(path, locale, method, body, false);
     }
 
     if (!res.ok) {

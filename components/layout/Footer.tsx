@@ -2,6 +2,7 @@ import { fetchFromServer } from "@/lib/api/server";
 import { PrivacyPolicyType } from "@/types/api/utils";
 import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
+import { Container } from "@/components/layout/Container";
 
 
 export default async function Footer() {
@@ -11,7 +12,7 @@ export default async function Footer() {
 
     if (!policy) {
         return (
-            <footer className="fixed bottom-0 bg-accent flex w-full h-20 md:h-14 items-center justify-center">
+            <footer className="sticky bottom-0 md:fixed bottom-0 bg-accent flex w-full h-20 md:h-14 items-center justify-center">
                 <small>Loading...</small>
             </footer>
         );
@@ -22,8 +23,8 @@ export default async function Footer() {
         .replace(/<\/p>$/, "");
 
     return (
-        <footer className="fixed bottom-0 bg-accent flex w-full h-20 md:h-14 items-center justify-center border-t border-border">
-            <div className="max-w-6xl w-full px-4 flex flex-col md:flex-row items-center justify-center gap-1 md:gap-3 text-center text-xs text-muted-foreground">
+        <footer className="bottom-0 md:fixed bg-accent flex w-full h-20 md:h-14 items-center justify-center border-t border-border">
+            <Container className="flex flex-col md:flex-row items-center justify-center gap-1 md:gap-3 text-center text-xs text-muted-foreground">
                 {/* Disclaimer */}
                 <span>
                     ⚠️{" "}
@@ -45,11 +46,11 @@ export default async function Footer() {
                     >
                         {t("credits")}
                     </Link>
-                {/* Copyright */}
-                <span>© {new Date().getFullYear()} Julien Schiélé</span>
+                    {/* Copyright */}
+                    <span>© {new Date().getFullYear()} Julien Schiélé</span>
                 </span>
 
-            </div>
+            </Container>
         </footer>
     )
 }

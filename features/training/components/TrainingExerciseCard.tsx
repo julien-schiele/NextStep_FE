@@ -18,7 +18,7 @@ export function TrainingExerciseCard({ exercise }: Props) {
             : `${exercise.value} ${exercise.name}`;
 
     return (
-        <Card className="p-0 border-none w-52 min-h-16 flex flex-col items-center justify-center gap-1 bg-secondary text-secondary-foreground">
+        <Card className="p-0 border-none w-full max-w-52 h-48 flex flex-col items-center bg-secondary text-secondary-foreground overflow-hidden">
             {/* TODO: add image or video link in database and fallback in public  */}
             <Image
                 src="/sport.png"
@@ -27,7 +27,7 @@ export function TrainingExerciseCard({ exercise }: Props) {
                 height={50}
                 className="object-cover"
             />
-            <div className="p-3 flex flex-col items-center space-y-2">
+            <div className="p-3 flex flex-col items-center justify-center space-y-2 flex-1 w-full">
                 <H4 className="">{displayValue}</H4>
 
                 {exercise.resolution === "duration" && (

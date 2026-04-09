@@ -14,13 +14,11 @@ async function TrainingPage() {
     if (currentProgram && currentUserProgram) {
         todaySequences = getTodaySequences({ currentProgram, currentUserProgram })
     }
-   
+
     {/* Client Component for interactions */ }
     return (
-        <main className="fixed top-0 h-screen px-6 w-full flex justify-center items-center">
-            <div className="w-full h-full max-w-6xl">
-                <TrainingPageClient sequenceList={todaySequences} userProgram={currentUserProgram!}/>
-            </div>
+        <main className="flex-1 fixed top-0 h-screen px-6 w-full flex justify-center items-center">
+            <TrainingPageClient sequenceList={todaySequences} userProgram={currentUserProgram!} />
         </main>
     )
 }

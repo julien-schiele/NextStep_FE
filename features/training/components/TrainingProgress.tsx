@@ -11,7 +11,7 @@ type Props = {
 export function TrainingProgress({ current, total, percent }: Props) {
     const t = useTranslations("TrainingPage")
     return (
-        <div className="space-y-2">
+        <div className="w-full space-y-2">
             <div className="flex justify-between text-sm">
                 <span>{t("sequence")} {current} / {total}</span>
                 <span>{percent}%</span>

@@ -17,7 +17,7 @@ export function ExerciseCard({ value, name, resolution, practice_zone }: Exercis
             : `${value} ${name}`;
 
     return (
-        <Card className="w-52 min-h-16 flex flex-col items-center justify-center gap-1 bg-secondary text-secondary-foreground p-2">
+        <Card className="w-full max-w-52 min-h-16 flex flex-col items-center justify-center gap-1 bg-secondary text-secondary-foreground p-2">
             <H4 className="text-center">{displayValue}</H4>
 
             {resolution === "duration" && (

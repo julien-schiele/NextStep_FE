@@ -1,12 +1,13 @@
+// lib/auth/authProvider.tsx
 "use client";
 
-import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, useCallback, ReactNode, useRef } from "react";
 import { fetchFromClient, setAccessToken } from "@/lib/api/client";
 import { TokenResponseType, UserType } from "@/types/api/users";
 import { useLocale } from "next-intl";
 import AuthDialog from "@/components/layout/AuthDialog";
 import { toast } from "sonner";
-import { useRouter } from "@/i18n/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { ApiError } from "../api/core";
 
 
@@ -29,10 +30,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [loading, setLoading] = useState(true);
     const [isOpen, setIsOpen] = useState(false)
     const router = useRouter()
+    const pathname = usePathname()
+
+    const localeRef = useRef(locale);
+    useEffect(() => {
+        localeRef.current = locale;
+    }, [locale]);
 
     const fetchUser = useCallback(async () => {
         try {
-            const u = await fetchFromClient<UserType>("/users/me/", locale);
+            const u = await fetchFromClient<UserType>("/users/current/", localeRef.current);
             setUser(u);
         } catch (e) {
             if (e instanceof ApiError && e.status === 401) {
@@ -41,11 +48,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } finally {
             setLoading(false);
         }
-    }, [locale]);
+    }, []);
 
     useEffect(() => {
         fetchUser();
-    }, [fetchUser]);
+    }, [pathname, fetchUser]);
+
 
     const login = async (email: string, password: string) => {
         try {
@@ -53,7 +61,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setAccessToken(data.access);
             await fetchUser();
             setIsOpen(false);
-            router.push("/dashboard")
+            router.push("/dashboard");
+            router.refresh();
         } catch (e) {
             toast.error((e as Error).message, { position: "bottom-center" });
         }

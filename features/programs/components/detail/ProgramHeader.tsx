@@ -24,10 +24,10 @@ export async function ProgramHeader({ program, levelDict, focusAxesDict }: Progr
             {/* ICON (top on mobile, right on desktop) */}
             <div className="text-accent flex-shrink-0 order-1 md:order-2 flex justify-center md:justify-end w-full md:w-auto">
                 {program.focus === "general_fitness" && (
-                    <MdFitnessCenter className="w-20 h-20 md:w-[140px] md:h-[140px] opacity-90" />
+                    <MdFitnessCenter className="w-20 h-20 md:w-[140px] md:h-[140px]" />
                 )}
                 {program.focus === "climbing_performance" && (
-                    <GiMountainClimbing className="w-20 h-20 md:w-[140px] md:h-[140px] opacity-90" />
+                    <GiMountainClimbing className="w-20 h-20 md:w-[140px] md:h-[140px]" />
                 )}
             </div>
 

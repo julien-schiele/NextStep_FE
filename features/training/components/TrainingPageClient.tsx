@@ -64,7 +64,7 @@ export function TrainingPageClient({ sequenceList, userProgram }: Props) {
     }
 
     return (
-        <section className="h-[100dvh] flex flex-col justify-between gap-6">
+        <section className="w-full h-[100dvh] flex flex-col justify-between gap-6">
             <TrainingHeader />
 
             <TrainingProgress

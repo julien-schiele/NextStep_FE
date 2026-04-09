@@ -1,3 +1,4 @@
+// lib/auth/server.tsx
 import { redirect } from "@/i18n/navigation";
 import { fetchFromServer } from "@/lib/api/server";
 import { UserType } from "@/types/api/users";
@@ -8,7 +9,7 @@ import { ComponentType } from "react"
 export async function getCurrentUser() {
     let res: UserType | null = null
     try {
-        res = await fetchFromServer("/users/me/");
+        res = await fetchFromServer("/users/current/");
         return res
     } catch {
         return null;

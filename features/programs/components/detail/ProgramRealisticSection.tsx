@@ -14,7 +14,7 @@ export async function ProgramRealisticSection({ realistic, notRealistic }: Progr
     const t = await getTranslations("ProgramDetailPage")
 
     return (
-        <div className="grid md:grid-cols-2 gap-4 md:gap-8 px-2 md:px-0 overflow-x-hidden">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-8 overflow-x-hidden">
             <Card className="space-y-5 w-full max-w-full overflow-hidden">
                 <H3 className="break-words">{t("realistic_if")} :</H3>
                 <UL className="space-y-2 break-words">

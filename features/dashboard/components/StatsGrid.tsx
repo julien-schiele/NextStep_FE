@@ -22,15 +22,19 @@ export async function StatsGrid({ userStats }: Props) {
                 <H3>{userStats.total_programs_completed}</H3>
             </Card>
 
-            <Card className="flex flex-col items-center justify-center space-y-2">
-                <P>{t("highest_level_completed")}</P>
-                <H3>{userStats.highest_level_completed}</H3>
-            </Card>
+            {userStats.highest_level_completed &&
+                <Card className="flex flex-col items-center justify-center space-y-2">
+                    <P>{t("highest_level_completed")}</P>
+                    <H3>{userStats.highest_level_completed}</H3>
+                </Card>
+            }
 
-            <Card className="flex flex-col items-center justify-center space-y-2">
-                <P>{t("current_level")}</P>
-                <H3>{userStats.current_level}</H3>
-            </Card>
+            {userStats.current_level &&
+                <Card className="flex flex-col items-center justify-center space-y-2">
+                    <P>{t("current_level")}</P>
+                    <H3>{userStats.current_level}</H3>
+                </Card>
+            }
         </div>
     );
 }

@@ -6,6 +6,8 @@ import OpenAuthDialogFromQuery from '@/components/layout/OpenAuthDialogFromQuery
 import { Toaster } from "@/components/ui/sonner"
 
 
+import Eruda from '@/components/debug/Eruda';
+
 type Props = {
     children: React.ReactNode;
     params: Promise<{ locale: string }>;
@@ -29,6 +31,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     return (
         <NextIntlClientProvider messages={messages} locale={locale}>
             <AuthProvider>
+                {process.env.NODE_ENV === 'development' && <Eruda />}
                 <OpenAuthDialogFromQuery />
                 <Toaster />
                 {children}

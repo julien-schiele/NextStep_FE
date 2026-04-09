@@ -86,6 +86,8 @@
         "current_level": "Nivel actual del programa",
         "abandon": "Abandonar",
         "start": "Empezar",
+        "abandon_confirm_title": "¿Abandonar este programa?",
+        "abandon_confirm_description": "Esta acción es irreversible. Tu progreso será guardado pero el programa será marcado como abandonado.",
         "day": "{count, plural, one {día} other {días}}",
         "historic": "Tu historial",
         "no_historic_yet": "Aún no has completado ningún programa.",

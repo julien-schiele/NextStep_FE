@@ -19,7 +19,7 @@ export function DashboardExerciseCard({ value, name, resolution, practice_zone }
             : `${value} ${name}`;
 
     return (
-        <Card className="p-0 border-none w-52 min-h-16 flex flex-col items-center justify-center gap-1 bg-secondary text-secondary-foreground">
+        <Card className="p-0 border-none w-full max-w-52 min-h-16 flex flex-col items-center justify-center gap-1 bg-secondary text-secondary-foreground">
             {/* TODO: add image in database and fallback in public  */}
             <Image
                 src="/sport.png"

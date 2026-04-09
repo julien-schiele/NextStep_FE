@@ -466,7 +466,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/users/me/": {
+    "/api/users/current/": {
         parameters: {
             query?: never;
             header?: never;

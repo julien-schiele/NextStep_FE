@@ -28,7 +28,7 @@ export function DeleteAccountButton() {
 
     const handleDelete = async () => {
         try {
-            await fetchFromClient("/users/me/", locale, "DELETE");
+            await fetchFromClient("/users/current/", locale, "DELETE");
             clearUser()
             router.push("/");
         } catch (e) {

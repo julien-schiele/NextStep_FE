@@ -20,7 +20,7 @@ export function TrainingSequenceSlider({ sequence, index, total, onNext, onPrev 
     const t = useTranslations("TrainingPage")
     return (
         <div className="flex-1 flex flex-col min-h-0">
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto flex items-center justify-center">
                 <div className="w-full flex flex-wrap justify-center gap-6 pb-4">
                     {sequence.map((exercise: ExercisePreviewType, i: number) => (
                         <TrainingExerciseCard exercise={exercise} key={i} />
@@ -28,7 +28,7 @@ export function TrainingSequenceSlider({ sequence, index, total, onNext, onPrev 
                 </div>
             </div>
 
-            <div className="flex-none flex justify-between gap-6 pt-4 pb-4">
+            <div className="flex-none flex justify-between gap-6 pt-4 pb-10">
                 {index >= 1 ? (
                     <Button className="w-full" onClick={onPrev} variant="secondary">
                         {t("previous")}

@@ -14,27 +14,25 @@ import { VariantProps } from "class-variance-authority";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
 
-
 interface ProgramHistorySectionProps {
     programId: string;
     history: UserProgramType[];
     inProgress: boolean;
 }
 
+const tagStatus: Record<
+    "active" | "abandoned" | "completed",
+    VariantProps<typeof tagVariants>["variant"]
+> = {
+    active: "default",
+    abandoned: "destructive",
+    completed: "outline",
+};
 
 export function ProgramHistorySection({ programId, history, inProgress }: ProgramHistorySectionProps) {
-    const t = useTranslations("ProgramDetailPage")
-    const locale = useLocale()
-    const router = useRouter()
-
-    const tagStatus: Record<
-        "active" | "abandoned" | "completed",
-        VariantProps<typeof tagVariants>["variant"]
-    > = {
-        active: "default",
-        abandoned: "destructive",
-        completed: "outline",
-    }
+    const t = useTranslations("ProgramDetailPage");
+    const locale = useLocale();
+    const router = useRouter();
 
     const handleStart: MouseEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault();
@@ -44,9 +42,7 @@ export function ProgramHistorySection({ programId, history, inProgress }: Progra
                 "/user-programs/",
                 locale,
                 "POST",
-                {
-                    program: programId,
-                }
+                { program: programId }
             );
             router.push("/dashboard");
         } catch (e) {
@@ -56,38 +52,51 @@ export function ProgramHistorySection({ programId, history, inProgress }: Progra
 
     return (
         <div className="space-y-10">
-            <H2>{t("historic")}</H2>
-            <div className="flex flex-col gap-4">
-                {history.map((h, i) => {
-                    const durationInDays = getDurationInDays(h.start_date, h.end_date)
-                    return (
-                        <Card key={i} className="flex justify-between items-center">
-                            <P className="flex-1 text-start">
-                                <ClientDate dateString={h.start_date} />
-                                -
-                                <ClientDate dateString={h.end_date} />
-                            </P>
-                            {/* TODO: implement feedback for program */}
-                            <P className="flex-1 text-center">Feedaback ?</P>
-                            <P className="flex-1 text-center">{durationInDays} {t("day", { count: durationInDays! })}</P>
-                            <P className="flex-1 text-center">
-                                <Tag variant={tagStatus[h.status!]} className="text-xs capitalize">{h.status_display}</Tag>
-                            </P>
-                        </Card>
-                    )
-                })}
-            </div>
+            {history.length > 0 && (
+                <>
+                    <H2>{t("historic")}</H2>
+                    <div className="flex flex-col gap-4">
+                        {history.map((h) => {
+                            const durationInDays = getDurationInDays(h.start_date, h.end_date);
+
+                            return (
+                                <Card key={h.id} className="flex flex-col md:flex-row gap-2 justify-between items-center">
+                                    <P className="flex-1 text-start">
+                                        <ClientDate dateString={h.start_date} />
+                                        {" - "}
+                                        <ClientDate dateString={h.end_date} />
+                                    </P>
+                                    {/* TODO: implement feedback for program 
+                                    <P className="flex-1 text-center">Feedback ?</P>
+                                    */}
+                                    {durationInDays !== null && (
+                                        <P className="flex-1 text-center">
+                                            {durationInDays} {t("day", { count: durationInDays })}
+                                        </P>
+                                    )}
+                                    <P className="flex-1 text-center">
+                                        <Tag variant={tagStatus[h.status!]} className="text-xs capitalize">
+                                            {h.status_display}
+                                        </Tag>
+                                    </P>
+                                </Card>
+                            );
+                        })}
+                    </div>
+                </>
+            )}
+
             <div className="flex justify-center">
                 {inProgress ? (
                     <Button asChild>
-                        <Link href={"/dashboard"}>{t("continue_program")}</Link>
+                        <Link href="/dashboard">{t("continue_program")}</Link>
                     </Button>
                 ) : (
                     <Button onClick={handleStart}>
-                        <Link href={"#"}>{t("start_program")}</Link>
+                        {t("start_program")}
                     </Button>
                 )}
             </div>
         </div>
-    )
+    );
 }

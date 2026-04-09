@@ -119,7 +119,7 @@ function Section({ title, items }: { title: string; items: Credit[] }) {
 
 export default function CreditsPage() {
     return (
-        <div className="flex flex-col gap-4">
+        <div className="w-full flex flex-col gap-6">
 
             <H1>Credits &amp; Attributions</H1>
             <P className="text-muted-foreground text-sm">

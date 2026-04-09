@@ -86,6 +86,8 @@
         "current_level": "Current program level",
         "abandon": "Abandon",
         "start": "Start",
+        "abandon_confirm_title": "Abandon this program?",
+        "abandon_confirm_description": "This action is irreversible. Your progress will be saved but the program will be marked as abandoned.",
         "day": "{count, plural, one {day} other {days}}",
         "historic": "Your historic",
         "no_historic_yet": "You haven't completed any programs yet.",

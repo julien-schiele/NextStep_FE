@@ -1,11 +1,13 @@
+// lib/api/server.ts
 import { getLocale } from "next-intl/server";
 import { cookies } from "next/headers";
-import { buildHeaders, parseErrorResponse } from "./core";
+import { ApiError, buildHeaders, parseErrorResponse } from "./core";
 
 export async function fetchFromServer<T>(
     path: string,
     method: string = "GET",
     body?: Record<string, unknown>,
+    retry=true
 ): Promise<T> {
     const locale = await getLocale();
     const cookieStore = await cookies();
@@ -26,9 +28,10 @@ export async function fetchFromServer<T>(
             cache: "no-store",
         });
 
-    let res = await makeRequest();
+    let accessToken = cookieStore.get("_at")?.value ?? undefined;
+    let res = await makeRequest(accessToken);
 
-    if (res.status === 401) {
+    if (res.status === 401 && retry) {
         const refreshRes = await fetch(`${baseUrl}/token/refresh/`, {
             method: "POST",
             headers: buildHeaders({ locale, cookieHeader }),
@@ -37,12 +40,12 @@ export async function fetchFromServer<T>(
         });
 
         if (!refreshRes.ok) {
-            throw new Error("Session expirée");
+            throw new ApiError(refreshRes.status, await parseErrorResponse(refreshRes));
         }
 
         const data = await refreshRes.json();
-        const accessToken = data?.access;
-
+        if (!data?.access) throw new ApiError(401, "Invalid refresh response");
+        accessToken = data.access;
         res = await makeRequest(accessToken);
     }
 
