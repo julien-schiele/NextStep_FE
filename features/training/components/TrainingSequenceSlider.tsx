@@ -19,29 +19,29 @@ type Props = {
 export function TrainingSequenceSlider({ sequence, index, total, onNext, onPrev }: Props) {
     const t = useTranslations("TrainingPage")
     return (
-        <div className="flex-1 flex flex-col  items-center mt-2 overflow-auto pb-10">
-            <div className="w-full flex flex-col justify-center item-center h-full overflow-auto">
-                <div className="w-full h-fit justify-center flex flex-wrap gap-6 overflow-auto">
+        <div className="flex-1 flex flex-col min-h-0">
+            <div className="flex-1 overflow-y-auto">
+                <div className="w-full flex flex-wrap justify-center gap-6 py-4">
                     {sequence.map((exercise: ExercisePreviewType, i: number) => (
                         <TrainingExerciseCard exercise={exercise} key={i} />
                     ))}
                 </div>
             </div>
 
-            <div className="flex justify-between w-full  gap-6 mt-10">
-                {index >= 1 ?
-                    <Button className="w-full" onClick={onPrev} variant="secondary" >
+            <div className="flex-none flex justify-between gap-6 pt-4 pb-14 md:pb-10">
+                {index >= 1 ? (
+                    <Button className="w-full" onClick={onPrev} variant="secondary">
                         {t("previous")}
                     </Button>
-                    :
-                    <Button size={"lg"} className="w-full" asChild variant="secondary" >
+                ) : (
+                    <Button size="lg" className="w-full" asChild variant="secondary">
                         <Link href="/dashboard/">{t("previous")}</Link>
                     </Button>
-                }
-                <Button size={"lg"} className="w-full" onClick={onNext}>
+                )}
+                <Button size="lg" className="w-full" onClick={onNext}>
                     {index === total - 1 ? t("complete") : t("next")}
                 </Button>
             </div>
         </div>
-    );
+    )
 }

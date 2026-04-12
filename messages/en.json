@@ -1,5 +1,5 @@
 {
-    "ErrorPage":{
+    "ErrorPage": {
         "something_happens": "Something happens",
         "please_retry": "Please retry",
         "retry": "Retry",
@@ -15,7 +15,9 @@
         "logout": "Logout"
     },
     "Footer": {
-        "know_more": "Know more"
+        "demo_only": "Demo only",
+        "privacy_policy": "Privacy Policy",
+        "credits": "Credits"
     },
     "HomePage": {
         "progress": "Progress",
@@ -49,7 +51,9 @@
         "first_name": "First name",
         "last_name": "Last name",
         "confirm_password": "Confirm password",
-        "create_account": "Create account"
+        "create_account": "Create account",
+        "i_accept_policy": "I accept the privacy policy",
+        "see_details": "See details"
     },
     "ProgramListPage": {
         "title": "Training programs",
@@ -67,7 +71,9 @@
         "session": "Session",
         "repetition": "{count, plural, one {repetition} other {repetitions}}",
         "duration": "{count, plural, one {second} other {seconds}}",
-        "day": "{count, plural, one {day} other {days}}"
+        "day": "{count, plural, one {day} other {days}}",
+        "continue_program": "Continue the program",
+        "start_program": "Start this program"
     },
     "DashboardPage": {
         "hello": "Hello",
@@ -78,7 +84,11 @@
         "completed_program_count": "Number of programs completed",
         "highest_level_completed": "Highest level achieved",
         "current_level": "Current program level",
+        "abandon": "Abandon",
+        "cancel": "Cancel",
         "start": "Start",
+        "abandon_confirm_title": "Abandon this program?",
+        "abandon_confirm_description": "This action is irreversible. Your progress will be saved but the program will be marked as abandoned.",
         "day": "{count, plural, one {day} other {days}}",
         "historic": "Your historic",
         "no_historic_yet": "You haven't completed any programs yet.",
@@ -135,6 +145,13 @@
                 "password_min_length": "Password must be at least 8 characters",
                 "passwords_do_not_match": "Passwords do not match"
             }
+        },
+        "DeleteAccountDialog": {
+            "delete_account": "Delete my account",
+            "delete_account_title": "Are you sure?",
+            "delete_account_description": "This action is permanent. Your account and all your data will be deleted.",
+            "cancel": "Cancel",
+            "delete_account_confirm": "Yes, delete my account"
         }
     }
 }

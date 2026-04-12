@@ -8,65 +8,67 @@ import { UserProgramType } from "@/types/api/tracking";
 import { VariantProps } from "class-variance-authority";
 import { getTranslations } from "next-intl/server";
 
-
 interface Props {
     userPrograms: UserProgramType[];
 }
 
+const tagStatus: Record<
+    "active" | "abandoned" | "completed",
+    VariantProps<typeof tagVariants>["variant"]
+> = {
+    active: "default",
+    abandoned: "destructive",
+    completed: "outline",
+}
 
 export async function HistorySection({ userPrograms }: Props) {
-    const t = await getTranslations("DashboardPage")
-    const tagStatus: Record<
-        "active" | "abandoned" | "completed",
-        VariantProps<typeof tagVariants>["variant"]
-    > = {
-        active: "default",
-        abandoned: "destructive",
-        completed: "outline",
-    }
+    const t = await getTranslations("DashboardPage");
 
     return (
-        <Card className="p-6 space-y-4">
+        <Card className="w-full p-6 space-y-4">
             <H3>{t("historic")}</H3>
 
-            {userPrograms ?
-                userPrograms.map((up, i) => {
-                    const duration = getDurationInDays(up.start_date, up.end_date)
-
-                    return (<Card
-                        key={i}
-                        className="flex justify-between p-3 rounded-lg border bg-muted/30"
-                    >
-                        <div className="space-y-2">
-                            <div className="font-semibold">{up.program_name}</div>
-                            <div className="text-xs text-muted-foreground">
-                                {up.start_date || up.end_date ? (
-                                    <>
-                                        {up.start_date ? <ClientDate dateString={up.start_date}/> : "—"} -{" "}
-                                        {up.end_date ? <ClientDate dateString={up.end_date}/> : "—"}
-                                    </>
-                                ) : (
-                                    "—"
-                                )}
-                            </div>
-
-                        </div>
-                        <div className="flex items-center space-x-6 justify-between">
-                            <div className="text-sm font-medium">
-                                {duration !== null &&
-                                    <P>{duration} {t("day", { count: duration })}</P>
-                                }
-                            </div>
-                            <Tag variant={tagStatus[up.status!]} className="text-xs capitalize">{up.status_display}</Tag>
-                        </div>
-                    </Card>)
-                })
-                :
+            {userPrograms.length === 0 ? (
                 <>
                     <P>{t("no_historic_yet")}</P>
                     <Link href="/programs">{t("select_new_program")}</Link>
                 </>
-            }
+            ) : (
+                userPrograms.map((up) => {
+                    const duration = getDurationInDays(up.start_date, up.end_date);
+
+                    return (
+                        <Card
+                            key={up.id}
+                            className="flex flex-col md:flex-row gap-2 justify-between p-3 rounded-lg border bg-muted/30"
+                        >
+                            <div className="space-y-2">
+                                <div className="font-semibold">{up.program_name}</div>
+                                <div className="text-xs text-muted-foreground">
+                                    {up.start_date || up.end_date ? (
+                                        <>
+                                            {up.start_date ? <ClientDate dateString={up.start_date} /> : "—"}
+                                            {" — "}
+                                            {up.end_date ? <ClientDate dateString={up.end_date} /> : "—"}
+                                        </>
+                                    ) : "—"}
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-6">
+                                {duration !== null && (
+                                    <P className="text-sm font-medium">
+                                        {duration} {t("day", { count: duration })}
+                                    </P>
+                                )}
+                                <Tag variant={tagStatus[up.status!]} className="text-xs capitalize">
+                                    {up.status_display}
+                                </Tag>
+                            </div>
+                        </Card>
+                    );
+                })
+            )}
         </Card>
     );
 }

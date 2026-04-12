@@ -12,6 +12,7 @@ import { fetchFromServer } from "@/lib/api/server";
 import { UserProgramType, UserStatsType } from "@/types/api/tracking";
 import { ProgramDetailType, SequenceListType } from "@/types/api/programs";
 import { Button } from "@/components/ui/button";
+import { Stack } from "@/components/layout/Stack";
 
 
 async function DashboardPage() {
@@ -32,27 +33,30 @@ async function DashboardPage() {
     }
 
     return (
-        <section className="space-y-16">
-            <DashboardHeader firstName={capitalize(user?.first_name)} />
+        <section>
+            <Stack size="xl" className="items-start">
+                <DashboardHeader firstName={capitalize(user?.first_name)} />
 
-            {currentProgram ? <>
-                <ProgramProgressCard
-                    programName={currentProgram?.name!}
-                    completedSessions={completedSessions!}
-                    totalSessions={currentProgram?.content.total_sessions!}
-                />
+                {currentProgram ? (
+                    <>
+                        <ProgramProgressCard
+                            programName={currentProgram!.name!}
+                            completedSessions={completedSessions!}
+                            totalSessions={currentProgram!.content.total_sessions!}
+                        />
 
-                <TodaySessionCard sequenceList={todaySequences!} userProgramId={currentUserProgram!.id} />
-            </>
-                :
-                <Button asChild>
-                    <Link href="/programs">{t("select_new_program")}</Link>
-                </Button>
-            }
+                        <TodaySessionCard sequenceList={todaySequences!} userProgramId={currentUserProgram!.id} />
+                    </>
+                ) : (
+                    <Button asChild>
+                        <Link href="/programs">{t("select_new_program")}</Link>
+                    </Button>
+                )}
 
-            <StatsGrid userStats={userStats} />
+                <StatsGrid userStats={userStats} />
 
-            <HistorySection userPrograms={userPrograms} />
+                <HistorySection userPrograms={userPrograms} />
+            </Stack>
         </section>
     );
 }

@@ -1,7 +1,6 @@
 import { Card } from "@/components/ui/card"
 import { H1, P } from "@/components/ui/text"
 import { Tag } from "@/components/ui/tag"
-import { getTranslations } from "next-intl/server"
 import { GiMountainClimbing } from "react-icons/gi"
 import { MdFitnessCenter } from "react-icons/md"
 import { ProgramDetailType } from "@/types/api/programs/index"
@@ -19,25 +18,51 @@ interface ProgramHeaderProps {
 
 
 export async function ProgramHeader({ program, levelDict, focusAxesDict }: ProgramHeaderProps) {
-    const t = await getTranslations("ProgramDetailPage")
     return (
-        <Card className="p-8 md:p-12 flex justify-between">
-            <div>
-                <H1 className="text-primary mb-6">{program.name}</H1>
-                <P className="mb-6">{program.description}</P>
-                {/* Level & focus axes */}
-                <div className="flex gap-4 flex-wrap">
-                    {program.level &&
-                        <Tag variant="secondary" size="sm">{levelDict[program.level!]}</Tag>
-                    }
+        <Card className="relative overflow-hidden p-5 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10 items-center md:items-start justify-between">
+
+            {/* ICON (top on mobile, right on desktop) */}
+            <div className="text-accent flex-shrink-0 order-1 md:order-2 flex justify-center md:justify-end w-full md:w-auto">
+                {program.focus === "general_fitness" && (
+                    <MdFitnessCenter className="w-20 h-20 md:w-[140px] md:h-[140px]" />
+                )}
+                {program.focus === "climbing_performance" && (
+                    <GiMountainClimbing className="w-20 h-20 md:w-[140px] md:h-[140px]" />
+                )}
+            </div>
+
+            {/* CONTENT */}
+            <div className="w-full order-2 md:order-1 text-center md:text-left">
+
+                {/* TITLE */}
+                <H1 className="text-primary mb-3 md:mb-5 break-words leading-tight">
+                    {program.name}
+                </H1>
+
+                {/* DESCRIPTION */}
+                <P className="mb-4 md:mb-6 break-words">
+                    {program.description}
+                </P>
+
+                {/* TAGS */}
+                <div className="flex flex-wrap gap-2 md:gap-3 justify-center md:justify-start">
+                    {program.level && (
+                        <Tag variant="secondary" size="sm" className="max-w-full">
+                            {levelDict[program.level!]}
+                        </Tag>
+                    )}
+
                     {program.focus_axes?.map((axes: string, index: number) => (
-                        <Tag key={index} variant="secondary" size="sm">{focusAxesDict[axes]}</Tag>
+                        <Tag
+                            key={index}
+                            variant="secondary"
+                            size="sm"
+                            className="max-w-full"
+                        >
+                            {focusAxesDict[axes]}
+                        </Tag>
                     ))}
                 </div>
-            </div>
-            <div className="text-accent">
-                {program.focus === "general_fitness" && <MdFitnessCenter size={150} />}
-                {program.focus === "climbing_performance" && <GiMountainClimbing size={150} />}
             </div>
         </Card>
     )

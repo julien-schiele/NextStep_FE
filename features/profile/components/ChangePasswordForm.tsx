@@ -23,11 +23,9 @@ export function ChangePasswordForm() {
     const {
         register,
         handleSubmit,
-        watch,
+        getValues,
         formState: { errors, isSubmitting },
     } = useForm<FormValues>();
-
-    const newPasswordValue = watch("new_password");
 
     const onSubmit = async (data: FormValues) => {
         setSuccess(false);
@@ -74,7 +72,7 @@ export function ChangePasswordForm() {
                 {...register("confirm_password", {
                     required: t("errors.confirm_password_required"),
                     validate: (val) =>
-                        val === newPasswordValue || t("errors.passwords_do_not_match"),
+                        val === getValues("new_password") || t("errors.passwords_do_not_match"),
                 })}
                 error={errors.confirm_password?.message}
             />

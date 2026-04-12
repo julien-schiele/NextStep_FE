@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { MdFitnessCenter } from "react-icons/md";
 import { GiMountainClimbing } from "react-icons/gi";
 import { useTranslations } from "next-intl";
-import { LevelEnumType, ProgramListType } from "@/types/api/programs";
+import { ProgramListType } from "@/types/api/programs";
 
 
 interface Props {

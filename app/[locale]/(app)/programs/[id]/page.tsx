@@ -6,6 +6,7 @@ import { ProgramSessionsTimeline } from "@/features/programs/components/detail/P
 import { ProgramDetailType, ProgramFiltersType } from "@/types/api/programs";
 import { protectedPage } from "@/lib/auth/server";
 import { UserProgramType } from "@/types/api/tracking";
+import { Stack } from "@/components/layout/Stack";
 
 
 type PageProps = {
@@ -33,27 +34,29 @@ async function ProgramPage({ params }: PageProps) {
     });
 
     return (
-        <section className="space-y-14">
-            <ProgramHeader
-                program={program}
-                levelDict={levelDict}
-                focusAxesDict={focusAxesDict}
-            />
+        <section>
+            <Stack size="xl">
+                <ProgramHeader
+                    program={program}
+                    levelDict={levelDict}
+                    focusAxesDict={focusAxesDict}
+                />
 
-            <ProgramRealisticSection
-                realistic={program.realistic_if}
-                notRealistic={program.not_realistic_if}
-            />
+                <ProgramRealisticSection
+                    realistic={program.realistic_if}
+                    notRealistic={program.not_realistic_if}
+                />
 
-            <ProgramHistorySection
-                programId={id}
-                history={userProgramHistoric}
-                inProgress={userProgramInProgress}
-            />
+                <ProgramHistorySection
+                    programId={id}
+                    history={userProgramHistoric}
+                    inProgress={userProgramInProgress}
+                />
 
-            <ProgramSessionsTimeline
-                cycles={program.content.cycles}
-            />
+                <ProgramSessionsTimeline
+                    cycles={program.content.cycles}
+                />
+            </Stack>
         </section>
     )
 }

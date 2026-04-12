@@ -15,7 +15,7 @@ export async function ProgramProgressCard({
     const percent = Math.round((completedSessions / totalSessions) * 100);
     const t = await getTranslations("DashboardPage")
     return (
-        <Card className="p-6 space-y-4">
+        <Card className="w-full space-y-4">
             <div className="flex justify-between text-sm">
                 <span>{programName}</span>
                 <span>

@@ -15,7 +15,9 @@
         "logout": "Deconnexion"
     },
     "Footer": {
-        "know_more": "Saber más"
+        "demo_only": "Solo demo",
+        "privacy_policy": "Política de privacidad",
+        "credits": "Créditos"
     },
     "HomePage": {
         "progress": "Progreso",
@@ -49,7 +51,9 @@
         "first_name": "Nombre",
         "last_name": "Apellido",
         "confirm_password": "Confirmar contraseña",
-        "create_account": "Crear cuenta"
+        "create_account": "Crear cuenta",
+        "i_accept_policy": "Acepto la política de confidencialidad",
+        "see_details": "Voir los detalles"
     },
     "ProgramListPage": {
         "title": "Todos los programas",
@@ -67,7 +71,9 @@
         "session": "Sesión",
         "repetition": "{count, plural, one {repetición} other {repeticiones}}",
         "duration": "{count, plural, one {segundo} other {segundos}}",
-        "day": "{count, plural, one {día} other {días}}"
+        "day": "{count, plural, one {día} other {días}}",
+        "continue_program": "Continuar el programa",
+        "start_program": "Iniciar este programa"
     },
     "DashboardPage": {
         "hello": "Hola",
@@ -78,7 +84,11 @@
         "completed_program_count": "Número de programas completados",
         "highest_level_completed": "Nivel más alto alcanzado",
         "current_level": "Nivel actual del programa",
+        "abandon": "Abandonar",
+        "cancel": "Cancelar",
         "start": "Empezar",
+        "abandon_confirm_title": "¿Abandonar este programa?",
+        "abandon_confirm_description": "Esta acción es irreversible. Tu progreso será guardado pero el programa será marcado como abandonado.",
         "day": "{count, plural, one {día} other {días}}",
         "historic": "Tu historial",
         "no_historic_yet": "Aún no has completado ningún programa.",
@@ -135,6 +145,13 @@
                 "password_min_length": "La contraseña debe tener al menos 8 caracteres",
                 "passwords_do_not_match": "Las contraseñas no coinciden"
             }
+        },
+        "DeleteAccountDialog": {
+            "delete_account": "Eliminar mi cuenta",
+            "delete_account_title": "¿Estás seguro?",
+            "delete_account_description": "Esta acción es permanente. Tu cuenta y todos tus datos serán eliminados.",
+            "cancel": "Cancelar",
+            "delete_account_confirm": "Sí, eliminar mi cuenta"
         }
     }
 }

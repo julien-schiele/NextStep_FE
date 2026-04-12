@@ -11,11 +11,12 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang='fr' suppressHydrationWarning>
-            <body>
+            <body className="flex flex-col min-h-screen overscroll-none">
                 <NextThemesProvider
                     attribute="class"
                     defaultTheme="system"
                     enableSystem
+                    disableTransitionOnChange
                 >
                     {children}
                 </NextThemesProvider>
