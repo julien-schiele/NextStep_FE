@@ -23,7 +23,7 @@ export default async function Footer() {
         .replace(/<\/p>$/, "");
 
     return (
-        <footer className="bottom-0 md:fixed bg-accent flex w-full h-20 md:h-14 items-center justify-center border-t border-border">
+        <footer className="bottom-0 md:fixed bg-accent flex w-full py-3 md:py-3 items-center justify-center border-t border-border">
             <Container className="flex flex-col md:flex-row items-center justify-center gap-1 md:gap-3 text-center text-xs text-muted-foreground">
                 {/* Disclaimer */}
                 <span>
