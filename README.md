@@ -1,4 +1,7 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+> This repository is part of the **[NextStep](https://github.com/julien-schiele/NextStep)** project. See the main repository for the full overview, architecture, and setup instructions.
+
+# NextStep_FE
+NextStep - Next.js Frontend - progress one day at a time
 
 ## Getting Started
 
