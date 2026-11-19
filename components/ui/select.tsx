@@ -1,9 +1,10 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const SelectVariants = cva(
-    "block w-full rounded-md text-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-not-allowed",
+    "block w-full appearance-none rounded-md text-sm cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-not-allowed",
     {
         variants: {
             variant: {
@@ -15,9 +16,9 @@ const SelectVariants = cva(
                     "bg-neutral-secondary-medium border border-default-medium text-heading shadow-xs",
             },
             size: {
-                default: "px-3 py-2.5",
-                sm: "px-2 py-2 text-xs",
-                lg: "px-4 py-3",
+                default: "pl-3 pr-10 py-2.5",
+                sm: "pl-2 pr-8 py-2 text-xs",
+                lg: "pl-4 pr-12 py-3",
             },
         },
         defaultVariants: {
@@ -53,13 +54,19 @@ const Select = React.forwardRef<
                 </label>
             )}
 
-            <select
-                ref={ref}
-                className={cn(SelectVariants({ variant, size, className }))}
-                {...props}
-            >
-                {children}
-            </select>
+            <div className="relative">
+                <select
+                    ref={ref}
+                    className={cn(SelectVariants({ variant, size, className }))}
+                    {...props}
+                >
+                    {children}
+                </select>
+                <ChevronDown
+                    aria-hidden
+                    className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+                />
+            </div>
         </div>
     );
 });

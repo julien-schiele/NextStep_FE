@@ -16,8 +16,8 @@ interface Props {
 export function ProgramCard({ program, levelDict }: Props) {
     const t = useTranslations("ProgramDetailPage")
     return (
-        <Link href={`programs/${program.id}`}>
-            <Card className="cursor-pointer hover:ring rounded-2xl h-50 overflow-hidden flex flex-col">
+        <Link href={`programs/${program.id}`} className="block h-full">
+            <Card className="cursor-pointer hover:ring rounded-2xl h-full min-h-50 flex flex-col">
                 <div className="flex gap-4 flex-1 p-2">
 
                     <div className="flex flex-col items-center gap-2 w-20 shrink-0 mr-2">
@@ -33,7 +33,7 @@ export function ProgramCard({ program, levelDict }: Props) {
                         </span>
                     </div>
 
-                    <div className="flex flex-col gap-2 flex-1">
+                    <div className="flex flex-col gap-2 flex-1 min-w-0">
                         <H3 className="text-lg font-semibold line-clamp-2">
                             {program.name}
                         </H3>
