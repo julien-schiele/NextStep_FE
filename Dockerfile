@@ -1,4 +1,4 @@
-FROM node:lts
+FROM node:24
 
 # Install utils si besoin
 RUN apt-get update -yq && \

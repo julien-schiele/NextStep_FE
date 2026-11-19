@@ -1,4 +1,4 @@
-FROM node:lts AS builder
+FROM node:24 AS builder
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ ENV NEXT_PUBLIC_API_URL=https://nextstep.julien-schiele.dev/api
 RUN yarn build
 
 # ── Production image ──────────────────────────────────────────────────────────
-FROM node:lts-slim AS runner
+FROM node:24-slim AS runner
 
 RUN apt-get update -yq && \
     apt-get install -y --no-install-recommends netcat-openbsd && \
