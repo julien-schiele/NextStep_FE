@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { ChevronDown } from "lucide-react";
 import { Button } from "../ui/button";
 
 export default function LocaleSelector() {
@@ -25,12 +26,18 @@ export default function LocaleSelector() {
     };
 
     return (
-        <Button asChild variant="outline" className="px-2">
-            <select onChange={handleChange} value={currentLocale}>
-                <option value="en">EN</option>
-                <option value="es">ES</option>
-                <option value="fr">FR</option>
-            </select>
-        </Button>
+        <div className="relative inline-flex">
+            <Button asChild variant="outline" className="appearance-none pl-3 pr-8 cursor-pointer">
+                <select onChange={handleChange} value={currentLocale} aria-label="Language">
+                    <option value="en">EN</option>
+                    <option value="es">ES</option>
+                    <option value="fr">FR</option>
+                </select>
+            </Button>
+            <ChevronDown
+                aria-hidden
+                className="pointer-events-none absolute right-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+            />
+        </div>
     );
 }
